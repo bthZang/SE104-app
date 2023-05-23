@@ -1,0 +1,84 @@
+
+// .container{
+//     min-width: 500px;
+//     width: 100vw;
+//     height: 100vh;
+//     background-image: url('../../assets/start-bg.svg');
+//     background-size: cover;
+  
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     gap: 20px;
+  
+//     position: relative;
+  
+//     .logo{
+//       width: 140px;
+//       height: auto;
+//       margin-top: 20vh;
+//     }
+//     .loginBtn{
+//       box-sizing: border-box;
+  
+//       /* Auto layout */
+      
+//       display: flex;
+//       flex-direction: row;
+//       justify-content: center;
+//       align-items: center;
+//       padding: 20px 100px;
+      
+//       width: auto;
+//       height: auto;
+      
+//       /* primary/1 */
+      
+//       border: 5px solid #1233E5;
+      
+//       /* Inside auto layout */
+//       font-family: 'Helvetica Neue';
+//       font-style: normal;
+//       font-weight: 700;
+//       font-size: 28px;
+//       /* identical to box height, or 127% */
+      
+//       letter-spacing: 0.5px;
+      
+//       /* dark */
+      
+//       color: #161248;
+      
+//     }
+//     .requestBtn{
+//       /* Auto layout */
+  
+//       display: flex;
+//       flex-direction: row;
+//       justify-content: center;
+//       align-items: center;
+//       padding: 20px 32px;
+      
+//       width: auto;
+//       height: auto;
+      
+//       /* dark */
+      
+//       background: #161248;
+//       border-radius: 20px;
+      
+//       /* Inside auto layout */
+      
+//       font-family: 'Helvetica Neue';
+//       font-style: normal;
+//       font-weight: 700;
+//       font-size: 24px;
+//       line-height: 40px;
+//       /* identical to box height, or 100% */
+      
+      
+//       color: #FFFFFF;
+    
+//     }
+//   }
+  

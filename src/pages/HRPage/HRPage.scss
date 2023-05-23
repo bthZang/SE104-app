@@ -1,0 +1,15 @@
+.container{
+    width: max-content !important;
+    // height: 100vh;
+    background-color: pink;
+    display: flex;
+    flex-direction: row !important;
+    .HRSideBar{
+        width: 20%;
+        margin-left: 30px;
+    }
+    .content{
+        width: 80%;
+        margin-left: 39px;
+    }
+}

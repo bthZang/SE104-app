@@ -1,0 +1,31 @@
+.container{
+    background-color: white;
+    width: max-content;
+    height: max-content;
+    display: flex;
+    flex-direction: row !important;
+    .title{
+        font-family:sans-serif;
+        font-weight: 750;
+        width: 365px;
+        font-size: 40px;
+        color: #1233E5;
+    }
+    .line{
+        border: 1px solid #A0AEF5;
+        height: 40px;
+        margin-top: 8px;
+        width: 1px;
+        background-color: #A0AEF5;
+        border-radius: 30px;
+    }
+    .dAT{
+        color: #5971EE;
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 21px;
+        font-weight: 645;
+        margin-top: -7px;
+
+    }
+    
+}
