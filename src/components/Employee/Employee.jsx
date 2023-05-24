@@ -61,7 +61,7 @@ const Employee = () => {
 
     return(
 
-        <div className="container">
+        <div className="containerEmployee">
             <div>
                 <TitleHome children={"Employee"}></TitleHome>
                 <div className="account">

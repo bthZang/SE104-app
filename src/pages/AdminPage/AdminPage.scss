@@ -1,9 +1,9 @@
-.container{
-    width: max-content !important;
-    // height: 100vh;
-    background-color: pink;
+.containerAdminPage{
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
     display: flex;
-    flex-direction: row !important;
+    flex-direction: row ;
     .adminSideBar{
         width: 20%;
         margin-left: 30px;

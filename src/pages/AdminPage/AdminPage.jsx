@@ -29,7 +29,7 @@ function AdminPage() {
   // const component = "Permission"
 
   return (
-    <div className="container">
+    <div className="containerAdminPage">
         <div className="adminSideBar">
            <AdminSideBar handleChange={handleChange}></AdminSideBar>
         </div>

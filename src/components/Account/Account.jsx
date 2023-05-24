@@ -43,7 +43,7 @@ const Account = () => {
 
     return(
 
-        <div className="container">
+        <div className="containerAccount">
             <div>
                 <TitleHome children={"Account"}></TitleHome>
                 <div className="account">

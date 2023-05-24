@@ -45,7 +45,7 @@
 		display: grid;
 		float: right;
 		z-index: 1000;
-		justify-content: center;
+		justify-content: center !important;
 		border: 0px solid #161248;
 		background-color: #161248;
 		border-radius: 40px;
@@ -53,6 +53,7 @@
 				font-family:'Franklin Gothic Light', 'Arial Narrow', Arial, sans-serif;
 				color: white;
 				font-size: 21px;
+				padding-top: 8px;
 				text-align: center;
 			}
 			
@@ -65,7 +66,9 @@
 			float: right;
 			border: 0px solid white;
 			background-color: white;
-			justify-content: center;
+			align-items: center;
+			align-content: center;
+			justify-content: center !important;
 			//border-radius: 40px;
 			border-top-left-radius: 40px;
 			border-end-start-radius: 40px;
@@ -76,6 +79,7 @@
 			.text {
 				font-family:'Franklin Gothic Light', 'Arial Narrow', Arial, sans-serif;
 				color: black;
+				padding-top: 8px;
 				margin-left: 89px;
 				font-size: 21px;
 

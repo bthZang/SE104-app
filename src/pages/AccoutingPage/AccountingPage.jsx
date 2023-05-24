@@ -15,7 +15,7 @@ function AccountingPage() {
   };
 
   return (
-    <div className="container">
+    <div className="containerAccountingPage">
         <div className="accountingSideBar">
            <SideBar handleChange={handleChange}></SideBar>
         </div>

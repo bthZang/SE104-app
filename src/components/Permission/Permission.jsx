@@ -40,7 +40,7 @@ const Permission = () => {
     return(
         <div> 
              <TitleHome children={"Permission"}></TitleHome>
-             <div className="container">
+             <div className="containerPermission">
                 <div>
                 <div className="humanResource">
                     <p className="titleTable">Human Resoure Department</p>

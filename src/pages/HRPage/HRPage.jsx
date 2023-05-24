@@ -17,7 +17,7 @@ function HRPage() {
     setTab(status);
   };
   return (
-    <div className="container">
+    <div className="containerHRPage">
         <div className="HRSideBar">
            <HRSideBar handleChange={handleChange}></HRSideBar>
         </div>
