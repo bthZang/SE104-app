@@ -25,6 +25,8 @@ const CustomButton = ({ children, type, style, onClick }) => {
 			case "Accept":
 				className = "shortGreen";
 				break;
+			default: 
+				className = "shortBlue";
 		}
 	} else if (type == "long")
 		switch (children) {
@@ -47,6 +49,8 @@ const CustomButton = ({ children, type, style, onClick }) => {
 			case "Cancel":
 				className = "longGray";
 				break;
+			default: 
+				className = "longBlue";
 		}
 	else if (type == "normal" && children == "Export all")
 		className = "normalBlue";

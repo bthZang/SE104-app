@@ -1,4 +1,3 @@
-
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -15,24 +14,30 @@ function AccountingPage() {
     setTab(status);
   };
 
+  const [dialogType, setDialogType] = useState('');
+  const [id, setId] = useState('');
 
-
+  const handleOnClick = (type, id) => {
+    setId(id);
+    setDialogType(type)
+  };
 
   return (
     <div className="containerAccountingPage">
-        <div className="accountingSideBar">
-           <SideBar handleChange={handleChange}></SideBar>
+      <div className="accountingSideBar">
+        <SideBar handleChange={handleChange}></SideBar>
+      </div>
+      <div className="content" >
+        {tab == "payroll" && <Payroll onClick={handleOnClick} />}
+        {tab == "request" && <Request></Request>}
+
+        <div className="confirmBox">
+          {dialogType == "export" && <Confirm onClose={() => setDialogType('')}>{"Export"}</Confirm>}
         </div>
-       <div className="content" >
-        {tab == "payroll" && <Payroll></Payroll>  } 
-        {tab == "request" && <Request></Request>  } 
-       </div>
-       <Confirm className="confirmBox">
-       {/* {tab == "payroll" && <Payroll></Payroll>  }  */}
-        {/* {tab == "request" && <Request></Request>  }  */}
-       </Confirm>
+      </div>
+
     </div>
-   
+
   )
 }
 

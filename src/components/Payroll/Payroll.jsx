@@ -162,19 +162,22 @@ const columns = [
 	},
 ];
 
-const Payroll = () => {
+function o(id) {
+	console.log(id)
+}
+
+const Payroll = ({onClick}) => {
 	const [selectedOption, setSelectedOption] = useState(null);
 	const handleChange = (selectedOption) => {
 		setSelectedOption(selectedOption);
 	};
-	const [identifyPayroll, setIdentifyPayroll] = useState("");
 
 	const newPayrollData = payrollData.map((data) => ({
 		...data,
 		payslip: (
 			<CustomButton
 				onClick={() => {
-					setIdentifyPayroll(data.id);
+					onClick('export', data.id);
 				}}
 				type={"short"}
 			>

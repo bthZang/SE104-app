@@ -4,7 +4,7 @@ import "./Confirm.scss";
 //import { Button } from "@mui/material";
 import CustomButton from "../CustomButton/CustomButton";
 
-const Confirm = ({ children, type, text}) => {
+const Confirm = ({ children, text, onClose}) => {
 	//const {children, type} = props;
 	
 	let className = "button";
@@ -25,15 +25,14 @@ const Confirm = ({ children, type, text}) => {
 	}
 
 	return (
-		<div className="confirmContainer" >
-			<div className="box">
+		<div className="confirmContainer" onClick={onClose} >
+			<div className="box" onClick={e => e.stopPropagation()}>
 				<div className={className}>
-					{children}
 					<p className="confirmText">
 						Do you want to <span className="childrenText">{children}</span> this {text}
 					</p>
 					<div className="confirmBtn">
-						<CustomButton style={{width: "100%"}} type={type}>{children}</CustomButton>
+						<CustomButton style={{width: "100%"}} type="long" >{children}</CustomButton>
 					</div>
 				</div>
 			</div>
