@@ -19,26 +19,46 @@ const columns = [
         name: 'Name',
         selector: 'name',
         sortable: true,
+        width: "270px",
+		style: {
+			justifyContent: "left",
+		},
     },
     {
         name: 'Timestamp',
         selector: 'timestamp',
         sortable: true,
+         width: "287px",
+		style: {
+			justifyContent: "left",
+		},
     },
     {
         name: 'Month',
         selector: 'month',
         sortable: true,
+        width: "180px",
+		style: {
+			justifyContent: "left",
+		},
     },
     {
         name: 'Message',
         selector: 'message',
         sortable: true,
+         width: "400px",
+		style: {
+			justifyContent: "left",
+		},
     },
     {
         name: '',
         selector: 'button',
         sortable: true,
+         width: "200px",
+		style: {
+			justifyContent: "center",
+		},
     }
 ]
 
@@ -50,7 +70,7 @@ const Request = () => {
         <div className="containerRequest">
                 <TitleHome children={"Request"}></TitleHome>
                 <div className="account">
-                    <p className="titleTable">You have 4 pending request</p>
+                    <p className="titleTable">{`You have ${accountData.length} pending request`}</p>
                     <DataTable
                         columns={columns}
                         data={accountData}

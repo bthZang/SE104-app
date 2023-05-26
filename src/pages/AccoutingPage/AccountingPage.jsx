@@ -7,6 +7,7 @@ import "./AccountingPage.scss"
 import SideBar from "../../components/SideBar/SideBar";
 import Payroll from "../../components/payroll/payroll";
 import Request from "../../components/request/request";
+import Confirm from "../../components/Confirm/confirm";
 
 function AccountingPage() {
   const [tab, setTab] = useState('payroll');
@@ -23,6 +24,7 @@ function AccountingPage() {
         {tab == "payroll" && <Payroll></Payroll>  } 
         {tab == "request" && <Request></Request>  } 
        </div>
+       <Confirm></Confirm>
     </div>
    
   )
