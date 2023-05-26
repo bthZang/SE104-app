@@ -30,7 +30,6 @@ const payrollData = [
 		workingDays: "Accounting",
 		overTime: "Accounting",
 		netSalary: "P",
-		payslip: <CustomButton children={"Export"} type={"short"}></CustomButton>,
 	},
 	{
 		id: "#00002",
@@ -38,7 +37,6 @@ const payrollData = [
 		workingDays: "Accounting",
 		overTime: "Accounting",
 		netSalary: "P",
-		payslip: <CustomButton children={"Export"} type={"short"}></CustomButton>,
 	},
 	{
 		id: "#00003",
@@ -46,7 +44,6 @@ const payrollData = [
 		workingDays: "Accounting",
 		overTime: "Accounting",
 		netSalary: "P",
-		payslip: <CustomButton children={"Export"} type={"short"}></CustomButton>,
 	},
 	{
 		id: "#00004",
@@ -54,7 +51,6 @@ const payrollData = [
 		workingDays: "Accounting",
 		overTime: "Accounting",
 		netSalary: "P",
-		payslip: <CustomButton children={"Export"} type={"short"}></CustomButton>,
 	},
 	{
 		id: "#00005",
@@ -62,7 +58,6 @@ const payrollData = [
 		workingDays: "Accounting",
 		overTime: "Accounting",
 		netSalary: "P",
-		payslip: <CustomButton children={"Export"} type={"short"}></CustomButton>,
 	},
 	{
 		id: "#00006",
@@ -70,7 +65,6 @@ const payrollData = [
 		workingDays: "Accounting",
 		overTime: "Accounting",
 		netSalary: "P",
-		payslip: <CustomButton children={"Export"} type={"short"}></CustomButton>,
 	},
 	{
 		id: "#00007",
@@ -78,7 +72,6 @@ const payrollData = [
 		workingDays: "Accounting",
 		overTime: "Accounting",
 		netSalary: "P",
-		payslip: <CustomButton children={"Export"} type={"short"}></CustomButton>,
 	},
 	{
 		id: "#00008",
@@ -86,7 +79,6 @@ const payrollData = [
 		workingDays: "Accounting",
 		overTime: "Accounting",
 		netSalary: "P",
-		payslip: <CustomButton children={"Export"} type={"short"}></CustomButton>,
 	},
 	{
 		id: "#00009",
@@ -94,7 +86,6 @@ const payrollData = [
 		workingDays: "Accounting",
 		overTime: "Accounting",
 		netSalary: "P",
-		payslip: <CustomButton children={"Export"} type={"short"}></CustomButton>,
 	},
 	{
 		id: "#00010",
@@ -102,7 +93,6 @@ const payrollData = [
 		workingDays: "Accounting",
 		overTime: "Accounting",
 		netSalary: "P",
-		payslip: <CustomButton children={"Export"} type={"short"}></CustomButton>,
 	},
 ];
 
@@ -164,7 +154,7 @@ const columns = [
 		name: "Payslip",
 		selector: "payslip",
 		sortable: true,
-        center: true,
+		center: true,
 		style: {
 			// background: "orange",
 			justifyContent: "center",
@@ -172,11 +162,26 @@ const columns = [
 	},
 ];
 
-export default function Payroll() {
+const Payroll = () => {
 	const [selectedOption, setSelectedOption] = useState(null);
 	const handleChange = (selectedOption) => {
 		setSelectedOption(selectedOption);
 	};
+	const [identifyPayroll, setIdentifyPayroll] = useState("");
+
+	const newPayrollData = payrollData.map((data) => ({
+		...data,
+		payslip: (
+			<CustomButton
+				onClick={() => {
+					setIdentifyPayroll(data.id);
+				}}
+				type={"short"}
+			>
+				Export
+			</CustomButton>
+		),
+	}));
 
 	return (
 		<div className="containerPayroll">
@@ -199,7 +204,7 @@ export default function Payroll() {
 			<div className="table">
 				<DataTable
 					columns={columns}
-					data={payrollData}
+					data={newPayrollData}
 					pagination={true}
 					highlightOnHover={true}
 					striped={true}
@@ -207,4 +212,6 @@ export default function Payroll() {
 			</div>
 		</div>
 	);
-}
+};
+
+export default Payroll;

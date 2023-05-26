@@ -1,17 +1,21 @@
-import { Children } from "react";
+import { Children, useState } from "react";
 
 import "./Confirm.scss";
 //import { Button } from "@mui/material";
 import CustomButton from "../CustomButton/CustomButton";
 
-const Confirm = ({ children, type, text }) => {
+const Confirm = ({ children, type, text}) => {
 	//const {children, type} = props;
+	
 	let className = "button";
 	switch (children) {
 		case "Accept":
 			className = "accept";
 			break;
 		case "Delete":
+			// onclick=()=>{handleOnClick('delete')}
+			className = "delete";
+			break;
 		case "Reject":
 			className = "delete";
 			break;

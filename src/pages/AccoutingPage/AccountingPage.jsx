@@ -15,6 +15,9 @@ function AccountingPage() {
     setTab(status);
   };
 
+
+
+
   return (
     <div className="containerAccountingPage">
         <div className="accountingSideBar">
@@ -24,7 +27,10 @@ function AccountingPage() {
         {tab == "payroll" && <Payroll></Payroll>  } 
         {tab == "request" && <Request></Request>  } 
        </div>
-       <Confirm></Confirm>
+       <Confirm className="confirmBox">
+       {/* {tab == "payroll" && <Payroll></Payroll>  }  */}
+        {/* {tab == "request" && <Request></Request>  }  */}
+       </Confirm>
     </div>
    
   )

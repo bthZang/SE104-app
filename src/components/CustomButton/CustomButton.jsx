@@ -3,9 +3,10 @@ import { Children } from "react";
 import "./CustomButton.scss";
 //import { Button } from "@mui/material";
 
-const CustomButton = ({ children, type, style }) => {
-	//const {children, type} = props;
+const CustomButton = ({ children, type, style, onClick }) => {
 	let className = "button";
+
+
 	if (type == "short") {
 		switch (children) {
 			case "Change":
@@ -15,6 +16,9 @@ const CustomButton = ({ children, type, style }) => {
 				className = "shortBlue";
 				break;
 			case "Delete":
+                // onClick = 
+                className = "shortRed";
+				break;
 			case "Reject":
 				className = "shortRed";
 				break;
@@ -34,6 +38,7 @@ const CustomButton = ({ children, type, style }) => {
 				break;
 			case "Delete":
 			case "Reject":
+                // onClick=({})
 				className = "longRed";
 				break;
 			case "Accept":
@@ -47,7 +52,7 @@ const CustomButton = ({ children, type, style }) => {
 		className = "normalBlue";
 
 	return (
-		<div className={className} style={style}>
+		<div onClick={onClick} className={className} style={style}>
 			{children}
 		</div>
 	);
