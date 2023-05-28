@@ -1,4 +1,5 @@
 import "./Payroll.scss";
+import * as XLSX from 'xlsx';
 
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
@@ -21,79 +22,6 @@ const options = [
 	"Oct-2023",
 	"Nov-2023",
 	"Dec-2023",
-];
-
-const payrollData = [
-	{
-		id: "#00001",
-		name: "Example",
-		workingDays: "Accounting",
-		overTime: "Accounting",
-		netSalary: "P",
-	},
-	{
-		id: "#00002",
-		name: "Example",
-		workingDays: "Accounting",
-		overTime: "Accounting",
-		netSalary: "P",
-	},
-	{
-		id: "#00003",
-		name: "Example",
-		workingDays: "Accounting",
-		overTime: "Accounting",
-		netSalary: "P",
-	},
-	{
-		id: "#00004",
-		name: "Example",
-		workingDays: "Accounting",
-		overTime: "Accounting",
-		netSalary: "P",
-	},
-	{
-		id: "#00005",
-		name: "Example",
-		workingDays: "Accounting",
-		overTime: "Accounting",
-		netSalary: "P",
-	},
-	{
-		id: "#00006",
-		name: "Example",
-		workingDays: "Accounting",
-		overTime: "Accounting",
-		netSalary: "P",
-	},
-	{
-		id: "#00007",
-		name: "Example",
-		workingDays: "Accounting",
-		overTime: "Accounting",
-		netSalary: "P",
-	},
-	{
-		id: "#00008",
-		name: "Example",
-		workingDays: "Accounting",
-		overTime: "Accounting",
-		netSalary: "P",
-	},
-	{
-		id: "#00009",
-		name: "Example",
-		workingDays: "Accounting",
-		overTime: "Accounting",
-		netSalary: "P",
-	},
-	{
-		id: "#00010",
-		name: "Example",
-		workingDays: "Accounting",
-		overTime: "Accounting",
-		netSalary: "P",
-	},
 ];
 
 const columns = [
@@ -162,29 +90,19 @@ const columns = [
 	},
 ];
 
-function o(id) {
-	console.log(id)
-}
 
-const Payroll = ({onClick}) => {
+const Payroll = ({ onClick, payrollData, newPayrollData }) => {
+
+
+
+
+
+
 	const [selectedOption, setSelectedOption] = useState(null);
 	const handleChange = (selectedOption) => {
 		setSelectedOption(selectedOption);
 	};
 
-	const newPayrollData = payrollData.map((data) => ({
-		...data,
-		payslip: (
-			<CustomButton
-				onClick={() => {
-					onClick('export', data.id);
-				}}
-				type={"short"}
-			>
-				Export
-			</CustomButton>
-		),
-	}));
 
 	return (
 		<div className="containerPayroll">
@@ -200,6 +118,7 @@ const Payroll = ({onClick}) => {
 					className="customDropdown"
 				></Dropdown>
 				<CustomButton
+					onClick={() => onClick('exportAll', 0)}
 					children={"Export all"}
 					type={"normal"}
 				></CustomButton>
