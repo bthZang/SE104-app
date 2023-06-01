@@ -1,18 +1,15 @@
-
+import { useState, useRef } from "react";
 import DataTable from "react-data-table-component";
 
 import CustomButton from "../CustomButton/CustomButton";
 import TitleHome from "../titleHome/titleHome";
+import AddConfirm from "../AddConfirm/AddConfirm";
+//import {TextField} from 'react-text-field'
+
+// import { TextField } from "@mui/material";
 
 import "./Account.scss"
 
-const accountData = [
-    {email: 'example@email', name: 'Example', permission: 'HR' ,button: <CustomButton type={'short'} children={'Delete'} ></CustomButton>},
-    {email: 'example@email', name: 'Example', permission: 'Accounting' ,button: <CustomButton type={'short'} children={'Delete'} ></CustomButton>},
-    {email: 'example@email', name: 'Example', permission: 'BOD' ,button: <CustomButton type={'short'} children={'Delete'} ></CustomButton>},
-    {email: 'example@email', name: 'Example', permission: 'None' ,button: <CustomButton type={'short'} children={'Delete'} ></CustomButton>},
-
-]
 
 const columns = [
 
@@ -35,13 +32,23 @@ const columns = [
         name: '',
         selector: 'button',
         sortable: true,
+        style: {
+            justifyContent: 'center'
+        }
     }
 ]
 
-const Account = () => {
+const Account = ({ accountData, newAccountData, onClick, onClose }) => {
 
+    const [click, setClick] = useState(null)
 
-    return(
+    const btnAddRef = useRef(null)
+
+    const handleOnClick = () => {
+        setClick(btnAddRef.current.id)
+    };
+
+    return (
 
         <div className="containerAccount">
             <div>
@@ -50,18 +57,22 @@ const Account = () => {
                     <p className="titleTable">Acount</p>
                     <DataTable
                         columns={columns}
-                        data={accountData}
+                        data={newAccountData}
                         pagination={true}
                         highlightOnHover={true}
                         striped={true}
                     ></DataTable>
                 </div>
-                <button className="btn">Add new account</button>
-                
+                <button id="btnAdd" ref={btnAddRef} className="btn" onClick={()=>{handleOnClick()}}>Add new account</button>
+                <div>
+                    {click == "btnAdd" && <AddConfirm text={"account?"} 
+                        onClick={onclick}
+                    >Add</AddConfirm>}
+                </div>
             </div>
         </div>
-      
-        
+        // id="btnAdd" ref={btnAddRef} onClick={()=>{handleOnClick}}
+
     );
 
 }

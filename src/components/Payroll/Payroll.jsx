@@ -93,11 +93,6 @@ const columns = [
 
 const Payroll = ({ onClick, payrollData, newPayrollData }) => {
 
-
-
-
-
-
 	const [selectedOption, setSelectedOption] = useState(null);
 	const handleChange = (selectedOption) => {
 		setSelectedOption(selectedOption);

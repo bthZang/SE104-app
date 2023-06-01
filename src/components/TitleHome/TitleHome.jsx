@@ -4,7 +4,7 @@ import moment from "moment/moment";
 import "./TitleHome.scss"
 import Search from "../search/search";
 
-const TitleHome = ({children}) => {
+const TitleHome = ({children, showSearch = true}) => {
     const now = moment().format('ddd, DD-MMM-YY, HH:mm A')
 
     return(
@@ -18,7 +18,7 @@ const TitleHome = ({children}) => {
                 <p >{now}</p>
             
             </div>
-            <div className="search"><Search></Search></div>
+          {showSearch &&  <div className="search"><Search></Search></div>}
             
         </div>
     );

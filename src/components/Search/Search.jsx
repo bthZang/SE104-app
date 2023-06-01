@@ -6,7 +6,7 @@ import searchImg from "../../assets/images/search.svg"
 
 const Search = () => {
     return(
-        <div className="border">
+        <div  className="border">
             <button className="searchBtn">
                 <img scr={searchBtn} className="searchImg">
                     </img></button>

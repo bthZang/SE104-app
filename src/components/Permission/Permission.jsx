@@ -6,15 +6,15 @@ import TitleHome from "../titleHome/titleHome";
 
 import "./Permission.scss"
 
-const humanRescourceData = [
-    {email: 'example@email', name: 'Example', button: <CustomButton type={'short'} children={'Change'} ></CustomButton>}
-]
-const AcountingData = [
-    {email: 'example@email', name: 'Example', button: <CustomButton type={'short'} children={'Change'} ></CustomButton>}
-]
-const BoardData = [
-    {email: 'example@email', name: 'Example', button: <CustomButton type={'short'} children={'Change'} ></CustomButton>}
-]
+// const humanRescourceData = [
+//     {email: 'example@email', name: 'Example', button: <CustomButton type={'short'} children={'Change'} ></CustomButton>}
+// ]
+// const AcountingData = [
+//     {email: 'example@email', name: 'Example', button: <CustomButton type={'short'} children={'Change'} ></CustomButton>}
+// ]
+// const BoardData = [
+//     {email: 'example@email', name: 'Example', button: <CustomButton type={'short'} children={'Change'} ></CustomButton>}
+// ]
 const columns = [
 
     {
@@ -31,22 +31,25 @@ const columns = [
         name: '',
         selector: 'button',
         sortable: true,
+        style: {
+			justifyContent: "center",
+		},
     }
 ]
 
-const Permission = () => {
+const Permission = ({onClick,humanRescourceData, AcountingData, BoardData, newBoardData, newAcountingData, newHumanRescourceData}) => {
 
 
     return(
         <div> 
-             <TitleHome children={"Permission"}></TitleHome>
+             <TitleHome showSearch={false} children={"Permission"}></TitleHome>
              <div className="containerPermission">
                 <div>
                 <div className="humanResource">
                     <p className="titleTable">Human Resoure Department</p>
                     <DataTable
                         columns={columns}
-                        data={humanRescourceData}
+                        data={newHumanRescourceData}
                         pagination={true}
                         highlightOnHover={true}
                         striped={true}
@@ -57,7 +60,7 @@ const Permission = () => {
                     <p className="titleTable">Accounting Department</p>
                     <DataTable
                         columns={columns}
-                        data={AcountingData}
+                        data={newAcountingData}
                         pagination={true}
                         highlightOnHover={true}
                         striped={true}
@@ -68,7 +71,7 @@ const Permission = () => {
                     <p className="titleTable">Board of Director</p>
                     <DataTable
                         columns={columns}
-                        data={BoardData}
+                        data={newBoardData}
                         pagination={true}
                         highlightOnHover={true}
                         striped={true}

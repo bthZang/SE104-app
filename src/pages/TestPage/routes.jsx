@@ -8,7 +8,7 @@ import HRPage from '../HRPage/HRPage';
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <AccountingPage />,
+        element: <AdminPage />,
     },
     
 ]);

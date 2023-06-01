@@ -7,7 +7,7 @@ import "./AccountingPage.scss"
 import SideBar from "../../components/SideBar/SideBar";
 import Payroll from "../../components/payroll/payroll";
 import Request from "../../components/request/request";
-import Confirm from "../../components/Confirm/confirm";
+import Confirm from "../../components/Confirm/Confirm";
 import CustomButton from "../../components/CustomButton/CustomButton";
 
 const payrollData = [
@@ -149,11 +149,11 @@ function AccountingPage() {
         {tab == "request" && <Request></Request>}
 
         <div className="confirmBox">
-          {dialogType == "export" && <Confirm onClose={() => setDialogType('')}
+          {dialogType == "export" && <Confirm text={"payroll?"} onClose={() => setDialogType('')}
             onClick={handleExportPayrollToExcel}
           >{"Export"}</Confirm>}
 
-          {dialogType == "exportAll" && <Confirm onClose={() => setDialogType('')}
+          {dialogType == "exportAll" && <Confirm text={"all payroll?"} onClose={() => setDialogType('')}
             onClick={handleExportAllPayrollToExcel}
           >{"Export All"}</Confirm>}
         </div>
