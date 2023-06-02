@@ -6,19 +6,7 @@ import TitleHome from "../titleHome/titleHome";
 
 import "./Employee.scss"
 
-const employeeData = [
-    {id: '#00001', name: 'Example', gender: 'Male' ,birthdate: '06/05/2002', department: 'unknown', position:'unknown' },
-    {id: '#00002', name: 'Example', gender: 'Male' ,birthdate: '06/05/2002', department: 'unknown', position:'unknown' },
-    {id: '#00003', name: 'Example', gender: 'Female' ,birthdate: '06/05/2002', department: 'unknown', position:'unknown' },
-    {id: '#00004', name: 'Example', gender: 'Male' ,birthdate: '06/05/2002', department: 'unknown', position:'unknown' },
-    {id: '#00005', name: 'Example', gender: 'Female' ,birthdate: '06/05/2002', department: 'unknown', position:'unknown' },
-    {id: '#00006', name: 'Example', gender: 'Male' ,birthdate: '06/05/2002', department: 'unknown', position:'unknown' },
-    {id: '#00007', name: 'Example', gender: 'Female' ,birthdate: '06/05/2002', department: 'unknown', position:'unknown' },
-    {id: '#00008', name: 'Example', gender: 'Male' ,birthdate: '06/05/2002', department: 'unknown', position:'unknown' },
-    {id: '#00009', name: 'Example', gender: 'Male' ,birthdate: '06/05/2002', department: 'unknown', position:'unknown' },
-   
 
-]
 
 const columns = [
 
@@ -56,7 +44,7 @@ const columns = [
     }
 ]
 
-const Employee = () => {
+const Employee = ({employeeData}) => {
 
 
     return(

@@ -8,7 +8,7 @@ const Search = () => {
     return(
         <div  className="border">
             <button className="searchBtn">
-                <img scr={searchBtn} className="searchImg">
+                <img scr={searchImg} className="searchImg">
                     </img></button>
             
             <input type="text" placeholder="Search ..." className="textInput"></input>
