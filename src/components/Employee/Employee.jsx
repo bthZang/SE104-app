@@ -52,7 +52,7 @@ const Employee = ({employeeData}) => {
         <div className="containerEmployee">
             <div>
                 <TitleHome children={"Employee"}></TitleHome>
-                <div className="account">
+                <div className="employee">
                     <DataTable
                         columns={columns}
                         data={employeeData}

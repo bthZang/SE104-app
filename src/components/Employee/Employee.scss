@@ -1,11 +1,11 @@
 .containerEmployee{
     background-color: white;
     border: 0px solid white;
-    width: max-content;
+    min-width: 100%;
     display: flex;
     flex-direction: column-reverse;
     gap: 20px;
-	height: max-content;
+	min-height: 100vh;
     .rdt_TableHead {
         color: #3552E9;
         font-size: 20px;
@@ -37,12 +37,7 @@
         font-weight: 500;
         font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
     }
-    .btn{
-        width: 140px;
-        height: 52px;
-        border-radius: 0px;
-        border: 1px solid #3552E9;
-        background-color: #A0AEF5;
-        color: #1233E5;
+    .employee{
+        margin-top:58px ;
     }
 }

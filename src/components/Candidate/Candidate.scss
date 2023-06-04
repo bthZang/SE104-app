@@ -1,0 +1,49 @@
+.containerCandidate{
+   background-color: white;
+   border: 0px solid white;
+   width: max-content;
+   display: flex;
+   flex-direction: column-reverse;
+   gap: 20px;
+  height: max-content;
+   .rdt_TableHead {
+       color: #3552E9;
+       font-size: 20px;
+       border-color: #3552E9;
+       font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+   }
+   .rdt_TableRow{
+       color: black;
+       font-size: 20px;
+       height: 52px;
+       border-color: #3552E9;
+       
+       font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+   }
+   .rdt_TableCol{
+       height: 52px;
+       border-color: #3552E9;
+       border: 0.00001px solid #3552E9;
+       width: 355px !important;
+       
+   }
+   
+
+
+   
+   .titleTable{
+       color: #3552E9;
+       font-size: 28px;
+       font-weight: 500;
+       font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+   }
+   .btn{
+       width: 355px !important;
+       height: 52px;
+       border-radius: 0px;
+       border: 1px solid #3552E9;
+       background-color: #A0AEF5;
+       color: #1233E5;
+       font-size: 21px;
+   }
+}

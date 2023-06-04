@@ -26,6 +26,12 @@ const employeeData = [
 
 ]
 
+const candidateData = [
+  {name: 'Example', CV: 'Male' ,birthdate: '06/05/2002' },
+  
+
+]
+
 function HRPage() {
     const [tab, setTab] = useState('dashboard');
     const handleChange = (status) => {

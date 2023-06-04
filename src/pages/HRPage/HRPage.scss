@@ -1,6 +1,6 @@
 .containerHRPage{
-    width: 100% !important;
-    // height: 100vh;
+    min-width: max-content ;
+    min-height:100vh;
     background-color: white;
     display: flex;
     flex-direction: row !important;
