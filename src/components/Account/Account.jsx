@@ -66,7 +66,7 @@ const Account = ({ accountData, newAccountData, onClick, onClose }) => {
                 <button id="btnAdd" ref={btnAddRef} className="btn" onClick={()=>{handleOnClick()}}>Add new account</button>
                 <div>
                     {click == "btnAdd" && <AddConfirm text={"account?"} 
-                        onClick={onclick}
+                        onClick={onclick} onClose={() => setClick('')}
                     >Add</AddConfirm>}
                 </div>
             </div>

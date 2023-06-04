@@ -130,9 +130,7 @@ function AdminPage() {
           {dialogType == "delete" && <Confirm  text={"account?"} onClose={() => setDialogType('')}
             onClick={onclick}
           >{"Delete"}</Confirm>}
-          {dialogType == "delete" && <Confirm  text={"account?"} onClose={() => setDialogType('')}
-            onClick={onclick}
-          >{"Delete"}</Confirm>}
+          
         </div>
       </div>
     </div>

@@ -3,7 +3,8 @@ import DataTable from "react-data-table-component";
 
 import CustomButton from "../CustomButton/CustomButton";
 import TitleHome from "../titleHome/titleHome";
-import AddConfirm from "../AddConfirm/AddConfirm";
+import AddAttachmentConfirm from "../AddAttachmentConfirm/AddAttachmentConfirm";
+
 
 import "./Candidate.scss"
 
@@ -11,23 +12,31 @@ import "./Candidate.scss"
 const columns = [
 
     {
-        name: 'Email',
-        selector: 'email',
-        sortable: true,
-    },
-    {
         name: 'Name',
         selector: 'name',
         sortable: true,
     },
     {
-        name: 'Permission',
-        selector: 'permission',
+        name: 'CV',
+        selector: 'CV',
+        sortable: true,
+    },
+    {
+        name: 'Apply position',
+        selector: 'applyPosition',
         sortable: true,
     },
     {
         name: '',
-        selector: 'button',
+        selector: 'acceptBtn',
+        sortable: true,
+        style: {
+            justifyContent: 'center'
+        }
+    },
+    {
+        name: '',
+        selector: 'rejectBtn',
         sortable: true,
         style: {
             justifyContent: 'center'
@@ -42,7 +51,7 @@ const Candidate = ({ candidateData, newCandidateData, onClick, onClose }) => {
     const btnCandidateAddRef = useRef(null)
 
     const handleOnClick = () => {
-        setClick(btnAddRef.current.id)
+        setClick(btnCandidateAddRef.current.id)
     };
 
     return (
@@ -51,20 +60,19 @@ const Candidate = ({ candidateData, newCandidateData, onClick, onClose }) => {
             <div>
                 <TitleHome children={"Candidate"}></TitleHome>
                 <div className="candidate">
-                    <p className="titleTable">Acount</p>
-                    {/* <DataTable
+                    <DataTable
                         columns={columns}
                         data={newCandidateData}
                         pagination={true}
                         highlightOnHover={true}
                         striped={true}
-                    ></DataTable> */}
+                    ></DataTable>
                 </div>
-                {/* <button id="btnCandidateAdd" ref={btnCandidateAddRef} className="btnCandidate" onClick={()=>{handleOnClick()}}>Add new <span style={{color : #1233E5}} >Candidate</span></button> */}
+                <button id="btnCandidateAdd" ref={btnCandidateAddRef} className="btnCandidate" onClick={()=>{handleOnClick()}}>Add new <span style={{color:"#1233E5"}} >candidate</span></button>
                 <div>
-                    {/* {click == "btnCandidateAdd" && <AddConfirm text={"account?"} 
-                        onClick={onclick}
-                    >Add</AddConfirm>} */}
+                    {click == "btnCandidateAdd" && <AddAttachmentConfirm text={"Candidate"} 
+                        onClick={onclick} onClose={() => setClick('')}
+                    >Add</AddAttachmentConfirm>}
                 </div>
             </div>
         </div>

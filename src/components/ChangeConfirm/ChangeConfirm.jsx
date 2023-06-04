@@ -34,6 +34,7 @@ const ChangeConfirm = ({ onClose, onClick }) => {
                         onChange={handleOnChange}
                         placeholder="Select access right"
                         className="customChangeDropdown"
+                        
                     ></Dropdown></div>
                     <div className="confirmBtn">
                         <CustomButton onClick={onClick} style={{ width: "100%" }} type="long" >Change</CustomButton>

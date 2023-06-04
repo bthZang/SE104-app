@@ -9,8 +9,8 @@ import Employee from "../../components/employee/employee";
 import DayTimeKeeping from "../../components/dayTimeKeeping/dayTimeKeeping";
 import Candidate from "../../components/candidate/candidate";
 import Dashboard from "../../components/dashboard/dashboard";
-
-
+import CustomButton from "../../components/CustomButton/CustomButton";
+import Confirm from "../../components/Confirm/Confirm";
 
 const employeeData = [
   {id: '#00001', name: 'Example', gender: 'Male' ,birthdate: '06/05/2002', department: 'unknown', position:'unknown' },
@@ -27,7 +27,15 @@ const employeeData = [
 ]
 
 const candidateData = [
-  {name: 'Example', CV: 'Male' ,birthdate: '06/05/2002' },
+  {name: 'Example1', CV: 'Male' ,applyPosition: 'CFO' },
+  {name: 'Example2', CV: 'Male' ,applyPosition: 'CFO' },
+  {name: 'Example3', CV: 'Male' ,applyPosition: 'CFO' },
+  {name: 'Example4', CV: 'Male' ,applyPosition: 'CFO' },
+  {name: 'Example5', CV: 'Male' ,applyPosition: 'CFO' },
+  {name: 'Example6', CV: 'Male' ,applyPosition: 'CFO' },
+  {name: 'Example7', CV: 'Male' ,applyPosition: 'CFO' },
+  {name: 'Example8', CV: 'Male' ,applyPosition: 'CFO' },
+
   
 
 ]
@@ -37,6 +45,40 @@ function HRPage() {
     const handleChange = (status) => {
     setTab(status);
   };
+
+  const [dialogType, setDialogType] = useState('');
+  const [email, setEmail] = useState('');
+
+  const handleOnClick = (type, email) => {
+    setEmail(email);
+    setDialogType(type)
+  };
+
+
+  const newCandidateData = candidateData.map((data) => ({
+    ...data,
+    acceptBtn: (
+      <CustomButton
+        onClick={() => {
+          handleOnClick('accept', data.email);
+        }}
+        type={"short"}
+      >
+        Accept
+      </CustomButton>
+    ),
+    rejectBtn: (
+      <CustomButton
+        onClick={() => {
+          handleOnClick('reject', data.email);
+        }}
+        type={"short"}
+      >
+        Reject
+      </CustomButton>
+    ),
+  }));
+
   return (
     <div className="containerHRPage">
         <div className="HRSideBar">
@@ -46,7 +88,16 @@ function HRPage() {
         {tab == "dashboard" && <Dashboard></Dashboard>  } 
         {tab == "timekeeping" && <DayTimeKeeping></DayTimeKeeping>  } 
         {tab == "employee" && <Employee employeeData={employeeData}></Employee>  } 
-        {tab == "candidate" && <Candidate></Candidate>  } 
+        {tab == "candidate" && <Candidate newCandidateData={newCandidateData}  ></Candidate>  } 
+
+        <div className="confirmBox">
+          {dialogType == "accept" && <Confirm  text={"candidate?"} onClose={() => setDialogType('')}
+            onClick={onclick}
+          >{"Accept"}</Confirm>}
+          {dialogType == "reject" && <Confirm  text={"candidate?"} onClose={() => setDialogType('')}
+            onClick={onclick}
+          >{"Reject"}</Confirm>}
+        </div>
        </div>
     </div>
    

@@ -1,6 +1,6 @@
 .containerAccountingPage{
-    width: 100% !important;
-    // height: 100vh;
+    min-width: max-content ;
+    padding-right: 100px;
     background-color: white;
     display: flex;
     flex-direction: row !important;
