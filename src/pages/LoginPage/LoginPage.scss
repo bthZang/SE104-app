@@ -1,0 +1,57 @@
+.containerLoginPage{
+    box-sizing: border-box;
+    min-width: 500px;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 25px 40px;
+
+    .decorContainerLoginPage{
+        width: 606px;
+        height: 663px;
+        background-image: url('../../assets/login-page-decor.svg');
+        background-size: cover;
+        border-radius: 20px;
+    }
+    .loginOutlet{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px;
+        
+        width: 600px;
+        height: 600px;
+
+        .headerLoginPage{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 10px 10px 0px 56px;    
+    
+            width: 100%;
+            height: fit-content;
+    
+            .logoLoginPage{
+                width: 100px;
+                height: auto;
+            }
+            
+        }
+    
+        .backLoginPage{
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            padding: 0px 10px;
+            
+            .backButtonLoginpage{
+                width:  auto;
+                height: 32px;
+            }
+        }
+    }
+    
+}

@@ -1,16 +1,33 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import HomePage from '../homePage/homePage';
-import AccountingPage from '../AccoutingPage/accountingPage';
-import AdminPage from '../adminPage/adminPage';
+import HomePage from '../HomePage/HomePage';
+import AccountingPage from '../AccoutingPage/AccountingPage';
+import AdminPage from '../AdminPage/AdminPage';
 import HRPage from '../HRPage/HRPage';
+import LoginPage from '../LoginPage/LoginPage';
+import LoginOutlet from '../LoginPage/LoginOutlet/LoginOutlet';
+import ForgotPasswordOutlet from '../LoginPage/ForgotPasswordOutlet/ForgotPasswordOutlet'
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <HRPage />,
+        element: <HomePage />,
     },
-    
+    {
+        path: '/login',
+        element: <LoginPage />,
+        children: [
+            {
+                index: true,
+                element: <LoginOutlet />,
+            },
+            {
+                path: 'forgot-password',
+                element: <ForgotPasswordOutlet />,
+            },
+        ]
+    }
+
 ]);
 
 export default router;

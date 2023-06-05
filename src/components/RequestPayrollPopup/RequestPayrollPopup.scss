@@ -1,0 +1,36 @@
+
+.dialogContainerRequestPayrollPopup{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 55px 32px 0px;
+    gap: 28px;
+
+    .dialogTitleRequestPayrollPopup{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0px;
+        gap: 10px;
+
+        #titleRequestPayrollPopup{
+            color: #1233E5;
+            font-weight: 600;
+        }
+        #descriptionRequestPayrollPopup{
+            color: #7D8FF1;
+            width: fit-content;
+        }
+    }
+    .monthPickerRequestPayrollPopup{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0px;
+        gap: 28px;
+    }
+}
+
+.modalFooter{
+    padding: 28px 32px 55px;
+}
