@@ -116,7 +116,7 @@ function AccountingPage() {
     const row = payrollData.find((data) => data.id == id);
 
     const data = [
-      ['ID', 'Name', 'Working days', 'Over time', 'Net salary'],
+      ['ID', 'Name', 'Working days', 'Over time', 'Salary'],
       [id, row.name, row.workingDays, row.overTime, row.netSalary],
     ];
     const workbook = XLSX.utils.book_new();
@@ -129,7 +129,7 @@ function AccountingPage() {
     // const row = payrollData.find((data) => data.id == id);
 
     const data = [
-      ['ID', 'Name', 'Working days', 'Over time', 'Net salary'],]
+      ['ID', 'Name', 'Working days', 'Over time', 'Salary'],]
     for (let i = 0; i < payrollData.length; i++) {
       data.push([payrollData[i].id, payrollData[i].name, payrollData[i].workingDays, payrollData[i].overTime, payrollData[i].netSalary])
     }

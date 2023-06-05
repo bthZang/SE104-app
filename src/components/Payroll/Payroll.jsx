@@ -68,7 +68,7 @@ const columns = [
 		},
 	},
 	{
-		name: "Net salary",
+		name: "Salary",
 		selector: "netSalary",
 		width: "270px",
 
