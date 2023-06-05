@@ -1,6 +1,6 @@
 
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 import "./HRPage.scss"
 
@@ -11,40 +11,88 @@ import Candidate from "../../components/candidate/candidate";
 import Dashboard from "../../components/dashboard/dashboard";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import Confirm from "../../components/Confirm/Confirm";
+import MonthTimeKeeping from "../../components/monthTimeKeeping/monthTimeKeeping";
+import TitleHome from "../../components/titleHome/titleHome";
+
 
 const employeeData = [
-  {id: '#00001', name: 'Example', gender: 'Male' ,birthdate: '06/05/2002', department: 'unknown', position:'unknown' },
-  {id: '#00002', name: 'Example', gender: 'Male' ,birthdate: '06/05/2002', department: 'unknown', position:'unknown' },
-  {id: '#00003', name: 'Example', gender: 'Female' ,birthdate: '06/05/2002', department: 'unknown', position:'unknown' },
-  {id: '#00004', name: 'Example', gender: 'Male' ,birthdate: '06/05/2002', department: 'unknown', position:'unknown' },
-  {id: '#00005', name: 'Example', gender: 'Female' ,birthdate: '06/05/2002', department: 'unknown', position:'unknown' },
-  {id: '#00006', name: 'Example', gender: 'Male' ,birthdate: '06/05/2002', department: 'unknown', position:'unknown' },
-  {id: '#00007', name: 'Example', gender: 'Female' ,birthdate: '06/05/2002', department: 'unknown', position:'unknown' },
-  {id: '#00008', name: 'Example', gender: 'Male' ,birthdate: '06/05/2002', department: 'unknown', position:'unknown' },
-  {id: '#00009', name: 'Example', gender: 'Male' ,birthdate: '06/05/2002', department: 'unknown', position:'unknown' },
- 
+  { id: '#00001', name: 'Example', gender: 'Male', birthdate: '06/05/2002', department: 'unknown', position: 'unknown' },
+  { id: '#00002', name: 'Example', gender: 'Male', birthdate: '06/05/2002', department: 'unknown', position: 'unknown' },
+  { id: '#00003', name: 'Example', gender: 'Female', birthdate: '06/05/2002', department: 'unknown', position: 'unknown' },
+  { id: '#00004', name: 'Example', gender: 'Male', birthdate: '06/05/2002', department: 'unknown', position: 'unknown' },
+  { id: '#00005', name: 'Example', gender: 'Female', birthdate: '06/05/2002', department: 'unknown', position: 'unknown' },
+  { id: '#00006', name: 'Example', gender: 'Male', birthdate: '06/05/2002', department: 'unknown', position: 'unknown' },
+  { id: '#00007', name: 'Example', gender: 'Female', birthdate: '06/05/2002', department: 'unknown', position: 'unknown' },
+  { id: '#00008', name: 'Example', gender: 'Male', birthdate: '06/05/2002', department: 'unknown', position: 'unknown' },
+  { id: '#00009', name: 'Example', gender: 'Male', birthdate: '06/05/2002', department: 'unknown', position: 'unknown' },
+
 
 ]
 
 const candidateData = [
-  {name: 'Example1', CV: 'Male' ,applyPosition: 'CFO' },
-  {name: 'Example2', CV: 'Male' ,applyPosition: 'CFO' },
-  {name: 'Example3', CV: 'Male' ,applyPosition: 'CFO' },
-  {name: 'Example4', CV: 'Male' ,applyPosition: 'CFO' },
-  {name: 'Example5', CV: 'Male' ,applyPosition: 'CFO' },
-  {name: 'Example6', CV: 'Male' ,applyPosition: 'CFO' },
-  {name: 'Example7', CV: 'Male' ,applyPosition: 'CFO' },
-  {name: 'Example8', CV: 'Male' ,applyPosition: 'CFO' },
+  { name: 'Example1', CV: 'Male', applyPosition: 'CFO' },
+  { name: 'Example2', CV: 'Male', applyPosition: 'CFO' },
+  { name: 'Example3', CV: 'Male', applyPosition: 'CFO' },
+  { name: 'Example4', CV: 'Male', applyPosition: 'CFO' },
+  { name: 'Example5', CV: 'Male', applyPosition: 'CFO' },
+  { name: 'Example6', CV: 'Male', applyPosition: 'CFO' },
+  { name: 'Example7', CV: 'Male', applyPosition: 'CFO' },
+  { name: 'Example8', CV: 'Male', applyPosition: 'CFO' },
 
-  
+
+
+]
+
+const dayTimeKeepingData = [
+  { id: '#00001', name: 'Example', department: 'Accounting', position: 'P', in: 'D', out: 'P' },
+  { id: '#00002', name: 'Example', department: 'Technical', position: 'P', in: 'D', out: 'P' },
+  { id: '#00003', name: 'Example', department: 'Accounting', position: 'P', in: 'D', out: 'P' },
+  { id: '#00004', name: 'Example', department: 'Accounting', position: 'P', in: 'D', out: 'P' },
+  { id: '#00005', name: 'Example', department: 'Technical', position: 'P', in: 'D', out: 'P' },
+  { id: '#00006', name: 'Example', department: 'Accounting', position: 'P', in: 'D', out: 'P' },
+  { id: '#00007', name: 'Example', department: 'Accounting', position: 'P', in: 'D', out: 'P' },
+  { id: '#00008', name: 'Example', department: 'HR', position: 'P', in: 'D', out: 'P' },
+  { id: '#00009', name: 'Example', department: 'Accounting', position: 'P', in: 'D', out: 'P' },
+  { id: '#00010', name: 'Example', department: 'HR', position: 'P', in: 'D', out: 'P' },
+
+
+
+]
+
+const monthTimeKeepingData = [
+  { id: '#00001', name: 'Example', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P', workingDays: '27', dayOff: '3', overtime: '4', total: '27' },
+  { id: '#00002', name: 'Example', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P', workingDays: '27', dayOff: '3', overtime: '4', total: '27' },
+  { id: '#00003', name: 'Example', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P', workingDays: '27', dayOff: '3', overtime: '4', total: '27' },
+  { id: '#00004', name: 'Example', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P', workingDays: '27', dayOff: '3', overtime: '4', total: '27' },
+  { id: '#00005', name: 'Example', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P', workingDays: '27', dayOff: '3', overtime: '4', total: '27' },
+  { id: '#00006', name: 'Example', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P', workingDays: '27', dayOff: '3', overtime: '4', total: '27' },
+  { id: '#00007', name: 'Example', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P', workingDays: '27', dayOff: '3', overtime: '4', total: '27' },
+  { id: '#00008', name: 'Example', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P', workingDays: '27', dayOff: '3', overtime: '4', total: '27' },
+  { id: '#00009', name: 'Example', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P', workingDays: '27', dayOff: '3', overtime: '4', total: '27' },
+  { id: '#000010', name: 'Example', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P', workingDays: '27', dayOff: '3', overtime: '4', total: '27' },
+  { id: '#000011', name: 'Example', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P', workingDays: '27', dayOff: '3', overtime: '4', total: '27' },
+
+
 
 ]
 
 function HRPage() {
-    const [tab, setTab] = useState('dashboard');
-    const handleChange = (status) => {
+  const [tab, setTab] = useState('dashboard');
+  const handleChange = (status) => {
     setTab(status);
   };
+
+  const [tabTimekeeping, setTabTimekepping] = useState('dayTimekeeping');
+
+  const [tabTimekeepingBtn, setTabTimekeppingBtn] = useState('day');
+  const handleChangeTabTimekeeping = (statusRef) => {
+    setTabTimekeppingBtn(statusRef.current.id);
+    //setTabTimekepping(statusRef)
+  };
+
+  const dayRef = useRef(null)
+  const monthRef = useRef(null)
+
 
   const [dialogType, setDialogType] = useState('');
   const [email, setEmail] = useState('');
@@ -81,26 +129,39 @@ function HRPage() {
 
   return (
     <div className="containerHRPage">
-        <div className="HRSideBar">
-           <HRSideBar handleChange={handleChange}></HRSideBar>
-        </div>
-       <div className="content" >
-        {tab == "dashboard" && <Dashboard></Dashboard>  } 
-        {tab == "timekeeping" && <DayTimeKeeping></DayTimeKeeping>  } 
-        {tab == "employee" && <Employee employeeData={employeeData}></Employee>  } 
-        {tab == "candidate" && <Candidate newCandidateData={newCandidateData}  ></Candidate>  } 
+      <div className="HRSideBar">
+        <HRSideBar handleChange={handleChange}></HRSideBar>
+      </div>
+      <div className="content" >
+        {tab == "dashboard" && <Dashboard></Dashboard>}
+        {tab == "timekeeping" &&
+<div><TitleHome>Timekeeping</TitleHome>
+          <div className="timekeepingStyle"> 
+            <div id="day" ref={dayRef} className={tabTimekeepingBtn === 'day' ? 'blur' : 'nonBlur'} onClick={() => { handleChangeTabTimekeeping(dayRef) }}>
+              <p >Today</p>
+            </div>
+            <div id="month" ref={monthRef} className={tabTimekeepingBtn === 'month' ? 'blur' : 'nonBlur'} onClick={() => { handleChangeTabTimekeeping(monthRef) }}>
+              <p >Month</p>
+            </div>
+            
+</div>{tabTimekeepingBtn == "day" && <DayTimeKeeping dayTimeKeepingData={dayTimeKeepingData}></DayTimeKeeping>}
+            {tabTimekeepingBtn == "month" && <MonthTimeKeeping monthTimeKeepingData={monthTimeKeepingData}></MonthTimeKeeping>}
+          </div>
+        }
+        {tab == "employee" && <Employee employeeData={employeeData}></Employee>}
+        {tab == "candidate" && <Candidate newCandidateData={newCandidateData}  ></Candidate>}
 
         <div className="confirmBox">
-          {dialogType == "accept" && <Confirm  text={"candidate?"} onClose={() => setDialogType('')}
+          {dialogType == "accept" && <Confirm text={"candidate?"} onClose={() => setDialogType('')}
             onClick={onclick}
           >{"Accept"}</Confirm>}
-          {dialogType == "reject" && <Confirm  text={"candidate?"} onClose={() => setDialogType('')}
+          {dialogType == "reject" && <Confirm text={"candidate?"} onClose={() => setDialogType('')}
             onClick={onclick}
           >{"Reject"}</Confirm>}
         </div>
-       </div>
+      </div>
     </div>
-   
+
   )
 }
 

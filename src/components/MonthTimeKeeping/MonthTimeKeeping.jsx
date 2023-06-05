@@ -5,22 +5,7 @@ import TitleHome from "../titleHome/titleHome";
 
 import "./MonthTimeKeeping.scss"
 
-const monthTimeKeepingData = [
-    {id: '#00001', name: 'Example', one: 'D', two: 'P' , three: 'D', four: 'P' , five: 'D', six: 'P' , seven: 'P' , workingDays: '27', dayOff: '3', overtime:'4', total: '27' },
-    {id: '#00002', name: 'Example', one: 'D', two: 'P' , three: 'D', four: 'P' , five: 'D', six: 'P' , seven: 'P' , workingDays: '27', dayOff: '3', overtime:'4', total: '27' },
-    {id: '#00003', name: 'Example', one: 'D', two: 'P' , three: 'D', four: 'P' , five: 'D', six: 'P' , seven: 'P' , workingDays: '27', dayOff: '3', overtime:'4', total: '27' },
-    {id: '#00004', name: 'Example', one: 'D', two: 'P' , three: 'D', four: 'P' , five: 'D', six: 'P' , seven: 'P' , workingDays: '27', dayOff: '3', overtime:'4', total: '27' },
-    {id: '#00005', name: 'Example', one: 'D', two: 'P' , three: 'D', four: 'P' , five: 'D', six: 'P' , seven: 'P' , workingDays: '27', dayOff: '3', overtime:'4', total: '27' },
-    {id: '#00006', name: 'Example', one: 'D', two: 'P' , three: 'D', four: 'P' , five: 'D', six: 'P' , seven: 'P' , workingDays: '27', dayOff: '3', overtime:'4', total: '27' },
-    {id: '#00007', name: 'Example', one: 'D', two: 'P' , three: 'D', four: 'P' , five: 'D', six: 'P' , seven: 'P' , workingDays: '27', dayOff: '3', overtime:'4', total: '27' },
-    {id: '#00008', name: 'Example', one: 'D', two: 'P' , three: 'D', four: 'P' , five: 'D', six: 'P' , seven: 'P' , workingDays: '27', dayOff: '3', overtime:'4', total: '27' },
-    {id: '#00009', name: 'Example', one: 'D', two: 'P' , three: 'D', four: 'P' , five: 'D', six: 'P' , seven: 'P' , workingDays: '27', dayOff: '3', overtime:'4', total: '27' },
-    {id: '#000010', name: 'Example', one: 'D', two: 'P' , three: 'D', four: 'P' , five: 'D', six: 'P' , seven: 'P' , workingDays: '27', dayOff: '3', overtime:'4', total: '27' },
-    {id: '#000011', name: 'Example', one: 'D', two: 'P' , three: 'D', four: 'P' , five: 'D', six: 'P' , seven: 'P' , workingDays: '27', dayOff: '3', overtime:'4', total: '27' },
-    
-   
 
-]
 
 const columns = [
 
@@ -93,7 +78,7 @@ const columns = [
     }
 ]
 
-const MonthTimeKeeping = () => {
+const MonthTimeKeeping = ({onClick, handleChange, monthTimeKeepingData}) => {
 
 
     return(
