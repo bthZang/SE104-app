@@ -6,6 +6,7 @@ import avatar from "../../assets/images/LogoPNG.png"
 import "./TitleHome.scss"
 import Search from "../search/search";
 import Profile from "../Profile/Profile";
+import UserAccount from "../UserAccount/UserAccount";
 
 const TitleHome = ({children, showSearch = true, data} ) => {
     const now = moment().format('ddd, DD-MMM-YY, HH:mm A')
@@ -23,7 +24,7 @@ const TitleHome = ({children, showSearch = true, data} ) => {
             <div id='user' ref={userRef} className="avatar" onClick={()=>{handleOnClick(userRef)}}>
                 <img src={avatar} style={{width:'70px'}}/>
             </div>
-            {click == 'user'  && <Profile data={data} onClose={() => setClick(false)}></Profile>}
+            {click == 'user'  && <UserAccount data={data} onClose={() => setClick(false)}></UserAccount>}
             <div className="title">
                 {children}
             </div>

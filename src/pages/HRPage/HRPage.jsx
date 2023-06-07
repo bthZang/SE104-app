@@ -16,16 +16,13 @@ import TitleHome from "../../components/titleHome/titleHome";
 
 
 const employeeData = [
-  { id: '#00001', name: 'Example', gender: 'Male', birthdate: '06/05/2002', department: 'unknown', position: 'unknown' },
-  { id: '#00002', name: 'Example', gender: 'Male', birthdate: '06/05/2002', department: 'unknown', position: 'unknown' },
-  { id: '#00003', name: 'Example', gender: 'Female', birthdate: '06/05/2002', department: 'unknown', position: 'unknown' },
-  { id: '#00004', name: 'Example', gender: 'Male', birthdate: '06/05/2002', department: 'unknown', position: 'unknown' },
-  { id: '#00005', name: 'Example', gender: 'Female', birthdate: '06/05/2002', department: 'unknown', position: 'unknown' },
-  { id: '#00006', name: 'Example', gender: 'Male', birthdate: '06/05/2002', department: 'unknown', position: 'unknown' },
-  { id: '#00007', name: 'Example', gender: 'Female', birthdate: '06/05/2002', department: 'unknown', position: 'unknown' },
-  { id: '#00008', name: 'Example', gender: 'Male', birthdate: '06/05/2002', department: 'unknown', position: 'unknown' },
-  { id: '#00009', name: 'Example', gender: 'Male', birthdate: '06/05/2002', department: 'unknown', position: 'unknown' },
-
+  { id: '#00001',birthplace: 'ketui',ethnictity:'kinh', citizenId :'khongnoi', name: 'Bùi Thị Hoàng Giang', gender: 'Male', birthdate: '06/05/2002', department: 'unknown', position: 'unknown' },
+  { id: '#00002',birthplace: 'ketui',ethnictity:'kinh', citizenId :'khongnoi', name: 'Nguyễn Hoàng Hy', gender: 'Male', birthdate: '01/12/2003', department: 'unknown', position: 'unknown' },
+  { id: '#00003',birthplace: 'ketui',ethnictity:'kinh', citizenId :'khongnoi', name: 'Ngô Quang Khải', gender: 'Male', birthdate: '27/12/2003', department: 'unknown', position: 'unknown' },
+  { id: '#00004',birthplace: 'ketui',ethnictity:'kinh', citizenId :'khongnoi', name: 'Đinh Quang Dương', gender: 'Male', birthdate: '02/09/2003', department: 'unknown', position: 'unknown' },
+  { id: '#00005',birthplace: 'ketui',ethnictity:'kinh', citizenId :'khongnoi', name: 'Nguyễn Tuấn Khang', gender: 'Male', birthdate: '10/10/2003', department: 'unknown', position: 'unknown' },
+  { id: '#00006',birthplace: 'ketui',ethnictity:'kinh', citizenId :'khongnoi', name: 'Nguyễn Đức Thành Duy', gender: 'Male', birthdate: '24/03/2003', department: 'unknown', position: 'unknown' },
+  
 
 ]
 
@@ -76,7 +73,7 @@ const monthTimeKeepingData = [
 
 ]
 
-let data='Zangggg'
+let data = 'Zangggg'
 
 function HRPage() {
   const [tab, setTab] = useState('dashboard');
@@ -95,6 +92,10 @@ function HRPage() {
   const dayRef = useRef(null)
   const monthRef = useRef(null)
 
+  const [id, setId] = useState(null)
+  const handleOnClickID = (_id) => {
+    setId(_id)
+  }
 
   const [dialogType, setDialogType] = useState('');
   const [email, setEmail] = useState('');
@@ -137,20 +138,20 @@ function HRPage() {
       <div className="content" >
         {tab == "dashboard" && <Dashboard data={data}></Dashboard>}
         {tab == "timekeeping" &&
-<div><TitleHome data={data}>Timekeeping</TitleHome>
-          <div className="timekeepingStyle"> 
-            <div id="day" ref={dayRef} className={tabTimekeepingBtn === 'day' ? 'blur' : 'nonBlur'} onClick={() => { handleChangeTabTimekeeping(dayRef) }}>
-              <p >Today</p>
-            </div>
-            <div id="month" ref={monthRef} className={tabTimekeepingBtn === 'month' ? 'blur' : 'nonBlur'} onClick={() => { handleChangeTabTimekeeping(monthRef) }}>
-              <p >Month</p>
-            </div>
-            
-</div>{tabTimekeepingBtn == "day" && <DayTimeKeeping dayTimeKeepingData={dayTimeKeepingData}></DayTimeKeeping>}
+          <div><TitleHome data={data}>Timekeeping</TitleHome>
+            <div className="timekeepingStyle">
+              <div id="day" ref={dayRef} className={tabTimekeepingBtn === 'day' ? 'blur' : 'nonBlur'} onClick={() => { handleChangeTabTimekeeping(dayRef) }}>
+                <p >Today</p>
+              </div>
+              <div id="month" ref={monthRef} className={tabTimekeepingBtn === 'month' ? 'blur' : 'nonBlur'} onClick={() => { handleChangeTabTimekeeping(monthRef) }}>
+                <p >Month</p>
+              </div>
+
+            </div>{tabTimekeepingBtn == "day" && <DayTimeKeeping dayTimeKeepingData={dayTimeKeepingData}></DayTimeKeeping>}
             {tabTimekeepingBtn == "month" && <MonthTimeKeeping monthTimeKeepingData={monthTimeKeepingData}></MonthTimeKeeping>}
           </div>
         }
-        {tab == "employee" && <Employee data={data} employeeData={employeeData}></Employee>}
+        {tab == "employee" && <Employee data={data} employeeData={employeeData} onClick={handleOnClickID}></Employee>}
         {tab == "candidate" && <Candidate data={data} newCandidateData={newCandidateData}  ></Candidate>}
 
         <div className="confirmBox">
