@@ -76,6 +76,8 @@ const monthTimeKeepingData = [
 
 ]
 
+let data='Zangggg'
+
 function HRPage() {
   const [tab, setTab] = useState('dashboard');
   const handleChange = (status) => {
@@ -133,9 +135,9 @@ function HRPage() {
         <HRSideBar handleChange={handleChange}></HRSideBar>
       </div>
       <div className="content" >
-        {tab == "dashboard" && <Dashboard></Dashboard>}
+        {tab == "dashboard" && <Dashboard data={data}></Dashboard>}
         {tab == "timekeeping" &&
-<div><TitleHome>Timekeeping</TitleHome>
+<div><TitleHome data={data}>Timekeeping</TitleHome>
           <div className="timekeepingStyle"> 
             <div id="day" ref={dayRef} className={tabTimekeepingBtn === 'day' ? 'blur' : 'nonBlur'} onClick={() => { handleChangeTabTimekeeping(dayRef) }}>
               <p >Today</p>
@@ -148,8 +150,8 @@ function HRPage() {
             {tabTimekeepingBtn == "month" && <MonthTimeKeeping monthTimeKeepingData={monthTimeKeepingData}></MonthTimeKeeping>}
           </div>
         }
-        {tab == "employee" && <Employee employeeData={employeeData}></Employee>}
-        {tab == "candidate" && <Candidate newCandidateData={newCandidateData}  ></Candidate>}
+        {tab == "employee" && <Employee data={data} employeeData={employeeData}></Employee>}
+        {tab == "candidate" && <Candidate data={data} newCandidateData={newCandidateData}  ></Candidate>}
 
         <div className="confirmBox">
           {dialogType == "accept" && <Confirm text={"candidate?"} onClose={() => setDialogType('')}

@@ -1,0 +1,20 @@
+.textBox{
+    border: 1px solid lightGray;
+    background-color: lightGray;
+    width: 320px;
+    // height: 50%;
+    border-radius: 20px;
+    padding-left: 21px;
+    padding-top: 9px;
+    padding-bottom: -16px;
+    display: flex;
+    text-align: left;
+    .textDefautValue{
+        outline: none;
+        border: none;
+        background-color: transparent;
+        color: black;
+        font-size: 20px;
+        padding-bottom: 16px;
+    }
+}

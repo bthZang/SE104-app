@@ -12,11 +12,11 @@ import CustomButton from "../CustomButton/CustomButton";
 
 
 
-const Dashboard = ({ onClick }) => {
+const Dashboard = ({ onClick, data}) => {
 
 	return (
 		<div className="containerDashboard">
-			<TitleHome showSearch ={false} children={"Dashboard"}></TitleHome>
+			<TitleHome showSearch ={false} children={"Dashboard"} data={data}></TitleHome>
 		</div>
 	);
 };

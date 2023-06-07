@@ -44,7 +44,7 @@ const columns = [
     
 ]
 
-const DayTimeKeeping = ({onClick, handleChange, dayTimeKeepingData}) => {
+const DayTimeKeeping = ({onClick, handleChange, dayTimeKeepingData,}) => {
 
 
     return(

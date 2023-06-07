@@ -44,7 +44,7 @@ const columns = [
     }
 ]
 
-const Candidate = ({ candidateData, newCandidateData, onClick, onClose }) => {
+const Candidate = ({ candidateData, newCandidateData, onClick, onClose, data }) => {
 
     const [click, setClick] = useState(null)
 
@@ -58,7 +58,7 @@ const Candidate = ({ candidateData, newCandidateData, onClick, onClose }) => {
 
         <div className="containerCandidate">
             <div>
-                <TitleHome children={"Candidate"}></TitleHome>
+                <TitleHome children={"Candidate"} data={data}></TitleHome>
                 <div className="candidate">
                     <DataTable
                         columns={columns}

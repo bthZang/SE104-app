@@ -1,0 +1,137 @@
+.containerProfile {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    @keyframes slide {
+        from {
+        right: -1000px;
+            
+        }
+        to {
+            right: -30px;
+        }
+    }
+    .boxProfile {
+        position: relative;
+        animation: slide 0.3s cubic-bezier(.03,.43,.61,1.26) 0s 1  forwards;
+        border: 1px solid #F4F4F4 !important;
+        background-color: white ;
+        min-width: 500px;
+        max-height: 500px;
+        display: flex;
+        border-radius: 20px;
+        display: flex;
+        padding: 50px;
+        overflow: auto;
+        flex-direction: row;
+        gap: 73px;
+        box-shadow: 0 0 20px 0px rgb(190, 190, 190);
+justify-self: end;
+        &>div {
+            width: 100%;
+        }
+
+        .firstColumn {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+
+            .titleDisplay {
+                display: flex;
+                flex-direction: row;
+                gap: 32px;
+
+                .imgDisplay {
+                    width: 100px;
+                    height: 100px;
+                    border: 1px solid white;
+                    border-radius: 100px;
+                    background-color: gray;
+                    cursor: pointer;
+                }
+
+                .textDisplay {
+                    display: flex;
+                    justify-content: left;
+                    flex-direction: column;
+                    gap: 0px;
+
+                    .name {
+                        color: black;
+                        font-size: 40px;
+                        font-weight: 600;
+                        width: max-content;
+                        padding: 0;
+                        margin: 0;
+
+                    }
+
+                    .position {
+                        color: #7D8FF1;
+                        font-size: 20px;
+                        width: max-content;
+                        padding: 0;
+                        margin: 0;
+
+                    }
+                }
+
+            }
+
+            .fisrtAttribute {
+                display: flex;
+                flex-direction: row;
+
+                .attribute {
+                    color: black;
+                    font-size: 21px;
+                    font-weight: 500;
+                    padding-right: 32px;
+                    
+                }
+            }
+
+        }
+
+        .secondColumn {
+            display: flex;
+            flex-direction: column;
+            width: max-content;
+            gap: 16px;
+
+            .attribute {
+                color: black;
+                font-size: 21px;
+                font-weight: 500;
+                text-align: left;
+            }
+
+        }
+
+
+        .textBox {
+            justify-content: flex-start;
+            flex-direction: column;
+            display: flex;
+            color: #A0AEF5;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+
+        }
+
+        .textChildren {
+            color: black;
+            width: 100%;
+            margin-top: 0px;
+            font-size: 20px;
+            font-weight: 400;
+
+        }
+    }
+}

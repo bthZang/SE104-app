@@ -1,0 +1,48 @@
+.containerSignInForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 40px;
+    width: fit-content;
+    height: fit-content;
+
+
+    .inputContainerSignInForm{
+        
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px;
+        gap: 32px;
+        
+        width: fit-content;
+        height: fit-content;
+
+        #titleSignInForm{
+            color: #1233E5;
+            font-weight: 600;
+        }
+        
+    }
+
+    .buttonContainerSignInForm{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0px;
+        gap: 12px;
+
+        width: 100%;
+        height: fit-content;
+
+        #forgotPasswordBtnSignInForm{
+            color: #5971EE;
+        }
+        #forgotPasswordBtnSignInForm:hover{
+            cursor: pointer;
+        }
+    }
+
+}

@@ -44,14 +44,14 @@ const columns = [
     }
 ]
 
-const Employee = ({employeeData}) => {
+const Employee = ({employeeData, data}) => {
 
 
     return(
 
         <div className="containerEmployee">
             <div>
-                <TitleHome children={"Employee"}></TitleHome>
+                <TitleHome children={"Employee"} data={data}></TitleHome>
                 <div className="employee">
                     <DataTable
                         columns={columns}
