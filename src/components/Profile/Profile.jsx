@@ -5,10 +5,19 @@ import CustomButton from "../CustomButton/CustomButton";
 import Display from "../Display/Display";
 import avatar from "../../assets/images/LogoPNG.png"
 import pen from "../../assets/edit.svg"
+import Pin from "../../assets/pin.svg"
 
 
 
 const Profile = ({ onClose, data }) => {
+    
+    const [color, setColor] = useState('gray')
+    const [attachment, setAttachment] = useState(null)
+    const handleAttachment = (e) => {
+        setAttachment(e.target.files[0])
+        setColor('red')
+    }
+    
 
     return (
         <div className="containerProfile" onClick={onClose} >
@@ -43,14 +52,29 @@ const Profile = ({ onClose, data }) => {
                     <p className="attribute" >DEPARTMENT</p>
 
                     <Display data={data}>Department</Display>
-                    <p className="attribute" style={{marginTop: '50px'}}>POSITION</p>
+                    <p className="attribute" style={{ marginTop: '50px' }}>POSITION</p>
 
                     <Display data={data}>Position</Display>
-                    <p className="attribute" style={{marginTop: '50px'}}>ONBOARDING</p>
+                    <p className="attribute" style={{ marginTop: '50px' }}>ONBOARDING</p>
 
                     <Display data={data}>Start Date</Display>
                     <Display data={data}>Contract Date</Display>
-                    <CustomButton type='short' style={{borderRadius:'10px',width :'213px', fontSize: '21px',padding: '20px 0', alignSelf: 'end', marginTop:'38px'}}>Delete</CustomButton>
+
+                    <div >
+                        <p className="textAttachment" >Resignation decision</p>
+                        <label className="attachment">
+
+                            <img src={Pin} className="imgPin" ></img>
+                            {/* cai box nay se bi an */}
+                            <input type="file" className="inputFile" onChange={handleAttachment} ></input>
+
+                            {/* cai box nay hien thi len tren ne */}
+                            <div className="inputFileBox" >{attachment?.name || 'No file attached'}</div>
+                        </label>
+
+                    </div>
+
+                    <CustomButton type='short' style={{backgroundColor :color, borderRadius: '10px', width: '213px', fontSize: '21px', padding: '20px 0', alignSelf: 'end', marginTop: '38px' }}    >Delete</CustomButton>
 
                 </div>
             </div>

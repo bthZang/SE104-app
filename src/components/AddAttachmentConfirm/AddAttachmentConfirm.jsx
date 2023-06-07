@@ -69,7 +69,7 @@ const AddAttachmentConfirm = ({ onClose, onClick }) => {
                                 <input type="file" className="inputFile" onChange={handleAttachment} ></input>
 
                                 {/* cai box nay hien thi len tren ne */}
-                                <div className="inputFileBox" >{attachment?.name}</div>
+                                <div className="inputFileBox" >{attachment?.name || 'No file attached'}</div>
                             </label>
 
                         </div>
