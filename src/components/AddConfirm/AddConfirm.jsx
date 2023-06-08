@@ -5,13 +5,20 @@ import "./AddConfirm.scss";
 //import { Button } from "@mui/material";
 import CustomButton from "../CustomButton/CustomButton";
 import { TextField } from "@mui/material";
+import { useRef } from "react";
+import { addUser } from "../../api/AdminAPI";
 
 
 const AddConfirm = ({ onClose, onClick }) => {
 
 
+    const [email, setEmail] = useState('')
+    const [name, setName] = useState('')
+    const accessToken = localStorage.getItem('accessToken')
 
-
+    const handleAddUser = () =>{
+        addUser(accessToken, email, name)
+    }
 
     return (
         <div className="addConfirmContainer" onClick={onClose} >
@@ -22,34 +29,37 @@ const AddConfirm = ({ onClose, onClick }) => {
                     </p>
                     <div className="topTable">
                     <TextField
+                    
                             id="firstNameInputSignInForm"
                             variant="outlined"
-                            label="First name"
+                            label="Email"
                             sx={{ width: '100%' }}
                             style={{
                                 paddingBottom: '43px',
                                 alignSelf: 'center',
 
                             }}
-                        // value={email}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         />
                         <TextField
                             id="lastNameInputSignInForm"
                             variant="outlined"
-                            label="Last name"
+                            label="Name"
                             sx={{ width: '100%' }}
                             style={{
                                 paddingBottom: '43px',
                                 alignSelf: 'center',
 
                             }}
-                        // value={email}
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                         />
 
 
                     </div>
                     <div className="confirmBtn">
-                        <CustomButton onClick={onClick} style={{width: "100%" }} type="long" >Add</CustomButton>
+                        <CustomButton onClick={handleAddUser} style={{width: "100%" }} type="long" >Add</CustomButton>
                     </div>
                 </div>
             </div>

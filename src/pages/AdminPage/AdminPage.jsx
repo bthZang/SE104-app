@@ -40,27 +40,46 @@ function AdminPage() {
   const [accountData, setAccountData] = useState([])
 
 
+  const callAPI = () => {
+    getAllUser(accessToken, 'ACCOUNTANT')
+      .then(response => {
+        setAcountingData(response);
+      })
+    getAllUser(accessToken, 'HR')
+      .then(response => {
+        sethumanRescourceData(response);
+      })
+    getAllUser(accessToken, 'BOD')
+      .then(response => {
+        setBoardData(response);
+
+      })
+    getAllUser(accessToken)
+      .then(response => {
+        setAccountData(response)
+      })
+  }
 
 
-  // useEffect(() => {
-  getAllUser(accessToken, 'ACCOUNTANT')
-    .then(response => {
-      setAcountingData(response);
-    })
-  getAllUser(accessToken, 'HR')
-    .then(response => {
-      sethumanRescourceData(response);
-    })
-  getAllUser(accessToken, 'BOD')
-    .then(response => {
-      setBoardData(response);
+  useEffect(() => {
+    getAllUser(accessToken, 'ACCOUNTANT')
+      .then(response => {
+        setAcountingData(response);
+      })
+    getAllUser(accessToken, 'HR')
+      .then(response => {
+        sethumanRescourceData(response);
+      })
+    getAllUser(accessToken, 'BOD')
+      .then(response => {
+        setBoardData(response);
 
-    })
-  getAllUser(accessToken)
-    .then(response => {
-      setAccountData(response)
-    })
-  // }, [])
+      })
+    getAllUser(accessToken)
+      .then(response => {
+        setAccountData(response)
+      })
+  }, [])
 
 
   const [tab, setTab] = useState('permission');
@@ -76,7 +95,7 @@ function AdminPage() {
     setDialogType(type)
   };
 
-  const newHumanRescourceData = humanRescourceData.map((data) => ({
+  const newHumanRescourceData = humanRescourceData?.map((data) => ({
     ...data,
     button: (
       <CustomButton
@@ -90,7 +109,7 @@ function AdminPage() {
     ),
   }));
 
-  const newBoardData = BoardData.map((data) => ({
+  const newBoardData = BoardData?.map((data) => ({
     ...data,
     button: (
       <CustomButton
@@ -104,7 +123,7 @@ function AdminPage() {
     ),
   }));
 
-  const newAcountingData = AcountingData.map((data) => ({
+  const newAcountingData = AcountingData?.map((data) => ({
     ...data,
     button: (
       <CustomButton
@@ -119,7 +138,7 @@ function AdminPage() {
   }));
 
 
-  const newAccountData = accountData.map((data) => ({
+  const newAccountData = accountData?.map((data) => ({
     ...data,
     button: (
       <CustomButton
@@ -140,6 +159,10 @@ function AdminPage() {
     "None Access",
   ];
 
+  const handleDeleteUser = () =>{
+    
+  }
+
 
 
   return (
@@ -153,10 +176,10 @@ function AdminPage() {
           {tab == "account" && <Account newAccountData={newAccountData} accountData={accountData}></Account>}
 
           <div className="confirmBox">
-            {dialogType == "change" && <ChangeConfirm options={options} onClose={() => setDialogType('')} userData={{ id: id, accessToken: accessToken }}
+            {dialogType == "change" && <ChangeConfirm handleChange={callAPI} options={options} onClose={() => setDialogType('')} userData={{ id: id, accessToken: accessToken }}
             >{"Change"}</ChangeConfirm>}
             {dialogType == "delete" && <Confirm text={"account?"} onClose={() => setDialogType('')}
-              onClick={onclick}
+              onClick={handleDeleteUser}
             >{"Delete"}</Confirm>}
 
           </div>

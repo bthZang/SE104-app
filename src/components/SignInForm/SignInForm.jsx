@@ -20,6 +20,7 @@ export default function SignInForm() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('')
+    const [isCLick, setIsClick] = useState(false)
 
     const dispatch = useDispatch()
 
@@ -39,7 +40,7 @@ export default function SignInForm() {
         })
     }
 
-    if (authStatus == 'succeeded') {
+    if (authStatus == 'succeeded' && isCLick) {
         successAlert()
         switch (userRole) {
             case "ADMIN":
@@ -59,6 +60,7 @@ export default function SignInForm() {
 
     const login = (event) => {
         event.preventDefault()
+        setIsClick(true)
 
         dispatch(loginPost({ email, password }))
 

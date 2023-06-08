@@ -8,7 +8,7 @@ import { updateUserRole } from "../../api/AdminAPI";
 
 
 
-const ChangeConfirm = ({ onClose, onClick, options, userData }) => {
+const ChangeConfirm = ({ onClose, onClick, options, userData, handleChange }) => {
 
     const [selectedOptions, setSelectedOptions] = useState(null);
     const handleOnChange = (selectedOptions) => {
@@ -16,7 +16,7 @@ const ChangeConfirm = ({ onClose, onClick, options, userData }) => {
         console.log(selectedOptions);
     };
 
-    const handleOnChangeClick = () => {
+    const handleOnChangeClick = async () => {
         var userRole
         switch (selectedOptions.value) {
             case "HR Deparment":
@@ -31,7 +31,8 @@ const ChangeConfirm = ({ onClose, onClick, options, userData }) => {
             default:
                 break
         }
-        updateUserRole(userData.accessToken, userData.id, userRole)
+        await updateUserRole(userData.accessToken, userData.id, userRole)
+        handleChange()
     }
 
 

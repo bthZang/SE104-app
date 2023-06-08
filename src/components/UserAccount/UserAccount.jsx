@@ -6,10 +6,12 @@ import Display from "../Display/Display";
 import avatar from "../../assets/images/LogoPNG.png"
 import pen from "../../assets/edit.svg"
 import Pin from "../../assets/pin.svg"
+import { useNavigate } from "react-router-dom";
 
 
 
 const UserAccount = ({ onClose, data }) => {
+    const navigate = useNavigate()
 
     const [color, setColor] = useState('gray')
     const [attachment, setAttachment] = useState(null)
@@ -24,7 +26,7 @@ const UserAccount = ({ onClose, data }) => {
             <div className="boxUserAccount" onClick={e => e.stopPropagation()}>
                 <div className="firstColumn">
                     <p className="name"  >{'data?.position'}</p>
-                   
+
                     <div className="titleDisplay" >
                         <div className="imgDisplay"><img src={avatar} style={{ width: '160px', height: '160px' }} /></div>
 
@@ -39,11 +41,15 @@ const UserAccount = ({ onClose, data }) => {
                     <div className="fisrtAttribute">
                     </div>
                     <Display data={'data?.email'}>Email</Display>
-                    <CustomButton type='long' style={{ borderRadius: '11px', width: '513px', fontSize: '21px', marginBottom:'60px',padding: '12px 0', alignSelf: 'center',  }}    >Change email</CustomButton>
+                    <CustomButton type='long' style={{ borderRadius: '11px', width: '513px', fontSize: '21px', marginBottom: '60px', padding: '12px 0', alignSelf: 'center', }}    >Change email</CustomButton>
 
                     <Display data={'data?.password'}>Password</Display>
-                    <CustomButton type='long' style={{ borderRadius: '11px', width: '513px', fontSize: '21px',padding: '12px 0', alignSelf: 'center'}}    >Change password</CustomButton>
-                    <CustomButton type='long' style={{}}    >Logout</CustomButton>
+                    <CustomButton type='long' style={{ borderRadius: '11px', width: '513px', fontSize: '21px', padding: '12px 0', alignSelf: 'center' }}    >Change password</CustomButton>
+                    <CustomButton type='long' style={{}} onClick={() => {
+                        // localStorage.removeItem('accessToken')
+                        navigate('/')
+                    }
+                    }>Logout</CustomButton>
 
                 </div>
 
