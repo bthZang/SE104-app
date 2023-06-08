@@ -54,7 +54,7 @@ const Account = ({ accountData, newAccountData, onClick, onClose }) => {
             <div>
                 <TitleHome children={"Account"}></TitleHome>
                 <div className="account">
-                    <p className="titleTable">Acount</p>
+                    <p className="titleTable">Account</p>
                     <DataTable
                         columns={columns}
                         data={newAccountData}
@@ -62,8 +62,9 @@ const Account = ({ accountData, newAccountData, onClick, onClose }) => {
                         highlightOnHover={true}
                         striped={true}
                     ></DataTable>
-                </div>
                 <button id="btnAdd" ref={btnAddRef} className="btn" onClick={() => { handleOnClick() }}>Add new account</button>
+
+                </div>
                 <div>
                     {click == "btnAdd" && <AddConfirm text={"account?"}
                         onClick={onclick} onClose={() => setClick('')}

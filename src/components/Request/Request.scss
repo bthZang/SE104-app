@@ -1,10 +1,12 @@
 .containerRequest{
     background-color: white;
     border: 0px solid white;
-    width: max-content !important;
+    min-width: 100%;
     display: flex;
     flex-direction: column;
-	height: max-content;
+    gap: 20px;
+	min-height: 100vh;
+    margin-top: 120px;
     .rdt_TableHead {
         color: #3552E9;
         font-size: 20px;
