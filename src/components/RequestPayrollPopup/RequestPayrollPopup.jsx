@@ -48,7 +48,7 @@ export default function RequestPayrollPopup({ isOpen, handleCancel, handleSend }
             onCancel={handleCancel}
             footer={
                 <div className="modalFooter">
-                    <FlexibleButton label="Send" onClick={() => handleSend(email, message)}></FlexibleButton>
+                    <FlexibleButton label="Send" onClick={() => handleSend(email, message, selectedDate)}></FlexibleButton>
                 </div>
             }
         >

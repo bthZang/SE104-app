@@ -6,36 +6,36 @@ import TitleHome from "../titleHome/titleHome";
 
 import "./Request.scss";
 
-const requestData = [
-	{
-		name: "Example",
-		timestamp: "HR",
-		month: "HR",
-		message: "HR",
-		button: <CustomButton type={"short"} children={"Send"}></CustomButton>,
-	},
-	{
-		name: "Example",
-		timestamp: "Accounting",
-		month: "HR",
-		message: "HR",
-		button: <CustomButton type={"short"} children={"Send"}></CustomButton>,
-	},
-	{
-		name: "Example",
-		timestamp: "BOD",
-		month: "HR",
-		message: "HR",
-		button: <CustomButton type={"short"} children={"Send"}></CustomButton>,
-	},
-	{
-		name: "Example",
-		timestamp: "None",
-		month: "HR",
-		message: "HR",
-		button: <CustomButton type={"short"} children={"Send"}></CustomButton>,
-	},
-];
+// const requestData = [
+// 	{
+// 		name: "Example",
+// 		timestamp: "HR",
+// 		month: "HR",
+// 		message: "HR",
+// 		button: <CustomButton type={"short"} children={"Send"}></CustomButton>,
+// 	},
+// 	{
+// 		name: "Example",
+// 		timestamp: "Accounting",
+// 		month: "HR",
+// 		message: "HR",
+// 		button: <CustomButton type={"short"} children={"Send"}></CustomButton>,
+// 	},
+// 	{
+// 		name: "Example",
+// 		timestamp: "BOD",
+// 		month: "HR",
+// 		message: "HR",
+// 		button: <CustomButton type={"short"} children={"Send"}></CustomButton>,
+// 	},
+// 	{
+// 		name: "Example",
+// 		timestamp: "None",
+// 		month: "HR",
+// 		message: "HR",
+// 		button: <CustomButton type={"short"} children={"Send"}></CustomButton>,
+// 	},
+// ];
 
 const columns = [
 	{
@@ -85,22 +85,8 @@ const columns = [
 	},
 ];
 
-const Request = () => {
-	const [identifyRequest, setIdentifyRequest] = useState("");
-
-	const newRequestData = requestData.map((data) => ({
-		...data,
-		payslip: (
-			<CustomButton
-				onClick={() => {
-					setIdentifyRequest(data.name);
-				}}
-				type={"short"}
-			>
-				Send
-			</CustomButton>
-		),
-	}));
+const Request = (requestData) => {
+	
 
 	return (
 		<div className="containerRequest">

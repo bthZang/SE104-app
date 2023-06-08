@@ -46,13 +46,34 @@ export const updateUserRole = async (accessToken, id, role) => {
 
 export const addUser = async (accessToken, email, name) => {
     try {
-        console.log(accessToken, email, name)
+
         const res = await axios.post(`${USER_API}/save`, { email, name }, {
             headers: {
                 Authorization: `Bearer ${accessToken}`
             },
         })
-        console.log(accessToken, email, name, res.data)
+        // console.log(accessToken, email, name, res.data)
+        return res.data
+    } catch (error) {
+        Swal.fire({
+            icon: 'error',
+            text: 'Something went wrong',
+            showConfirmButton: false,
+            timer: 1500
+        })
+        console.log(error)
+    }
+};
+
+export const deleteUser = async (accessToken, id) => {
+    try {
+        console.log(id)
+        const res = await axios.delete(`${USER_API}/delete?id=${id}`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            },
+        })
+        // console.log(accessToken, email, name, res.data)
         return res.data
     } catch (error) {
         Swal.fire({

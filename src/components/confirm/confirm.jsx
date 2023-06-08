@@ -4,7 +4,7 @@ import "./Confirm.scss";
 //import { Button } from "@mui/material";
 import CustomButton from "../CustomButton/CustomButton";
 
-const Confirm = ({ children, text, onClose, onClick }) => {
+const Confirm = ({ children, text, onClose, onClick}) => {
 	//const {children, type} = props;
 
 	let className = "button";
@@ -33,7 +33,10 @@ const Confirm = ({ children, text, onClose, onClick }) => {
 						Do you want to <span className="childrenText">{children}</span> this {text}
 					</p>
 					<div className="confirmBtn">
-						<CustomButton onClick={onClick} style={{ width: "100%" }} type="long" >{children}</CustomButton>
+						<CustomButton onClick={() => {
+							onClick()
+							onClose()
+						}} style={{ width: "100%" }} type="long" >{children}</CustomButton>
 					</div>
 				</div>
 			</div>
