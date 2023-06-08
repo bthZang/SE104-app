@@ -20,30 +20,30 @@ const UserAccount = ({ onClose, data }) => {
 
 
     return (
-        <div className="containerProfile" onClick={onClose} >
-            <div className="boxProfile" onClick={e => e.stopPropagation()}>
+        <div className="containerUserAccount" onClick={onClose} >
+            <div className="boxUserAccount" onClick={e => e.stopPropagation()}>
                 <div className="firstColumn">
-
+                    <p className="name"  >{'data?.position'}</p>
+                   
                     <div className="titleDisplay" >
-                        <div className="imgDisplay"><img src={avatar} style={{ width: '100px', height: '100px' }} /></div>
+                        <div className="imgDisplay"><img src={avatar} style={{ width: '160px', height: '160px' }} /></div>
 
                         <div className="textDisplay">
-                            <p className="name"  >{data?.name}</p>
+                            <div className="title"> {'data?.name'} </div>
                             <div className="line"></div>
-                            <div className="dAT">
-                                <p>{data?.position}</p>
+                            <div className="dAT">{'data?.position'}
                             </div>
                         </div>
 
                     </div>
                     <div className="fisrtAttribute">
                     </div>
-                    <Display data={data}>Email</Display>
-                    <CustomButton type='long' style={{ backgroundColor: color, borderRadius: '10px', width: '213px', fontSize: '21px', padding: '20px 0', alignSelf: 'end', marginTop: '38px' }}    >Change email</CustomButton>
+                    <Display data={'data?.email'}>Email</Display>
+                    <CustomButton type='long' style={{ borderRadius: '11px', width: '513px', fontSize: '21px', marginBottom:'60px',padding: '12px 0', alignSelf: 'center',  }}    >Change email</CustomButton>
 
-                    <Display data={data}>Password</Display>
-                    <CustomButton type='long' style={{ backgroundColor: color, borderRadius: '10px', width: '213px', fontSize: '21px', padding: '20px 0', alignSelf: 'end', marginTop: '38px' }}    >Change password</CustomButton>
-                    <CustomButton type='long' style={{ backgroundColor: color, borderRadius: '10px', width: '213px', fontSize: '21px', padding: '20px 0', alignSelf: 'end', marginTop: '38px' }}    >Logout</CustomButton>
+                    <Display data={'data?.password'}>Password</Display>
+                    <CustomButton type='long' style={{ borderRadius: '11px', width: '513px', fontSize: '21px',padding: '12px 0', alignSelf: 'center'}}    >Change password</CustomButton>
+                    <CustomButton type='long' style={{}}    >Logout</CustomButton>
 
                 </div>
 

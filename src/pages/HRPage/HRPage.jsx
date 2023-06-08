@@ -147,11 +147,11 @@ function HRPage() {
                 <p >Month</p>
               </div>
 
-            </div>{tabTimekeepingBtn == "day" && <DayTimeKeeping dayTimeKeepingData={dayTimeKeepingData}></DayTimeKeeping>}
+            </div>{tabTimekeepingBtn == "day" && <DayTimeKeeping dayTimeKeepingData={dayTimeKeepingData} ></DayTimeKeeping>}
             {tabTimekeepingBtn == "month" && <MonthTimeKeeping monthTimeKeepingData={monthTimeKeepingData}></MonthTimeKeeping>}
           </div>
         }
-        {tab == "employee" && <Employee data={data} employeeData={employeeData} onClick={handleOnClickID}></Employee>}
+        {tab == "employee" && <Employee employeeData={employeeData} onClick={handleOnClickID}></Employee>}
         {tab == "candidate" && <Candidate data={data} newCandidateData={newCandidateData}  ></Candidate>}
 
         <div className="confirmBox">

@@ -1,4 +1,4 @@
-.containerProfile {
+.containerUserAccount {
     position: fixed;
     top: 0;
     left: 0;
@@ -19,7 +19,7 @@
         }
     }
 
-    .boxProfile {
+    .boxUserAccount {
         position: relative;
         animation: slide 0.3s cubic-bezier(.03, .43, .61, 1.26) 0s 1 forwards;
         border: 1px solid #F4F4F4 !important;
@@ -45,18 +45,37 @@
             flex-direction: column;
             gap: 16px;
 
+            .textBox {
+                align-self: center;
+                width: 492px;
+                background-color: #F4F4F4;
+            }
+
+            .name {
+                color: black;
+                font-size: 40px;
+                font-weight: 700;
+                width: max-content;
+                padding-left: 192px;
+                margin-top: 40px;
+                margin-bottom: -95px;
+                z-index: 10;
+            }
+
             .titleDisplay {
                 display: flex;
                 flex-direction: row;
                 gap: 32px;
+                padding-bottom: 60px;
 
                 .imgDisplay {
-                    width: 100px;
-                    height: 100px;
+                    width: 160px;
+                    height: 160px;
                     border: 1px solid white;
                     border-radius: 100px;
                     background-color: gray;
                     cursor: pointer;
+                    margin-top: -1 0px;
                 }
 
                 .textDisplay {
@@ -64,25 +83,39 @@
                     justify-content: left;
                     flex-direction: column;
                     gap: 0px;
+                    padding-top: 80px;
 
-                    .name {
-                        color: black;
-                        font-size: 40px;
+                    background-color: white;
+                    flex-direction: row;
+
+                    .title {
+                        padding-right: 51px;
+                        font-size: 28px;
+                        color: #1233E5;
+
+                        font-family: Arial, Helvetica, sans-serif;
                         font-weight: 600;
-                        width: max-content;
-                        padding: 0;
-                        margin: 0;
+                    }
+
+                    .line {
+                        border: 1px solid #A0AEF5;
+                        height: 28px;
+                        width: 0.5px;
+                        background-color: #A0AEF5;
+                        border-radius: 30px;
+                    }
+
+                    .dAT {
+                        padding-top: 8px;
+                        font-size: 28px;
+                        padding-left: 40px;
+                        color: #A0AEF5;
+                        font-family: Arial, Helvetica, sans-serif;
+                        font-weight: 600;
 
                     }
 
-                    .position {
-                        color: #7D8FF1;
-                        font-size: 20px;
-                        width: max-content;
-                        padding: 0;
-                        margin: 0;
 
-                    }
                 }
 
             }
@@ -90,6 +123,10 @@
             .fisrtAttribute {
                 display: flex;
                 flex-direction: row;
+                justify-content: center;
+                align-self: center;
+                align-items: center;
+                align-content: center;
 
                 .attribute {
                     color: black;
@@ -102,73 +139,7 @@
 
         }
 
-        .secondColumn {
-            display: flex;
-            flex-direction: column;
-            width: max-content;
-            gap: 16px;
 
-            .attribute {
-                color: black;
-                font-size: 16px;
-                font-weight: 500;
-                text-align: left;
-            }
-
-            .textAttachment {
-                color: #A0AEF5;
-                font-family: 'Arial', sans-serif;
-                font-size: 15px;
-                text-align: left;
-                font-weight: 500;
-                padding-left: 26px;
-            }
-
-            .attachment {
-                display: flex;
-                flex-direction: row;
-
-                .imgPin {
-                    width: 50px;
-                    height: 50px;
-                }
-
-                .inputFile {
-                    border: 1px solid lightGray;
-                    background-color: white;
-                    width: 100%;
-                    height: 70px;
-                    overflow: auto;
-                    border-radius: 5px;
-                    color: lightGray;
-                    display: none;
-                    align-self: center;
-                    justify-content: center;
-                    align-items: center;
-                    vertical-align: middle;
-                    align-content: center;
-                    margin: auto;
-                    padding: auto;
-                    visibility: hidden;
-                }
-
-                .inputFileBox {
-                    border: 1px solid lightGray;
-                    background-color: white;
-                    width: 100%;
-                    height: 50px;
-                    border-radius: 5px;
-                    color: darkGray;
-                    display: flex;
-                    align-items: center;
-                    vertical-align: middle;
-                    align-content: center;
-                    padding-left: 16px;
-                }
-            }
-
-
-        }
 
 
         .textBox {
