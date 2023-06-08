@@ -88,15 +88,27 @@ function HRPage() {
   })))
   const handleChangeFunction = (d, index, key) => (state) => {
     setMonthTimeKeepingData(prev => {
+      d = prev[index]
       const newData = [...prev.map(d => ({ ...d }))]
       const keys = Object.keys(d)
       let P = 0;
       let D = 0;
       let T = 0;
-      keys.forEach(key => {
-        if (d[key] == 'P') P += 1;
-        if (d[key] == 'D') D += 1;
-        if (d[key] == 'T') T += 1;
+      keys.forEach(key_ => {
+        console.log({key: d[key_]})
+        if (key_ != key) {
+
+          if (d[key_]?.props?.children == 'P' || d[key_] == 'P') P += 1;
+          if (d[key_]?.props?.children == 'D' || d[key_] == 'D') D += 1;
+          if (d[key_]?.props?.children == 'T' || d[key_] == 'T') T += 1;
+        } else {
+          if (state == 'P') P += 1;
+          if (state == 'D') D += 1;
+          if (state == 'T') T += 1;
+          if (d[key_]?.props?.children == 'P' || d[key_] == 'P') P -= 1;
+          if (d[key_]?.props?.children == 'D' || d[key_] == 'D') D -= 1;
+          if (d[key_]?.props?.children == 'T' || d[key_] == 'T') T -= 1;
+        }
       })
       newData[index].dayOff = P
       newData[index].workingDays = D
