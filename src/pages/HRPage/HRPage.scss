@@ -30,17 +30,21 @@
         font-family: sans-serif;
         font-weight: bold;
         position: fixed;
-        top: 220px;
-        gap: 16px;
+        top: 180px;
+        left: 399px;
+        gap: 46px;
+        padding: 0px 40px;
+        z-index: 99999;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 0 10px 2px lightGray;
 
         .blur {
             color: black;
-            padding-right: 50px;
         }
 
         .nonBlur {
             color: #D6D6D6;
-            padding-right: 50px;
         }
     }
 }
