@@ -31,8 +31,6 @@ const ChangeConfirm = ({ onClose, onClick, options, userData }) => {
             default:
                 break
         }
-        console.log(selectedOptions)
-        console.log(userRole)
         updateUserRole(userData.accessToken, userData.id, userRole)
     }
 
