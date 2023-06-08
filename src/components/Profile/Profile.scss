@@ -29,13 +29,12 @@
         display: flex;
         border-radius: 20px;
         display: flex;
-        padding: 50px;
+        padding: 50px ;
         overflow: auto;
         flex-direction: row;
         gap: 73px;
         box-shadow: 0 0 20px 0px rgb(190, 190, 190);
         justify-self: end;
-
         &>div {
             width: 100%;
         }
@@ -90,6 +89,24 @@
             .fisrtAttribute {
                 display: flex;
                 flex-direction: row;
+                align-items: center;
+
+                .imgPen {
+                    cursor: pointer;
+                    height: 30px;
+                    padding: 5px;
+                    transition: 0.3s;
+
+                    &:hover {
+                        background-color: #f4f4f4;
+                        border-radius: 5px;
+                    }
+
+                    &:active {
+                        background-color: #c4c4c4;
+                        border-radius: 5px;
+                    }
+                }
 
                 .attribute {
                     color: black;
@@ -164,7 +181,7 @@
                     vertical-align: middle;
                     align-content: center;
                     padding-left: 16px;
-                    overflow:visible;
+                    overflow:auto;
                 }
             }
 

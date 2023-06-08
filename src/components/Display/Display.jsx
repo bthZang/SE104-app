@@ -7,11 +7,11 @@ import "./Display.scss";
 import { color } from "@mui/system";
 //import { Button } from "@mui/material";
 
-const Display = ({ children, type, onClick, data }) => {
+const Display = ({ children, type, onClick, data, isEditable }) => {
     return (
         <div onClick={onClick} data={data} className='textBox'>
             {children}
-            <input className='textDefautValue' type="text" defaultValue={data}></input>
+            <input disabled={!isEditable} className='textDefautValue' type="text" defaultValue={data}></input>
         </div>
     );
 };

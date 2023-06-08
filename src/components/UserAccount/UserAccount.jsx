@@ -50,6 +50,7 @@ const UserAccount = ({ onClose, data }) => {
                         navigate('/')
                     }
                     }>Logout</CustomButton>
+                    <p>.........</p>
 
                 </div>
 
