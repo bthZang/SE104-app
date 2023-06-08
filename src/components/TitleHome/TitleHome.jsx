@@ -8,7 +8,7 @@ import Search from "../search/search";
 import Profile from "../Profile/Profile";
 import UserAccount from "../UserAccount/UserAccount";
 
-const TitleHome = ({children, showSearch = true, data} ) => {
+const TitleHome = ({children, showSearch = true, data, style} ) => {
     const now = moment().format('ddd, DD-MMM-YY, HH:mm A')
     
     const [click, setClick]=useState(false)

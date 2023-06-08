@@ -7,14 +7,19 @@
     flex-direction: row !important;
 
     .HRSideBar {
-        margin-left: 30px;
+        padding-left: 30px;
+        background-color: white;
         float: left;
         margin-right: 70px;
+        position: fixed;
+        z-index: 10;
+        overflow: hidden;
+        height: 100vh;
     }
 
     .content {
         margin-top: 134px;
-        margin-left: 39px;
+        margin-left: 379px;
         float: right;
     }
 
@@ -24,6 +29,9 @@
         font-size: 21px;
         font-family: sans-serif;
         font-weight: bold;
+        position: fixed;
+        top: 220px;
+        gap: 16px;
 
         .blur {
             color: black;
@@ -33,7 +41,6 @@
         .nonBlur {
             color: #D6D6D6;
             padding-right: 50px;
-
         }
     }
 }

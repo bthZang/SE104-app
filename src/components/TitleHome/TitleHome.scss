@@ -5,7 +5,8 @@
     height: max-content;
     display: flex;
     flex-direction: row ;
-    position: relative;
+    position: fixed;
+    top: 120px;
     padding-right: 100px;
     .avatar{
         width: 70px;
@@ -13,8 +14,8 @@
         border: 1px solid white;
         border-radius: 100px;
         background-color: gray;
-        position:absolute;
-        top: -91px;
+        position:fixed;
+        top: 50px;
         right: 50px;
         cursor: pointer;
     }

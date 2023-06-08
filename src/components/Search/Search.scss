@@ -13,7 +13,7 @@
         justify-content: center;
         border-width: 0px;
         background-color: transparent;
-        hover {border: 1px solid transparent;}
+        outline: transparent;
         .searchImg{
             width: 20px;
             align-self: center;
@@ -29,5 +29,7 @@
         font-size: 20px;
         height: 25px;
         margin-left: 24px;
+        outline: transparent;
+        color: black;
     }
 }

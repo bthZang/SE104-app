@@ -1,63 +1,70 @@
 .sideBar {
 	width: 270px;
-	height: 822px;
-	display: grid;
-	place-items: center;
+	// display: grid;
+	// place-items: center;
 	color: white;
+	height: 100%;
 	border: 0px solid white;
 	background-color: white;
-	position: relative;
+	// position: relative;
 	overflow: hidden;
 
 	.table {
 		width: 270px;
-		height: 100vh;
+		height: calc(100% - 60px);
+		overflow: hidden;
 		display: grid;
-		padding:0%;
+		// padding: 0%;
 		display: inline;
+		position: relative;
 		overflow: hidden;
 		justify-content: center;
 		align-items: center;
-		border: 1px solid #161248 ;
+		border: 1px solid #161248;
 		background-color: #161248;
 		border-radius: 70px;
+
 		.title {
 			float: right;
-			display:flex;
-			margin-top: 50px;		
+			display: flex;
+			margin-top: 50px;
+
 			.logo {
 				width: 148px;
 				height: 148px;
 				margin-left: 210px;
 				z-index: 10000;
 			}
+
 			.topSideBar {
 				width: 81px;
 				height: 107px;
 			}
 		}
-		.nonChosen {
-		width: 250px;
-		position: relative;
 
-		height: 90px;
-		display: grid;
-		float: right;
-		z-index: 1000;
-		justify-content: center;
-		border: 0px solid #161248;
-		background-color: #161248;
-		border-radius: 40px;
+		.nonChosen {
+			width: 250px;
+			position: relative;
+
+			height: 90px;
+			display: grid;
+			float: right;
+			z-index: 1000;
+			justify-content: center;
+			border: 0px solid #161248;
+			background-color: #161248;
+			border-radius: 40px;
+
 			.text {
-				font-family:'Franklin Gothic Light', 'Arial Narrow', Arial, sans-serif;
+				font-family: 'Franklin Gothic Light', 'Arial Narrow', Arial, sans-serif;
 				color: white;
 				font-size: 21px;
 				text-align: center;
 			}
-			
-			
+
+
 		}
-		
+
 		.chosen {
 			width: 200px;
 			height: 90px;
@@ -72,14 +79,16 @@
 			margin-right: 50px;
 			box-shadow: 50px 44px 0 white, 50px -44px 0 white;
 			z-index: 1;
+
 			.text {
-				font-family:'Franklin Gothic Light', 'Arial Narrow', Arial, sans-serif;
+				font-family: 'Franklin Gothic Light', 'Arial Narrow', Arial, sans-serif;
 				color: black;
 				margin-left: 89px;
 				font-size: 21px;
 
 			}
 		}
+
 		.last {
 			width: 250px;
 			height: 90px;
@@ -88,47 +97,52 @@
 			float: right;
 			justify-content: center;
 			align-items: center;
+			z-index: 1;
+			border: 0px solid #161248;
+			background-color: #161248;
+			border-radius: 40px;
+
+		}
+
+		.top {
+			width: 250px;
+			height: 90px;
+			position: relative;
+			z-index: 1000;
+			float: right;
+			display: grid;
+			justify-content: center;
+			align-items: center;
+			margin-top: -36px;
 			z-index: 1000;
 			border: 0px solid #161248;
 			background-color: #161248;
 			border-radius: 40px;
-			
-		}
-		.top{
-				width: 250px;
-				height: 90px;
-				position: relative;
-				z-index: 1000;
-				float: right;
-				display: grid;
-				justify-content: center;
-				align-items: center;
-				margin-top: -36px;
-				z-index: 1000;
-				border: 0px solid #161248;
-				background-color: #161248;
-				border-radius: 40px;
-				
+
 		}
 
-		.botLeftSideBar{
+		.botLeftSideBar {
 			width: 100.16px;
 			height: 271.05px;
-			float: left;
+			position: absolute;
+			bottom: 0px;
+			z-index: 9999;
+			display: block;
 
-			margin-top: 10px;
 
 		}
 
-		.botRightSideBar{
+		.botRightSideBar {
 			width: 87.98px;
 			height: 179.6px;
-			float: right;
-
-			margin-top: 120px;
+			position: absolute;
+			bottom: -20px;
+			right: 0;
+			z-index: 9999;
+			display: block;
 
 		}
-			}
-	
+	}
+
 
 }
