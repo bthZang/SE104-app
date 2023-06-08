@@ -2,18 +2,30 @@ import { TextField, Typography } from "@mui/material";
 import { useState, useEffect, useRef } from "react";
 import { Modal, DatePicker } from "antd";
 
+
 import FlexibleButton from '../FlexibleButton/FlexibleButton';
 
 import './RequestPayrollPopup.scss'
+import moment from "moment/moment";
 
 
-export default function RequestPayrollPopup({ isOpen, handleCancel }) {
+export default function RequestPayrollPopup({ isOpen, handleCancel, handleSend }) {
 
     // useEffect(() => {
     //     if (!isOpen) {
     //         return;
     //     }
     // }, [isOpen]);
+    // const monthFormat = 'YYYY/MM';
+
+    const [selectedDate, setSelectedDate] = useState(null);
+    const [email, setEmail] = useState(null)
+    const [message, setMessage] = useState(null)
+
+    const handleDateChange = (date, dateString) => {
+        const formattedDate = moment(dateString).format('YYYY-MM');
+        setSelectedDate(formattedDate);
+    };
 
     const test = () => {
         alert('success');
@@ -22,7 +34,10 @@ export default function RequestPayrollPopup({ isOpen, handleCancel }) {
 
     const sendRequest = () => {
         console.log("send");
+        // console.log(selectedDate.toString())
     }
+
+
 
     return (
         <Modal
@@ -33,7 +48,7 @@ export default function RequestPayrollPopup({ isOpen, handleCancel }) {
             onCancel={handleCancel}
             footer={
                 <div className="modalFooter">
-                    <FlexibleButton label="Send" onClick={sendRequest}></FlexibleButton>
+                    <FlexibleButton label="Send" onClick={() => handleSend(email, message)}></FlexibleButton>
                 </div>
             }
         >
@@ -44,12 +59,21 @@ export default function RequestPayrollPopup({ isOpen, handleCancel }) {
                 </div>
                 <div className="monthPickerRequestPayrollPopup">
                     <Typography variant="subtitle2">Month:</Typography>
-                    <DatePicker picker="month" />
+                    <DatePicker picker="month" format="YYYY-MM" onChange={handleDateChange} />
                 </div>
-                <TextField id="messagelInputRequestPayrollPopup" sx={{ width: '100%' }}
+                <TextField id="emailInputRequestPayrollPopup" sx={{ width: '100%' }}
+                    label="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Please enter your email!"
+                    multiline />
+                <TextField id="messageInputRequestPayrollPopup" sx={{ width: '100%' }}
                     label="Message"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
                     placeholder="Write something..."
                     multiline />
+
             </div>
         </Modal>
 

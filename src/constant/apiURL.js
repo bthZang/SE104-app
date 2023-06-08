@@ -2,7 +2,7 @@ export const BASE_URL = 'http://192.168.2.159:8081/api';
 
 export const AUTH_API = `${BASE_URL}/auth`;
 
-export const REQUEST_API = `${BASE_URL}/timekeeping`;
+export const REQUEST_API = `${BASE_URL}/request`;
 
 export const USER_API = `${BASE_URL}/user`;
 
