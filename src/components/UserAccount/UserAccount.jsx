@@ -44,6 +44,7 @@ const UserAccount = ({ onClose, data }) => {
                     <Display data={'data?.password'}>Password</Display>
                     <CustomButton type='long' style={{ borderRadius: '11px', width: '513px', fontSize: '21px',padding: '12px 0', alignSelf: 'center'}}    >Change password</CustomButton>
                     <CustomButton type='long' style={{}}    >Logout</CustomButton>
+                    <p>.........</p>
 
                 </div>
 
