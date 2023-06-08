@@ -6,8 +6,12 @@
     display: flex;
     flex-direction: row ;
     position: fixed;
-    top: 120px;
+    top: 0px;
     padding-right: 100px;
+    z-index: 9999;
+    left: 300px;
+    padding-top: 100px;
+    padding-left: 100px;
     .avatar{
         width: 70px;
         height: 70px;
@@ -46,7 +50,9 @@
     
 }
 .search{
-        margin-top: 50px;
+        margin-top: 100px;
         justify-content: right;
         display: flex;
+        left: 600px;
+        margin-left: -245px;
     }

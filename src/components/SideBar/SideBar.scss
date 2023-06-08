@@ -11,7 +11,7 @@
 
 	.table {
 		width: 270px;
-		height: 822px;
+		height: 100vh;
 		display: grid;
 		padding:0%;
 		display: inline;
@@ -24,17 +24,16 @@
 		.title {
 			float: right;
 			display:flex;
-			margin-right: 55px;
 			margin-top: 50px;		
 			.logo {
 				width: 148px;
 				height: 148px;
+				margin-left: 210px;
 				z-index: 10000;
 			}
 			.topSideBar {
 				width: 81px;
 				height: 107px;
-				margin-right: -78px ;
 			}
 		}
 		.nonChosen {
@@ -45,7 +44,7 @@
 		display: grid;
 		float: right;
 		z-index: 1000;
-		justify-content: center !important;
+		justify-content: center;
 		border: 0px solid #161248;
 		background-color: #161248;
 		border-radius: 40px;
@@ -53,7 +52,6 @@
 				font-family:'Franklin Gothic Light', 'Arial Narrow', Arial, sans-serif;
 				color: white;
 				font-size: 21px;
-				padding-top: 8px;
 				text-align: center;
 			}
 			
@@ -66,9 +64,7 @@
 			float: right;
 			border: 0px solid white;
 			background-color: white;
-			align-items: center;
-			align-content: center;
-			justify-content: center !important;
+			justify-content: center;
 			//border-radius: 40px;
 			border-top-left-radius: 40px;
 			border-end-start-radius: 40px;
@@ -79,9 +75,9 @@
 			.text {
 				font-family:'Franklin Gothic Light', 'Arial Narrow', Arial, sans-serif;
 				color: black;
-				padding-top: 8px;
 				margin-left: 89px;
 				font-size: 21px;
+				padding: 8px;
 
 			}
 		}

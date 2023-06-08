@@ -9,7 +9,7 @@ export const loginPost = createAsyncThunk('authManagement/loginPost', async ({ e
     try {
 
         const res = await axios.post(`${AUTH_API}/login`, { email, password })
-
+        localStorage.setItem('accessToken', res.data.access_token)
         return res.data
     } catch (error) {
         Swal.fire({
@@ -29,6 +29,11 @@ const initialState = {
 export const authManagementSlice = createSlice({
     name: 'authManagement',
     initialState: initialState,
+    reducers: {
+        setAccessToken: (state, action) => {
+            state.data = action.payload
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(loginPost.pending, (state) => {
@@ -37,6 +42,7 @@ export const authManagementSlice = createSlice({
             .addCase(loginPost.fulfilled, (state, action) => {
                 state.status = 'succeeded'
                 state.data = action.payload
+                console.log(state.data)
             })
             .addCase(loginPost.rejected, (state, action) => {
                 state.status = 'failed'
@@ -52,5 +58,6 @@ export const selectAccessToken = state => (state.authManagement.data ? state.aut
 
 export const selectUserRole = state => (state.authManagement.data ? state.authManagement.data.user_role : '')
 
+export const {setAccessToken} = authManagementSlice.actions
 
 export default authManagementSlice.reducer

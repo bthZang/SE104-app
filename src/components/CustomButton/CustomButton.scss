@@ -11,13 +11,25 @@
     display: flex;
     align-items: center;
     background-color: #3552E9;
+    
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover{
+        background-color: #1029a7;
+
+    }
 }
 
 .normalBlue {
     width: 206px;
     height: 48px;
     color: white;
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover{
+        background-color: #1029a7;
 
+    }
     border-radius: 5px;
     background-color: #3552E9;
     font-size: 21px;
@@ -33,7 +45,12 @@
     height: 70px;
     font-size: 28px;
     color: white;
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover{
+        background-color: #1029a7;
 
+    }
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-align: center;
     justify-content: center;
@@ -47,7 +64,12 @@
     width: 123px;
     height: 36px;
     color: white;
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover{
+        background-color: rgb(173, 3, 3);
 
+    }
     border-radius: 5px;
     background-color: red;
     font-size: 16px;
@@ -62,7 +84,12 @@
     width: 571px;
     height: 70px;
     color: white;
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover{
+        background-color: rgb(173, 3, 3);
 
+    }
     border-radius: 5px;
     background-color: red;
     font-size: 28px;
@@ -76,7 +103,12 @@
 .shortGreen {
     width: 123px;
     color: white;
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover{
+        background-color: #0a8510;
 
+    }
     height: 36px;
     border-radius: 5px;
     background-color: #0BA712;
@@ -92,7 +124,12 @@
     width: 571px;
     height: 70px;
     color: white;
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover{
+        background-color: #0a8510;
 
+    }
     border-radius: 5px;
     background-color: #0BA712;
     font-size: 28px;
@@ -115,6 +152,13 @@
     justify-content: center;
     display: flex;
     align-items: center;
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover{
+        background-color: rgb(86, 85, 85);
+
+    }
+
 }
 
 .logout {
@@ -135,6 +179,11 @@
     align-self: center;
     margin-top: 108px;
     margin-bottom: 108px;
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover{
+        background-color: rgb(209, 205, 205);
 
+    }
     border: 2.5px solid #3552E9;
 }

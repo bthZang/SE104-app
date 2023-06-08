@@ -27,7 +27,7 @@ const AddAttachmentConfirm = ({ onClose, onClick }) => {
                         <TextField
                             id="firstNameInputSignInForm"
                             variant="outlined"
-                            label="First name"
+                            label="Email"
                             sx={{ width: '100%' }}
                             style={{
                                 paddingBottom: '43px',
@@ -39,7 +39,7 @@ const AddAttachmentConfirm = ({ onClose, onClick }) => {
                         <TextField
                             id="lastNameInputSignInForm"
                             variant="outlined"
-                            label="Last name"
+                            label="Name"
                             sx={{ width: '100%' }}
                             style={{
                                 paddingBottom: '43px',

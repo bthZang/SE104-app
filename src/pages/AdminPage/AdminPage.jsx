@@ -46,22 +46,19 @@ function AdminPage() {
   getAllUser(accessToken, 'ACCOUNTANT')
     .then(response => {
       setAcountingData(response);
-      console.log(AcountingData)
     })
   getAllUser(accessToken, 'HR')
     .then(response => {
       sethumanRescourceData(response);
-      console.log(humanRescourceData)
     })
   getAllUser(accessToken, 'BOD')
     .then(response => {
       setBoardData(response);
-      console.log(BoardData)
+
     })
   getAllUser(accessToken)
     .then(response => {
       setAccountData(response)
-      console.log(accountData)
     })
   // }, [])
 
