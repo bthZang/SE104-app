@@ -7,6 +7,7 @@ import HRPage from '../HRPage/HRPage';
 import LoginPage from '../LoginPage/LoginPage';
 import LoginOutlet from '../LoginPage/LoginOutlet/LoginOutlet';
 import ForgotPasswordOutlet from '../LoginPage/ForgotPasswordOutlet/ForgotPasswordOutlet'
+import AccessDenyPage from '../AccessDenyPage';
 
 const router = createBrowserRouter([
     {
@@ -28,16 +29,20 @@ const router = createBrowserRouter([
         ]
     },
     {
-        path:"\hr",
+        path: "/hr",
         element: <HRPage />
     },
     {
-        path:"\accountant",
-        element: <AccountingPage/>
+        path: "/accountant",
+        element: <AccountingPage />
     },
     {
-        path:"\admin",
+        path: "/admin",
         element: <AdminPage></AdminPage>
+    },
+    {
+        path: "/accessDeny",
+        element: <AccessDenyPage />
     },
 
 

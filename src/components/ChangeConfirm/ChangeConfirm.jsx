@@ -4,21 +4,40 @@ import Dropdown from "react-dropdown";
 import "./ChangeConfirm.scss";
 //import { Button } from "@mui/material";
 import CustomButton from "../CustomButton/CustomButton";
+import { updateUserRole } from "../../api/AdminAPI";
 
-const ChangeConfirm = ({ onClose, onClick }) => {
+
+
+const ChangeConfirm = ({ onClose, onClick, options, userData }) => {
 
     const [selectedOptions, setSelectedOptions] = useState(null);
     const handleOnChange = (selectedOptions) => {
         setSelectedOptions(selectedOptions);
+        console.log(selectedOptions);
     };
 
-    const options = [
-        "HR Deparment",
-        "Accounting Deparment",
-        "Board of Director",
-        "None Access",
-      ];
-      
+    const handleOnChangeClick = () => {
+        var userRole
+        switch (selectedOptions.value) {
+            case "HR Deparment":
+                userRole = 'HR'
+                break
+            case "Accounting Deparment":
+                userRole = 'ACCOUNTANT'
+                break
+            case "Boar of Director":
+                userRole = 'BOD'
+                break
+            default:
+                break
+        }
+        console.log(selectedOptions)
+        console.log(userRole)
+        updateUserRole(userData.accessToken, userData.id, userRole)
+    }
+
+
+
     return (
         <div className="changeConfirmContainer" onClick={onClose} >
             <div className="box" onClick={e => e.stopPropagation()}>
@@ -26,18 +45,17 @@ const ChangeConfirm = ({ onClose, onClick }) => {
                     <p className="confirmText">
                         Change <span style={{ color: '#1233E5' }}>permission</span>
                     </p>
-                <div className="topTable">
-                    <Dropdown
-                        //width={200}
-                        options={options}
-                        value={selectedOptions}
-                        onChange={handleOnChange}
-                        placeholder="Select access right"
-                        className="customChangeDropdown"
-                        
-                    ></Dropdown></div>
+                    <div className="topTable">
+                        <Dropdown
+                            //width={200}
+                            options={options}
+                            value={selectedOptions}
+                            onChange={handleOnChange}
+                            placeholder="Select access right"
+                            className="customChangeDropdown"
+                        ></Dropdown></div>
                     <div className="confirmBtn">
-                        <CustomButton onClick={onClick} style={{ width: "100%" }} type="long" >Change</CustomButton>
+                        <CustomButton onClick={() => { handleOnChangeClick() }} style={{ width: "100%" }} type="long" >Change</CustomButton>
                     </div>
                 </div>
             </div>

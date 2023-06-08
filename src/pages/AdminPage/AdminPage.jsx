@@ -1,6 +1,7 @@
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, } from "react-router-dom";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import "./AdminPage.scss"
 
@@ -15,27 +16,55 @@ import Confirm from "../../components/Confirm/Confirm";
 
 import topAdminPage from "../../assets/images/topAdminPage.png"
 
-const humanRescourceData = [
-  { email: 'example@email', name: 'Example', }
-]
-const AcountingData = [
-  { email: 'example@email', name: 'Example', }
-]
-const BoardData = [
-  { email: 'example@email', name: 'Example', }
-]
+import { useEffect } from "react";
+import { getAllUser, updateUserRole } from "../../api/AdminAPI";
+import { selectAccessToken, selectAuthData, selectUserRole } from "../../app/reducer/authReducer";
 
-
-const accountData = [
-  { email: 'example@email', name: 'Example', permission: 'HR', },
-  { email: 'example@email', name: 'Example', permission: 'Accounting', },
-  { email: 'example@email', name: 'Example', permission: 'BOD', },
-  { email: 'example@email', name: 'Example', permission: 'None', },
-
-]
 
 
 function AdminPage() {
+
+  const navigate = useNavigate()
+
+  const userRole = useSelector(selectUserRole)
+
+  const accessToken = useSelector(selectAccessToken)
+
+
+  const [AcountingData, setAcountingData] = useState([])
+
+  const [BoardData, setBoardData] = useState([])
+
+  const [humanRescourceData, sethumanRescourceData] = useState([])
+
+  const [accountData, setAccountData] = useState([])
+
+
+
+
+  // useEffect(() => {
+  getAllUser(accessToken, 'ACCOUNTANT')
+    .then(response => {
+      setAcountingData(response);
+      console.log(AcountingData)
+    })
+  getAllUser(accessToken, 'HR')
+    .then(response => {
+      sethumanRescourceData(response);
+      console.log(humanRescourceData)
+    })
+  getAllUser(accessToken, 'BOD')
+    .then(response => {
+      setBoardData(response);
+      console.log(BoardData)
+    })
+  getAllUser(accessToken)
+    .then(response => {
+      setAccountData(response)
+      console.log(accountData)
+    })
+  // }, [])
+
 
   const [tab, setTab] = useState('permission');
   const handleChange = (status) => {
@@ -43,10 +72,10 @@ function AdminPage() {
   };
 
   const [dialogType, setDialogType] = useState('');
-  const [email, setEmail] = useState('');
+  const [id, setId] = useState('');
 
-  const handleOnClick = (type, email) => {
-    setEmail(email);
+  const handleOnClick = (type, id) => {
+    setId(id)
     setDialogType(type)
   };
 
@@ -55,7 +84,7 @@ function AdminPage() {
     button: (
       <CustomButton
         onClick={() => {
-          handleOnClick('change', data.email);
+          handleOnClick('change', data.id);
         }}
         type={"short"}
       >
@@ -69,7 +98,7 @@ function AdminPage() {
     button: (
       <CustomButton
         onClick={() => {
-          handleOnClick('change', data.email);
+          handleOnClick('change', data.id);
         }}
         type={"short"}
       >
@@ -83,7 +112,7 @@ function AdminPage() {
     button: (
       <CustomButton
         onClick={() => {
-          handleOnClick('change', data.email);
+          handleOnClick('change', data.id);
         }}
         type={"short"}
       >
@@ -98,7 +127,7 @@ function AdminPage() {
     button: (
       <CustomButton
         onClick={() => {
-          handleOnClick('delete', data.email);
+          handleOnClick('delete', data.id);
         }}
         type={"short"}
       >
@@ -107,34 +136,37 @@ function AdminPage() {
     ),
   }));
 
-  // const options = [
-  //   "HR Deparment",
-  //   "Accounting Deparment",
-  //   "Boar of Director",
-  //   "None Access",
-  // ];
+  const options = [
+    "HR Deparment",
+    "Accounting Deparment",
+    "Boar of Director",
+    "None Access",
+  ];
+
+
 
   return (
-    <div className="containerAdminPage">
-      <div className="adminSideBar">
-        <AdminSideBar handleChange={handleChange}></AdminSideBar>
-      </div>
-      <div className="content" >
-        {tab == "permission" && <Permission newAcountingData={newAcountingData} newBoardData={newBoardData} newHumanRescourceData={newHumanRescourceData} humanRescourceData={humanRescourceData} BoardData={BoardData} AcountingData={AcountingData}></Permission>}
-        {tab == "account" && <Account newAccountData={newAccountData} accountData={accountData}></Account>}
-
-        <div className="confirmBox">
-          {dialogType == "change" && <ChangeConfirm onClose={() => setDialogType('')}
-            onClick={onclick}
-          >{"Change"}</ChangeConfirm>}
-          {dialogType == "delete" && <Confirm  text={"account?"} onClose={() => setDialogType('')}
-            onClick={onclick}
-          >{"Delete"}</Confirm>}
-          
+    <>
+      {userRole == 'ADMIN' && <div className="containerAdminPage">
+        <div className="adminSideBar">
+          <AdminSideBar handleChange={handleChange}></AdminSideBar>
         </div>
-      </div>
-    </div>
+        <div className="content" >
+          {tab == "permission" && <Permission newAcountingData={newAcountingData} newBoardData={newBoardData} newHumanRescourceData={newHumanRescourceData} humanRescourceData={humanRescourceData} BoardData={BoardData} AcountingData={AcountingData}></Permission>}
+          {tab == "account" && <Account newAccountData={newAccountData} accountData={accountData}></Account>}
 
+          <div className="confirmBox">
+            {dialogType == "change" && <ChangeConfirm options={options} onClose={() => setDialogType('')} userData={{ id: id, accessToken: accessToken }}
+            >{"Change"}</ChangeConfirm>}
+            {dialogType == "delete" && <Confirm text={"account?"} onClose={() => setDialogType('')}
+              onClick={onclick}
+            >{"Delete"}</Confirm>}
+
+          </div>
+        </div>
+      </div>}
+      {userRole != 'ADMIN' && <div>You can't access this page</div>}
+    </>
   )
 }
 

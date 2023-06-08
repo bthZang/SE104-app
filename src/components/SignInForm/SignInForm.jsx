@@ -6,12 +6,12 @@ import {
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import './SignInForm.scss'
 import FlexibleButton from '../FlexibleButton/FlexibleButton';
-
-// import axios from 'axios';
-// import SignInAPI from '../../api/SignInAPI';
-
+import signInRequest from '../../api/SignInAPI';
+import Swal from 'sweetalert2';
+import { loginPost, selectAuthStatus, selectUserRole } from '../../app/reducer/authReducer';
 
 
 
@@ -19,33 +19,56 @@ export default function SignInForm() {
     const [showPassword, setShowPassword] = useState(false);
 
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [password, setPassword] = useState('')
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
+    const dispatch = useDispatch()
 
-    //     // Gọi callback onLogin và truyền thông tin đăng nhập
-    //     onLogin({ username, password });
+    const authStatus = useSelector(selectAuthStatus)
 
-    //     // Đặt lại giá trị form sau khi submit
+    const userRole = useSelector(selectUserRole)
 
-    // };
+    const navigate = useNavigate()
 
-    // const login = (event) => {
-    //     event.preventDefault();
+    const successAlert = () => {
+        Swal.fire({
+            icon: 'success',
+            text: 'Login successful!',
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true,
+        })
+    }
 
-    //     SignInAPI(email, password);
+    if (authStatus == 'succeeded') {
+        successAlert()
+        switch (userRole) {
+            case "ADMIN":
+                navigate('/admin')
+                break
+            case "HR":
+                navigate('/hr')
+                break
+            case "ACCOUNTANT":
+                navigate('/accountant')
+                break
+            default:
+                break
+        }
+    }
 
-    //     // setUsername('');
-    //     // setPassword('');
 
-    // }
+    const login = (event) => {
+        event.preventDefault()
+
+        dispatch(loginPost({ email, password }))
+
+
+    }
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     const handleMouseDownPassword = event => {
         event.preventDefault()
     };
-    const navigate = useNavigate();
     return (
         <div className="containerSignInForm">
             <div className="inputContainerSignInForm">
@@ -82,9 +105,9 @@ export default function SignInForm() {
                 </FormControl>
             </div>
             <div className="buttonContainerSignInForm">
-                <FlexibleButton type='solid' label='Login' onClick={null} />
+                <FlexibleButton type='solid' label='Login' onClick={login} />
                 <Typography id="forgotPasswordBtnSignInForm" variant='body1' onClick={() => {
-                    navigate('/login/forgot-password');
+                    navigate('/login/forgot-password')
                 }}>Forgot password?</Typography>
             </div>
 

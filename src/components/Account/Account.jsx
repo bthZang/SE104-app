@@ -25,7 +25,7 @@ const columns = [
     },
     {
         name: 'Permission',
-        selector: 'permission',
+        selector: 'userRole',
         sortable: true,
     },
     {
@@ -63,9 +63,9 @@ const Account = ({ accountData, newAccountData, onClick, onClose }) => {
                         striped={true}
                     ></DataTable>
                 </div>
-                <button id="btnAdd" ref={btnAddRef} className="btn" onClick={()=>{handleOnClick()}}>Add new account</button>
+                <button id="btnAdd" ref={btnAddRef} className="btn" onClick={() => { handleOnClick() }}>Add new account</button>
                 <div>
-                    {click == "btnAdd" && <AddConfirm text={"account?"} 
+                    {click == "btnAdd" && <AddConfirm text={"account?"}
                         onClick={onclick} onClose={() => setClick('')}
                     >Add</AddConfirm>}
                 </div>

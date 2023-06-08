@@ -14,7 +14,9 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.3",
+    "@reduxjs/toolkit": "^1.9.5",
     "antd": "^5.5.2",
+    "axios": "^1.4.0",
     "dayjs": "^1.11.8",
     "moment": "^2.29.4",
     "prop-types": "^15.8.1",
@@ -22,10 +24,13 @@
     "react-data-table-component": "^7.5.3",
     "react-dom": "^18.2.0",
     "react-dropdown": "^1.11.0",
+    "react-redux": "^8.0.7",
     "react-router-dom": "^6.11.2",
     "react-select": "^5.7.3",
     "react-text-field": "^0.4.0",
+    "redux": "^4.2.1",
     "sass": "^1.62.1",
+    "sweetalert2": "^11.7.11",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
