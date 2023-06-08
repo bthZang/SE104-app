@@ -1,6 +1,6 @@
 
 import { useNavigate } from "react-router-dom";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import "./HRPage.scss"
 
@@ -13,16 +13,18 @@ import CustomButton from "../../components/CustomButton/CustomButton";
 import Confirm from "../../components/Confirm/Confirm";
 import MonthTimeKeeping from "../../components/monthTimeKeeping/monthTimeKeeping";
 import TitleHome from "../../components/titleHome/titleHome";
+import { getAllEmployee } from "../../api/EmployeeAPI";
+import { Button } from "antd";
 
 
 const employeeData = [
-  { id: '#00001',birthplace: 'ketui',ethnictity:'kinh', citizenId :'khongnoi', name: 'Bùi Thị Hoàng Giang', gender: 'Male', birthdate: '06/05/2002', department: 'unknown', position: 'unknown' },
-  { id: '#00002',birthplace: 'ketui',ethnictity:'kinh', citizenId :'khongnoi', name: 'Nguyễn Hoàng Hy', gender: 'Male', birthdate: '01/12/2003', department: 'unknown', position: 'unknown' },
-  { id: '#00003',birthplace: 'ketui',ethnictity:'kinh', citizenId :'khongnoi', name: 'Ngô Quang Khải', gender: 'Male', birthdate: '27/12/2003', department: 'unknown', position: 'unknown' },
-  { id: '#00004',birthplace: 'ketui',ethnictity:'kinh', citizenId :'khongnoi', name: 'Đinh Quang Dương', gender: 'Male', birthdate: '02/09/2003', department: 'unknown', position: 'unknown' },
-  { id: '#00005',birthplace: 'ketui',ethnictity:'kinh', citizenId :'khongnoi', name: 'Nguyễn Tuấn Khang', gender: 'Male', birthdate: '10/10/2003', department: 'unknown', position: 'unknown' },
-  { id: '#00006',birthplace: 'ketui',ethnictity:'kinh', citizenId :'khongnoi', name: 'Nguyễn Đức Thành Duy', gender: 'Male', birthdate: '24/03/2003', department: 'unknown', position: 'unknown' },
-  
+  { id: '#00001', birthplace: 'ketui', ethnictity: 'kinh', citizenId: 'khongnoi', name: 'Bùi Thị Hoàng Giang', gender: 'Male', birthdate: '06/05/2002', department: 'unknown', position: 'unknown' },
+  { id: '#00002', birthplace: 'ketui', ethnictity: 'kinh', citizenId: 'khongnoi', name: 'Nguyễn Hoàng Hy', gender: 'Male', birthdate: '01/12/2003', department: 'unknown', position: 'unknown' },
+  { id: '#00003', birthplace: 'ketui', ethnictity: 'kinh', citizenId: 'khongnoi', name: 'Ngô Quang Khải', gender: 'Male', birthdate: '27/12/2003', department: 'unknown', position: 'unknown' },
+  { id: '#00004', birthplace: 'ketui', ethnictity: 'kinh', citizenId: 'khongnoi', name: 'Đinh Quang Dương', gender: 'Male', birthdate: '02/09/2003', department: 'unknown', position: 'unknown' },
+  { id: '#00005', birthplace: 'ketui', ethnictity: 'kinh', citizenId: 'khongnoi', name: 'Nguyễn Tuấn Khang', gender: 'Male', birthdate: '10/10/2003', department: 'unknown', position: 'unknown' },
+  { id: '#00006', birthplace: 'ketui', ethnictity: 'kinh', citizenId: 'khongnoi', name: 'Nguyễn Đức Thành Duy', gender: 'Male', birthdate: '24/03/2003', department: 'unknown', position: 'unknown' },
+
 
 ]
 
@@ -40,7 +42,7 @@ const candidateData = [
 
 ]
 
-const dayTimeKeepingData = [
+const dayTimeKeepingDataDeafault = [
   { id: '#00001', name: 'Example', department: 'Accounting', position: 'P', in: 'D', out: 'P' },
   { id: '#00002', name: 'Example', department: 'Technical', position: 'P', in: 'D', out: 'P' },
   { id: '#00003', name: 'Example', department: 'Accounting', position: 'P', in: 'D', out: 'P' },
@@ -56,14 +58,14 @@ const dayTimeKeepingData = [
 
 ]
 
-const monthTimeKeepingData = [
-  { id: '#00001', name: 'Example', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P',eight: 'P',nine: 'P',ten: 'P', eleven: 'P',twelve: 'P',thirteen: 'P',fourteen: 'P',fifteen: 'P',sixteen: 'P',seventeen: 'P',eighteen: 'P',nineteen:'I',twenty: 'P',thirty: 'P',twentyNine: 'P',twentyEight: 'P',twentySeven: 'P',twentySix: 'P',twentyFive: 'P',twentyFour: 'P',twentyThree: 'P',twentyTwo: 'P',twentyOne: 'P',workingDays: '27', dayOff: '3', overtime: '4', total: '27' },
-  { id: '#00002', name: 'Example', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P',eight: 'P',nine: 'P',ten: 'P', eleven: 'P',twelve: 'P',thirteen: 'P',fourteen: 'P',fifteen: 'P',sixteen: 'P',seventeen: 'P',eighteen: 'P',nineteen:'I',twenty: 'P',thirty: 'P',twentyNine: 'P',twentyEight: 'P',twentySeven: 'P',twentySix: 'P',twentyFive: 'P',twentyFour: 'P',twentyThree: 'P',twentyTwo: 'P',twentyOne: 'P',workingDays: '27', dayOff: '3', overtime: '4', total: '27' },
-  { id: '#00003', name: 'Example', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P',eight: 'P',nine: 'P',ten: 'P', eleven: 'P',twelve: 'P',thirteen: 'P',fourteen: 'P',fifteen: 'P',sixteen: 'P',seventeen: 'P',eighteen: 'P',nineteen:'I',twenty: 'P',thirty: 'P',twentyNine: 'P',twentyEight: 'P',twentySeven: 'P',twentySix: 'P',twentyFive: 'P',twentyFour: 'P',twentyThree: 'P',twentyTwo: 'P',twentyOne: 'P',workingDays: '27', dayOff: '3', overtime: '4', total: '27' },
-  { id: '#00004', name: 'Example', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P',eight: 'P',nine: 'P',ten: 'P', eleven: 'P',twelve: 'P',thirteen: 'P',fourteen: 'P',fifteen: 'P',sixteen: 'P',seventeen: 'P',eighteen: 'P',nineteen:'I',twenty: 'P',thirty: 'P',twentyNine: 'P',twentyEight: 'P',twentySeven: 'P',twentySix: 'P',twentyFive: 'P',twentyFour: 'P',twentyThree: 'P',twentyTwo: 'P',twentyOne: 'P',workingDays: '27', dayOff: '3', overtime: '4', total: '27' },
-  { id: '#00005', name: 'Example', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P',eight: 'P',nine: 'P',ten: 'P', eleven: 'P',twelve: 'P',thirteen: 'P',fourteen: 'P',fifteen: 'P',sixteen: 'P',seventeen: 'P',eighteen: 'P',nineteen:'I',twenty: 'P',thirty: 'P',twentyNine: 'P',twentyEight: 'P',twentySeven: 'P',twentySix: 'P',twentyFive: 'P',twentyFour: 'P',twentyThree: 'P',twentyTwo: 'P',twentyOne: 'P',workingDays: '27', dayOff: '3', overtime: '4', total: '27' },
-  { id: '#00006', name: 'Example', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P',eight: 'P',nine: 'P',ten: 'P', eleven: 'P',twelve: 'P',thirteen: 'P',fourteen: 'P',fifteen: 'P',sixteen: 'P',seventeen: 'P',eighteen: 'P',nineteen:'I',twenty: 'P',thirty: 'P',twentyNine: 'P',twentyEight: 'P',twentySeven: 'P',twentySix: 'P',twentyFive: 'P',twentyFour: 'P',twentyThree: 'P',twentyTwo: 'P',twentyOne: 'P',workingDays: '27', dayOff: '3', overtime: '4', total: '27' },
- 
+const monthTimeKeepingDataDefault = [
+  { id: '#00001', name: 'Example', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P', eight: 'P', nine: 'P', ten: 'P', eleven: 'P', twelve: 'P', thirteen: 'P', fourteen: 'P', fifteen: 'P', sixteen: 'P', seventeen: 'P', eighteen: 'P', nineteen: 'T', twenty: 'P', thirty: 'P', twentyNine: 'P', twentyEight: 'P', twentySeven: 'P', twentySix: 'P', twentyFive: 'P', twentyFour: 'P', twentyThree: 'P', twentyTwo: 'P', twentyOne: 'P', workingDays: '3', dayOff: '25', overtime: '1', total: '27' },
+  { id: '#00002', name: 'Example', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P', eight: 'P', nine: 'P', ten: 'P', eleven: 'P', twelve: 'P', thirteen: 'P', fourteen: 'P', fifteen: 'P', sixteen: 'P', seventeen: 'P', eighteen: 'P', nineteen: 'T', twenty: 'P', thirty: 'P', twentyNine: 'P', twentyEight: 'P', twentySeven: 'P', twentySix: 'P', twentyFive: 'P', twentyFour: 'P', twentyThree: 'P', twentyTwo: 'P', twentyOne: 'P', workingDays: '3', dayOff: '25', overtime: '1', total: '27' },
+  { id: '#00003', name: 'Example', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P', eight: 'P', nine: 'P', ten: 'P', eleven: 'P', twelve: 'P', thirteen: 'P', fourteen: 'P', fifteen: 'P', sixteen: 'P', seventeen: 'P', eighteen: 'P', nineteen: 'T', twenty: 'P', thirty: 'P', twentyNine: 'P', twentyEight: 'P', twentySeven: 'P', twentySix: 'P', twentyFive: 'P', twentyFour: 'P', twentyThree: 'P', twentyTwo: 'P', twentyOne: 'P', workingDays: '3', dayOff: '25', overtime: '1', total: '27' },
+  { id: '#00004', name: 'Example', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P', eight: 'P', nine: 'P', ten: 'P', eleven: 'P', twelve: 'P', thirteen: 'P', fourteen: 'P', fifteen: 'P', sixteen: 'P', seventeen: 'P', eighteen: 'P', nineteen: 'T', twenty: 'P', thirty: 'P', twentyNine: 'P', twentyEight: 'P', twentySeven: 'P', twentySix: 'P', twentyFive: 'P', twentyFour: 'P', twentyThree: 'P', twentyTwo: 'P', twentyOne: 'P', workingDays: '3', dayOff: '25', overtime: '1', total: '27' },
+  { id: '#00005', name: 'Example', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P', eight: 'P', nine: 'P', ten: 'P', eleven: 'P', twelve: 'P', thirteen: 'P', fourteen: 'P', fifteen: 'P', sixteen: 'P', seventeen: 'P', eighteen: 'P', nineteen: 'T', twenty: 'P', thirty: 'P', twentyNine: 'P', twentyEight: 'P', twentySeven: 'P', twentySix: 'P', twentyFive: 'P', twentyFour: 'P', twentyThree: 'P', twentyTwo: 'P', twentyOne: 'P', workingDays: '3', dayOff: '25', overtime: '1', total: '27' },
+  { id: '#00006', name: 'Example', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P', eight: 'P', nine: 'P', ten: 'P', eleven: 'P', twelve: 'P', thirteen: 'P', fourteen: 'P', fifteen: 'P', sixteen: 'P', seventeen: 'P', eighteen: 'P', nineteen: 'T', twenty: 'P', thirty: 'P', twentyNine: 'P', twentyEight: 'P', twentySeven: 'P', twentySix: 'P', twentyFive: 'P', twentyFour: 'P', twentyThree: 'P', twentyTwo: 'P', twentyOne: 'P', workingDays: '3', dayOff: '25', overtime: '1', total: '27' },
+
 
 
 ]
@@ -75,6 +77,74 @@ function HRPage() {
   const handleChange = (status) => {
     setTab(status);
   };
+
+  const [clickPosition, setClickPosition] = useState({ x: 0, y: 0, onChange: () => { }, isClick: false })
+  const [employeeData, setEmployeeData] = useState([])
+  const [dayTimeKeepingData, setDayTimeKeepingData] = useState(dayTimeKeepingDataDeafault.map(d => ({
+    ...d,
+    position: 'Developer',
+    in: new Date().toDateString(),
+    out: new Date().toDateString()
+  })))
+  const handleChangeFunction = (d, index, key) => (state) => {
+    setMonthTimeKeepingData(prev => {
+      d = prev[index]
+      const newData = [...prev.map(d => ({ ...d }))]
+      const keys = Object.keys(d)
+      let P = 0;
+      let D = 0;
+      let T = 0;
+      keys.forEach(key_ => {
+        console.log({key: d[key_]})
+        if (key_ != key) {
+
+          if (d[key_]?.props?.children == 'P' || d[key_] == 'P') P += 1;
+          if (d[key_]?.props?.children == 'D' || d[key_] == 'D') D += 1;
+          if (d[key_]?.props?.children == 'T' || d[key_] == 'T') T += 1;
+        } else {
+          if (state == 'P') P += 1;
+          if (state == 'D') D += 1;
+          if (state == 'T') T += 1;
+          if (d[key_]?.props?.children == 'P' || d[key_] == 'P') P -= 1;
+          if (d[key_]?.props?.children == 'D' || d[key_] == 'D') D -= 1;
+          if (d[key_]?.props?.children == 'T' || d[key_] == 'T') T -= 1;
+        }
+      })
+      newData[index].dayOff = P
+      newData[index].workingDays = D
+      newData[index].overtime = T
+      newData[index][key] = <CustomButton style={{ margin: 3, color: 'white', width: 45 }} type={'short'} onClick={(e) => {
+        setClickPosition({
+          x: e.clientX, y: e.clientY, onChange: handleChangeFunction(d, index, key), isClick: true
+        })
+      }}>{state}</CustomButton>
+      return newData
+    })
+  }
+  const newMonthTimeKeepingDataDefault = monthTimeKeepingDataDefault.map((d, index) => {
+    const keys = Object.keys(d)
+    const o = { ...d }
+    const infoKey = ['id', 'name', 'workingDays', 'dayOff', 'overtime', 'total']
+    keys.forEach(key => {
+      if (!infoKey.includes(key)) {
+        o[key] = <CustomButton style={{ margin: 3, color: 'white', width: 45 }} type={'short'} onClick={(e) => {
+          setClickPosition({
+            x: e.clientX, y: e.clientY, onChange: handleChangeFunction(d, index, key), isClick: true
+          })
+        }}>{d[key]}</CustomButton>
+      }
+    })
+    return o
+  })
+  const [monthTimeKeepingData, setMonthTimeKeepingData] = useState(newMonthTimeKeepingDataDefault)
+
+  useEffect(() => {
+    (async () => {
+      const employees = await getAllEmployee()
+      const mapEmployees = employees.map(d => ({ ...d, name: d.firstName + " " + d.lastName }))
+      setEmployeeData(mapEmployees)
+    })()
+  }, [])
 
   const [tabTimekeeping, setTabTimekepping] = useState('dayTimekeeping');
 
@@ -127,6 +197,25 @@ function HRPage() {
 
   return (
     <div className="containerHRPage">
+      {
+        clickPosition.isClick && <div style={{
+          top: clickPosition.y,
+          left: clickPosition.x
+        }} className="popup">
+          <button onClick={() => {
+            setClickPosition(prev => ({ ...prev, isClick: false }))
+            clickPosition.onChange('D')
+          }}>Work</button>
+          <button onClick={() => {
+            setClickPosition(prev => ({ ...prev, isClick: false }))
+            clickPosition.onChange('P')
+          }}>Not work</button>
+          <button onClick={() => {
+            setClickPosition(prev => ({ ...prev, isClick: false }))
+            clickPosition.onChange('T')
+          }}>Overtime</button>
+        </div>
+      }
       <div className="HRSideBar">
         <HRSideBar handleChange={handleChange}></HRSideBar>
       </div>

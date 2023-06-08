@@ -6,6 +6,22 @@
     display: flex;
     flex-direction: row !important;
 
+    .popup {
+        position: fixed;
+        background-color: white;
+        z-index: 100000;
+        border-radius: 10px;
+        box-shadow: 0 0 10px 0 rgb(162, 162, 162);
+        display: flex;
+        flex-direction: column;
+
+        button {
+            color: black;
+            background-color: white;
+            padding: 8px 20px;
+        }
+    }
+
     .HRSideBar {
         padding-left: 30px;
         background-color: white;
