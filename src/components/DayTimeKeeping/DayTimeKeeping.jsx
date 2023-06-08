@@ -19,17 +19,22 @@ const columns = [
         name: 'Name',
         selector: 'name',
         sortable: true,
+        width: '450px',
         
     },
     {
         name: 'Department',
         selector: 'department',
         sortable: true,
+        width: '350px',
+
     },
     {
         name: 'Position',
         selector: 'position',
         sortable: true,
+        width: '250px',
+
     },
     {
         name: 'Check-in',

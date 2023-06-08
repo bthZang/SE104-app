@@ -76,7 +76,7 @@ const monthTimeKeepingData = [
 let data = 'Zangggg'
 
 function HRPage() {
-  const [tab, setTab] = useState('dashboard');
+  const [tab, setTab] = useState('timekeeping');
   const handleChange = (status) => {
     setTab(status);
   };
