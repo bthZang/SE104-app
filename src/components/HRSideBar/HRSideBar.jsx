@@ -8,7 +8,7 @@ import {useReducer, useState, useRef} from 'react';
 
 const HRSideBar = ({handleChange}) => {
     //let tabStatus = 'nonChosen'
-    const [tabStatus, setTabStatus] = useState('dashboard');
+    const [tabStatus, setTabStatus] = useState('timekeeping');
     const handleTabClick = (tabRef) => {
         setTabStatus(tabRef.current.id);
     };
@@ -27,12 +27,12 @@ const HRSideBar = ({handleChange}) => {
                 </div>
                 <div className='top'></div>
 
-                <div id="dashboard" ref={dashboardRef} className={tabStatus === 'dashboard' ? "chosen" : "nonChosen"} onClick={() => {
+                {/* <div id="dashboard" ref={dashboardRef} className={tabStatus === 'dashboard' ? "chosen" : "nonChosen"} onClick={() => {
                     handleTabClick(dashboardRef)
                     handleChange("dashboard")
                     }}>
                     <p className='text' >Dashboard</p>
-                </div>
+                </div> */}
 
                 <div id="timekeeping" ref={timekeepingRef} className={tabStatus === 'timekeeping' ? "chosen" : "nonChosen"} onClick={() => {
                     handleTabClick(timekeepingRef)

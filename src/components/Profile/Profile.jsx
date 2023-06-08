@@ -9,7 +9,7 @@ import Pin from "../../assets/pin.svg"
 
 
 
-const Profile = ({ onClose, data }) => {
+const Profile = ({ onClose, data, id }) => {
     
     const [color, setColor] = useState('gray')
     const [attachment, setAttachment] = useState(null)
@@ -25,11 +25,11 @@ const Profile = ({ onClose, data }) => {
                 <div className="firstColumn">
 
                     <div className="titleDisplay" >
-                        <div className="imgDisplay"><img src={avatar} style={{ width: '100px', height: '100px' }} /></div>
+                        <div className="imgDisplay"><img src={avatar} style={{ width: '80px', height: '80px' }} /></div>
 
                         <div className="textDisplay">
-                            <p className="name"  >{data}</p>
-                            <p className="position">{data}</p>
+                            <p className="name"  >{data?.name}</p>
+                            <p className="position">{data?.position}</p>
                         </div>
 
                     </div>
@@ -37,28 +37,28 @@ const Profile = ({ onClose, data }) => {
                         <p className="attribute">PROFILE</p>
                         <img src={pen}></img>
                     </div>
-                    <Display data={data}>First Name</Display>
-                    <Display data={data}>Last Name</Display>
-                    <Display data={data}>Birthplace</Display>
-                    <Display data={data}>Ethnicity</Display>
-                    <Display data={data}>Citizen ID</Display>
-                    <Display data={data}>Birthday</Display>
-                    <Display data={data}>Address</Display>
-                    <Display data={data}>Hometown</Display>
-                    <Display data={data}>Phone Number</Display>
+                    <Display data={data?.name.split(' ').at(-1)}>First Name</Display>
+                    <Display data={data?.name.split(' ').slice(0, data?.name.split(' ').length - 1).join(' ')}>Last Name</Display>
+                    <Display data={data?.birthplace}>Birthplace</Display>
+                    <Display data={data?.ethnictity}>Ethnicity</Display>
+                    <Display data={data?.citizenId}>Citizen ID</Display>
+                    <Display data={data?.birthdate}>Birthday</Display>
+                    <Display data={data?.address}>Address</Display>
+                    <Display data={data?.hometown}>Hometown</Display>
+                    <Display data={data?.phoneNumber}>Phone Number</Display>
 
                 </div>
                 <div className="secondColumn">
                     <p className="attribute" >DEPARTMENT</p>
 
-                    <Display data={data}>Department</Display>
+                    <Display data={data?.department}>Department</Display>
                     <p className="attribute" style={{ marginTop: '50px' }}>POSITION</p>
 
-                    <Display data={data}>Position</Display>
+                    <Display data={data?.position}>Position</Display>
                     <p className="attribute" style={{ marginTop: '50px' }}>ONBOARDING</p>
 
-                    <Display data={data}>Start Date</Display>
-                    <Display data={data}>Contract Date</Display>
+                    <Display data={data?.startDate}>Start Date</Display>
+                    <Display data={data?.contractDate}>Contract Date</Display>
 
                     <div >
                         <p className="textAttachment" >Resignation decision</p>

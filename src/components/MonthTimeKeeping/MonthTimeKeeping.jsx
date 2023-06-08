@@ -19,6 +19,7 @@ const columns = [
         name: 'Name',
         selector: 'name',
         sortable: true,
+        width: '450px',
         
     },
     {
@@ -60,16 +61,22 @@ const columns = [
         name: 'Working days',
         selector: 'workingDays',
         sortable: true,
+        width: '200px',
+
     },
     {
         name: 'Days off',
         selector: 'dayOff',
         sortable: true,
+        width: '200px',
+
     },
     {
         name: 'Overtime',
         selector: 'overtime',
         sortable: true,
+        width: '200px',
+
     },
     {
         name: 'Total',

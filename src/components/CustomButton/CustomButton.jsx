@@ -16,8 +16,8 @@ const CustomButton = ({ children, type, style, onClick }) => {
 				className = "shortBlue";
 				break;
 			case "Delete":
-                // onClick = 
-                className = "shortRed";
+				// onClick = 
+				className = "shortRed";
 				break;
 			case "Reject":
 				className = "shortRed";
@@ -25,7 +25,7 @@ const CustomButton = ({ children, type, style, onClick }) => {
 			case "Accept":
 				className = "shortGreen";
 				break;
-			default: 
+			default:
 				className = "shortBlue";
 		}
 	} else if (type == "long")
@@ -38,9 +38,12 @@ const CustomButton = ({ children, type, style, onClick }) => {
 			case "Add new account":
 				className = "longBlue";
 				break;
+			case "Logout":
+				className = 'logout';
+				break;
 			case "Delete":
 			case "Reject":
-                // onClick=({})
+				// onClick=({})
 				className = "longRed";
 				break;
 			case "Accept":
@@ -49,7 +52,7 @@ const CustomButton = ({ children, type, style, onClick }) => {
 			case "Cancel":
 				className = "longGray";
 				break;
-			default: 
+			default:
 				className = "longBlue";
 		}
 	else if (type == "normal" && children == "Export all")

@@ -1,0 +1,165 @@
+.containerUserAccount {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    place-items: center;
+
+    @keyframes slide {
+        from {
+            right: -1000px;
+
+        }
+
+        to {
+            right: -30px;
+        }
+    }
+
+    .boxUserAccount {
+        position: relative;
+        animation: slide 0.3s cubic-bezier(.03, .43, .61, 1.26) 0s 1 forwards;
+        border: 1px solid #F4F4F4 !important;
+        background-color: white;
+        min-width: 500px;
+        max-height: 500px;
+        display: flex;
+        border-radius: 20px;
+        display: flex;
+        padding: 50px;
+        overflow: auto;
+        flex-direction: row;
+        gap: 73px;
+        box-shadow: 0 0 20px 0px rgb(190, 190, 190);
+        justify-self: end;
+
+        &>div {
+            width: 100%;
+        }
+
+        .firstColumn {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+
+            .textBox {
+                align-self: center;
+                width: 492px;
+                background-color: #F4F4F4;
+            }
+
+            .name {
+                color: black;
+                font-size: 40px;
+                font-weight: 700;
+                width: max-content;
+                padding-left: 192px;
+                margin-top: 40px;
+                margin-bottom: -95px;
+                z-index: 10;
+            }
+
+            .titleDisplay {
+                display: flex;
+                flex-direction: row;
+                gap: 32px;
+                padding-bottom: 60px;
+
+                .imgDisplay {
+                    width: 160px;
+                    height: 160px;
+                    border: 1px solid white;
+                    border-radius: 100px;
+                    background-color: gray;
+                    cursor: pointer;
+                    margin-top: -1 0px;
+                }
+
+                .textDisplay {
+                    display: flex;
+                    justify-content: left;
+                    flex-direction: column;
+                    gap: 0px;
+                    padding-top: 80px;
+
+                    background-color: white;
+                    flex-direction: row;
+
+                    .title {
+                        padding-right: 51px;
+                        font-size: 28px;
+                        color: #1233E5;
+
+                        font-family: Arial, Helvetica, sans-serif;
+                        font-weight: 600;
+                    }
+
+                    .line {
+                        border: 1px solid #A0AEF5;
+                        height: 28px;
+                        width: 0.5px;
+                        background-color: #A0AEF5;
+                        border-radius: 30px;
+                    }
+
+                    .dAT {
+                        padding-top: 8px;
+                        font-size: 28px;
+                        padding-left: 40px;
+                        color: #A0AEF5;
+                        font-family: Arial, Helvetica, sans-serif;
+                        font-weight: 600;
+
+                    }
+
+
+                }
+
+            }
+
+            .fisrtAttribute {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-self: center;
+                align-items: center;
+                align-content: center;
+
+                .attribute {
+                    color: black;
+                    font-size: 21px;
+                    font-weight: 500;
+                    padding-right: 32px;
+
+                }
+            }
+
+        }
+
+
+
+
+        .textBox {
+            justify-content: flex-start;
+            flex-direction: column;
+            display: flex;
+            color: #A0AEF5;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+
+        }
+
+        .textChildren {
+            color: black;
+            width: 100%;
+            margin-top: 0px;
+            font-size: 20px;
+            font-weight: 400;
+
+        }
+    }
+}
