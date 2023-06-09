@@ -22,3 +22,24 @@ export async function getAllEmployee() {
         })
     }
 }
+
+export const getOneEmployee = async (accessToken, id) => {
+    try {
+        const res = await axios.get(`${EMPLOYEE_API}?id=${id}`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        })
+    
+        return res.data
+    } catch (error) {
+        Swal.fire({
+            icon: 'error',
+            text: 'Something went wrong',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
+};
+
+// export const getAllEmployeeBy

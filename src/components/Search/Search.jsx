@@ -4,12 +4,13 @@ import "./Search.scss"
 import searchBtn from "../../assets/images/search.png"
 import searchImg from "../../assets/images/search.svg"
 
-const Search = () => {
+const Search = ({onChange}) => {
 
     const [searchTerm, setSearchTerm] = useState('');
 
     const handleSearch = () => {
         console.log(`Search for: ${searchTerm}`);
+        // onChange(searchTerm)
     };
 
     const handleKeyPress = (event) => {

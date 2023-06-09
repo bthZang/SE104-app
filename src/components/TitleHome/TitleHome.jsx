@@ -8,7 +8,7 @@ import Search from "../search/search";
 import Profile from "../Profile/Profile";
 import UserAccount from "../UserAccount/UserAccount";
 
-const TitleHome = ({children, showSearch = true, data, style} ) => {
+const TitleHome = ({children, showSearch = true, data, onChangeSearch, style} ) => {
     const now = moment().format('ddd, DD-MMM-YY, HH:mm A')
     
     const [click, setClick]=useState(false)
@@ -33,7 +33,7 @@ const TitleHome = ({children, showSearch = true, data, style} ) => {
                 <p >{now}</p>
             
             </div>
-          {showSearch &&  <div className="search"><Search></Search></div>}
+          {showSearch &&  <div className="search"><Search onChange={onChangeSearch}></Search></div>}
             
         </div>
     );

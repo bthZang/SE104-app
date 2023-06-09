@@ -72,6 +72,7 @@ function HRPage() {
   const handleChange = (status) => {
     setTab(status);
   };
+  const [searchValue, setSearchValue] = useState([])
 
 
   const [candidateData, setCandidateData] = useState([])

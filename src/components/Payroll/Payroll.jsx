@@ -34,18 +34,18 @@ const columns = [
 			justifyContent: "left",
 		},
 	},
-	{
-		name: "Name",
-		selector: "name",
-		sortable: true,
-		width: "329px",
+	// {
+	// 	name: "Name",
+	// 	selector: "name",
+	// 	sortable: true,
+	// 	width: "329px",
 
-		style: {
-			// background: "orange",
-			width: "329px",
-			justifyContent: "left",
-		},
-	},
+	// 	style: {
+	// 		// background: "orange",
+	// 		width: "329px",
+	// 		justifyContent: "left",
+	// 	},
+	// },
 	{
 		name: "Working days",
 		selector: "workingDays",

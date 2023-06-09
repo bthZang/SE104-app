@@ -32,7 +32,7 @@ const UserAccount = ({ onClose, data }) => {
             const response = await axios.get(`${USER_API}`, {
                 params: {
                     id
-                }, 
+                },
                 headers: {
                     Authorization: `Bearer ${accessToken}`
                 }
@@ -61,10 +61,10 @@ const UserAccount = ({ onClose, data }) => {
                     <div className="fisrtAttribute">
                     </div>
                     <Display data={userData?.email}>Email</Display>
-                    <CustomButton type='long' style={{ borderRadius: '11px', width: '513px', fontSize: '21px', marginBottom: '60px', padding: '12px 0', alignSelf: 'center', }}    >Change email</CustomButton>
+                    {/* <CustomButton type='long' style={{ borderRadius: '11px', width: '513px', fontSize: '21px', marginBottom: '60px', padding: '12px 0', alignSelf: 'center', }}    >Change email</CustomButton> */}
 
-                    <Display data={userData?.password}>Password</Display>
-                    <CustomButton type='long' style={{ borderRadius: '11px', width: '513px', fontSize: '21px', padding: '12px 0', alignSelf: 'center' }}    >Change password</CustomButton>
+                    <Display data='*******'>Password</Display>
+                    {/* <CustomButton type='long' style={{ borderRadius: '11px', width: '513px', fontSize: '21px', padding: '12px 0', alignSelf: 'center' }}    >Change password</CustomButton> */}
                     <CustomButton type='long' style={{}} onClick={() => {
                         // localStorage.removeItem('accessToken')
                         navigate('/')
