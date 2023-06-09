@@ -31,6 +31,7 @@
     "redux": "^4.2.1",
     "sass": "^1.62.1",
     "sweetalert2": "^11.7.11",
+    "uuid": "^9.0.0",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {

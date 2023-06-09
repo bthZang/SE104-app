@@ -5,7 +5,7 @@ import CheckBox from "../../components/CheckBox/CheckBox";
 import "./HRPage.scss"
 
 import HRSideBar from "../../components/HRSideBar/HRSideBar";
-import Employee from "../../components/employee/employee";
+import Employee from "../../components/Employee/Employee";
 import DayTimeKeeping from "../../components/dayTimeKeeping/dayTimeKeeping";
 import Candidate from "../../components/candidate/candidate";
 import Dashboard from "../../components/dashboard/dashboard";
@@ -18,18 +18,6 @@ import { Button } from "antd";
 import axios from "axios";
 import { CANDIDATE_API } from "../../constant/apiURL";
 import { EmployeeContext } from "../../contexts/EmployeeContext";
-
-
-const employeeData_ = [
-  { id: '#00001', birthplace: 'ketui', ethnictity: 'kinh', citizenId: 'khongnoi', name: 'Bùi Thị Hoàng Giang', gender: 'Male', birthdate: '06/05/2002', department: 'unknown', position: 'unknown' },
-  { id: '#00002', birthplace: 'ketui', ethnictity: 'kinh', citizenId: 'khongnoi', name: 'Nguyễn Hoàng Hy', gender: 'Male', birthdate: '01/12/2003', department: 'unknown', position: 'unknown' },
-  { id: '#00003', birthplace: 'ketui', ethnictity: 'kinh', citizenId: 'khongnoi', name: 'Ngô Quang Khải', gender: 'Male', birthdate: '27/12/2003', department: 'unknown', position: 'unknown' },
-  { id: '#00004', birthplace: 'ketui', ethnictity: 'kinh', citizenId: 'khongnoi', name: 'Đinh Quang Dương', gender: 'Male', birthdate: '02/09/2003', department: 'unknown', position: 'unknown' },
-  { id: '#00005', birthplace: 'ketui', ethnictity: 'kinh', citizenId: 'khongnoi', name: 'Nguyễn Tuấn Khang', gender: 'Male', birthdate: '10/10/2003', department: 'unknown', position: 'unknown' },
-  { id: '#00006', birthplace: 'ketui', ethnictity: 'kinh', citizenId: 'khongnoi', name: 'Nguyễn Đức Thành Duy', gender: 'Male', birthdate: '24/03/2003', department: 'unknown', position: 'unknown' },
-
-
-]
 
 const candidateData_ = [
   { name: 'Example1', CV: 'Male', applyPosition: 'CFO' },
@@ -74,7 +62,6 @@ function HRPage() {
     setTab(status);
   };
 
-  const { employeeData, setEmployeeData } = useContext(EmployeeContext)
 
 
   const [candidateData, setCandidateData] = useState([])
@@ -180,30 +167,6 @@ function HRPage() {
   };
 
 
-  const newCandidateData = candidateData_.map((data) => ({
-    ...data,
-    // name: data.firstName + " " + data.lastName,
-    acceptBtn: (
-      <CustomButton
-        onClick={() => {
-          handleOnClick('accept', data.email);
-        }}
-        type={"short"}
-      >
-        Accept
-      </CustomButton>
-    ),
-    rejectBtn: (
-      <CustomButton
-        onClick={() => {
-          handleOnClick('reject', data.email);
-        }}
-        type={"short"}
-      >
-        Reject
-      </CustomButton>
-    ),
-  }));
 
 
   return (
@@ -246,8 +209,8 @@ function HRPage() {
             {tabTimekeepingBtn == "month" && <MonthTimeKeeping monthTimeKeepingData={monthTimeKeepingData}></MonthTimeKeeping>}
           </div>
         }
-        {tab == "employee" && <Employee employeeData={employeeData} setEmployeeData={setEmployeeData} onClick={handleOnClickID}></Employee>}
-        {tab == "candidate" && <Candidate data={data} newCandidateData={newCandidateData}  ></Candidate>}
+        {tab == "employee" && <Employee onClick={handleOnClickID}></Employee>}
+        {tab == "candidate" && <Candidate />}
 
         <div className="confirmBox">
           {dialogType == "accept" && <Confirm text={"candidate?"} onClose={() => setDialogType('')}

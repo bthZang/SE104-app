@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import * as XLSX from 'xlsx';
 import TitleHome from "../titleHome/titleHome";
@@ -10,9 +10,13 @@ import Profile from "../Profile/Profile";
 import Search from "../search/search";
 
 import "./Employee.scss";
+import { EmployeeContext } from "../../contexts/EmployeeContext";
 
 
-const Employee = ({ employeeData, setEmployeeData, onClick }) => {
+const Employee = ({ onClick }) => {
+
+    const { employeeData, setEmployeeData } = useContext(EmployeeContext)
+
     const [isCheckAll, setIsCheckAll] = useState(false)
     const columns = [
         {
