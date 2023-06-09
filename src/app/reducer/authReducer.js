@@ -10,6 +10,7 @@ export const loginPost = createAsyncThunk('authManagement/loginPost', async ({ e
 
         const res = await axios.post(`${AUTH_API}/login`, { email, password })
         localStorage.setItem('accessToken', res.data.access_token)
+        localStorage.setItem('id', res.data.id)
         return res.data
     } catch (error) {
         Swal.fire({

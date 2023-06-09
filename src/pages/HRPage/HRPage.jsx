@@ -15,6 +15,8 @@ import MonthTimeKeeping from "../../components/monthTimeKeeping/monthTimeKeeping
 import TitleHome from "../../components/titleHome/titleHome";
 import { getAllEmployee } from "../../api/EmployeeAPI";
 import { Button } from "antd";
+import axios from "axios";
+import { CANDIDATE_API } from "../../constant/apiURL";
 
 
 const employeeData = [
@@ -43,31 +45,24 @@ const candidateData = [
 ]
 
 const dayTimeKeepingDataDeafault = [
-  { id: '#00001', name: 'Example', department: 'Accounting', position: 'P', in: 'D', out: 'P' },
-  { id: '#00002', name: 'Example', department: 'Technical', position: 'P', in: 'D', out: 'P' },
-  { id: '#00003', name: 'Example', department: 'Accounting', position: 'P', in: 'D', out: 'P' },
-  { id: '#00004', name: 'Example', department: 'Accounting', position: 'P', in: 'D', out: 'P' },
-  { id: '#00005', name: 'Example', department: 'Technical', position: 'P', in: 'D', out: 'P' },
-  { id: '#00006', name: 'Example', department: 'Accounting', position: 'P', in: 'D', out: 'P' },
-  { id: '#00007', name: 'Example', department: 'Accounting', position: 'P', in: 'D', out: 'P' },
-  { id: '#00008', name: 'Example', department: 'HR', position: 'P', in: 'D', out: 'P' },
-  { id: '#00009', name: 'Example', department: 'Accounting', position: 'P', in: 'D', out: 'P' },
-  { id: '#00010', name: 'Example', department: 'HR', position: 'P', in: 'D', out: 'P' },
+  { id: '1', name: 'Khai Ngo', department: 'Accounting', position: 'P', in: 'D', out: 'P' },
+  { id: '3', name: 'Giang Bui', department: 'Technical', position: 'P', in: 'D', out: 'P' },
+  { id: '4', name: 'Hy Nguyen', department: 'Accounting', position: 'P', in: 'D', out: 'P' },
+  { id: '5', name: 'Duy Nguyen', department: 'Accounting', position: 'P', in: 'D', out: 'P' },
+  { id: '6', name: 'Khang Nguyen', department: 'Technical', position: 'P', in: 'D', out: 'P' },
+  { id: '7', name: 'Da Nguyen', department: 'Accounting', position: 'P', in: 'D', out: 'P' },
 
 
 
 ]
 
 const monthTimeKeepingDataDefault = [
-  { id: '#00001', name: 'Example', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P', eight: 'P', nine: 'P', ten: 'P', eleven: 'P', twelve: 'P', thirteen: 'P', fourteen: 'P', fifteen: 'P', sixteen: 'P', seventeen: 'P', eighteen: 'P', nineteen: 'T', twenty: 'P', thirty: 'P', twentyNine: 'P', twentyEight: 'P', twentySeven: 'P', twentySix: 'P', twentyFive: 'P', twentyFour: 'P', twentyThree: 'P', twentyTwo: 'P', twentyOne: 'P', workingDays: '3', dayOff: '25', overtime: '1', total: '27' },
-  { id: '#00002', name: 'Example', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P', eight: 'P', nine: 'P', ten: 'P', eleven: 'P', twelve: 'P', thirteen: 'P', fourteen: 'P', fifteen: 'P', sixteen: 'P', seventeen: 'P', eighteen: 'P', nineteen: 'T', twenty: 'P', thirty: 'P', twentyNine: 'P', twentyEight: 'P', twentySeven: 'P', twentySix: 'P', twentyFive: 'P', twentyFour: 'P', twentyThree: 'P', twentyTwo: 'P', twentyOne: 'P', workingDays: '3', dayOff: '25', overtime: '1', total: '27' },
-  { id: '#00003', name: 'Example', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P', eight: 'P', nine: 'P', ten: 'P', eleven: 'P', twelve: 'P', thirteen: 'P', fourteen: 'P', fifteen: 'P', sixteen: 'P', seventeen: 'P', eighteen: 'P', nineteen: 'T', twenty: 'P', thirty: 'P', twentyNine: 'P', twentyEight: 'P', twentySeven: 'P', twentySix: 'P', twentyFive: 'P', twentyFour: 'P', twentyThree: 'P', twentyTwo: 'P', twentyOne: 'P', workingDays: '3', dayOff: '25', overtime: '1', total: '27' },
-  { id: '#00004', name: 'Example', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P', eight: 'P', nine: 'P', ten: 'P', eleven: 'P', twelve: 'P', thirteen: 'P', fourteen: 'P', fifteen: 'P', sixteen: 'P', seventeen: 'P', eighteen: 'P', nineteen: 'T', twenty: 'P', thirty: 'P', twentyNine: 'P', twentyEight: 'P', twentySeven: 'P', twentySix: 'P', twentyFive: 'P', twentyFour: 'P', twentyThree: 'P', twentyTwo: 'P', twentyOne: 'P', workingDays: '3', dayOff: '25', overtime: '1', total: '27' },
-  { id: '#00005', name: 'Example', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P', eight: 'P', nine: 'P', ten: 'P', eleven: 'P', twelve: 'P', thirteen: 'P', fourteen: 'P', fifteen: 'P', sixteen: 'P', seventeen: 'P', eighteen: 'P', nineteen: 'T', twenty: 'P', thirty: 'P', twentyNine: 'P', twentyEight: 'P', twentySeven: 'P', twentySix: 'P', twentyFive: 'P', twentyFour: 'P', twentyThree: 'P', twentyTwo: 'P', twentyOne: 'P', workingDays: '3', dayOff: '25', overtime: '1', total: '27' },
-  { id: '#00006', name: 'Example', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P', eight: 'P', nine: 'P', ten: 'P', eleven: 'P', twelve: 'P', thirteen: 'P', fourteen: 'P', fifteen: 'P', sixteen: 'P', seventeen: 'P', eighteen: 'P', nineteen: 'T', twenty: 'P', thirty: 'P', twentyNine: 'P', twentyEight: 'P', twentySeven: 'P', twentySix: 'P', twentyFive: 'P', twentyFour: 'P', twentyThree: 'P', twentyTwo: 'P', twentyOne: 'P', workingDays: '3', dayOff: '25', overtime: '1', total: '27' },
-
-
-
+  { id: '1', name: 'Khai Ngo', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P', eight: 'P', nine: 'P', ten: 'P', eleven: 'P', twelve: 'P', thirteen: 'P', fourteen: 'P', fifteen: 'P', sixteen: 'P', seventeen: 'P', eighteen: 'P', nineteen: 'T', twenty: 'P', thirty: 'P', twentyNine: 'P', twentyEight: 'P', twentySeven: 'P', twentySix: 'P', twentyFive: 'P', twentyFour: 'P', twentyThree: 'P', twentyTwo: 'P', twentyOne: 'P', workingDays: '3', dayOff: '25', overtime: '1', total: '30' },
+  { id: '3', name: 'Giang Bui', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P', eight: 'P', nine: 'P', ten: 'P', eleven: 'P', twelve: 'P', thirteen: 'P', fourteen: 'P', fifteen: 'P', sixteen: 'P', seventeen: 'P', eighteen: 'P', nineteen: 'T', twenty: 'P', thirty: 'P', twentyNine: 'P', twentyEight: 'P', twentySeven: 'P', twentySix: 'P', twentyFive: 'P', twentyFour: 'P', twentyThree: 'P', twentyTwo: 'P', twentyOne: 'P', workingDays: '3', dayOff: '25', overtime: '1', total: '30' },
+  { id: '4', name: 'Hy Nguyen', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P', eight: 'P', nine: 'P', ten: 'P', eleven: 'P', twelve: 'P', thirteen: 'P', fourteen: 'P', fifteen: 'P', sixteen: 'P', seventeen: 'P', eighteen: 'P', nineteen: 'T', twenty: 'P', thirty: 'P', twentyNine: 'P', twentyEight: 'P', twentySeven: 'P', twentySix: 'P', twentyFive: 'P', twentyFour: 'P', twentyThree: 'P', twentyTwo: 'P', twentyOne: 'P', workingDays: '3', dayOff: '25', overtime: '1', total: '30' },
+  { id: '5', name: 'Duy Nguyen', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P', eight: 'P', nine: 'P', ten: 'P', eleven: 'P', twelve: 'P', thirteen: 'P', fourteen: 'P', fifteen: 'P', sixteen: 'P', seventeen: 'P', eighteen: 'P', nineteen: 'T', twenty: 'P', thirty: 'P', twentyNine: 'P', twentyEight: 'P', twentySeven: 'P', twentySix: 'P', twentyFive: 'P', twentyFour: 'P', twentyThree: 'P', twentyTwo: 'P', twentyOne: 'P', workingDays: '3', dayOff: '25', overtime: '1', total: '30' },
+  { id: '6', name: 'Khang Nguyen', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P', eight: 'P', nine: 'P', ten: 'P', eleven: 'P', twelve: 'P', thirteen: 'P', fourteen: 'P', fifteen: 'P', sixteen: 'P', seventeen: 'P', eighteen: 'P', nineteen: 'T', twenty: 'P', thirty: 'P', twentyNine: 'P', twentyEight: 'P', twentySeven: 'P', twentySix: 'P', twentyFive: 'P', twentyFour: 'P', twentyThree: 'P', twentyTwo: 'P', twentyOne: 'P', workingDays: '3', dayOff: '25', overtime: '1', total: '30' },
+  { id: '7', name: 'Da Nguyen', one: 'D', two: 'P', three: 'D', four: 'P', five: 'D', six: 'P', seven: 'P', eight: 'P', nine: 'P', ten: 'P', eleven: 'P', twelve: 'P', thirteen: 'P', fourteen: 'P', fifteen: 'P', sixteen: 'P', seventeen: 'P', eighteen: 'P', nineteen: 'T', twenty: 'P', thirty: 'P', twentyNine: 'P', twentyEight: 'P', twentySeven: 'P', twentySix: 'P', twentyFive: 'P', twentyFour: 'P', twentyThree: 'P', twentyTwo: 'P', twentyOne: 'P', workingDays: '3', dayOff: '25', overtime: '1', total: '30' },
 ]
 
 let data = 'Zangggg'
@@ -77,6 +72,18 @@ function HRPage() {
   const handleChange = (status) => {
     setTab(status);
   };
+
+
+  const [candidateData, setCandidateData] = useState([])
+
+  useEffect(() => {
+    (async () => {
+      const response = await axios.get(`${CANDIDATE_API}/all`, {
+        headers: {Authorization: `Bearer ${localStorage.getItem('accessToken')}`}
+      })
+      setCandidateData(response.data)
+    })()
+  }, [])
 
   const [clickPosition, setClickPosition] = useState({ x: 0, y: 0, onChange: () => { }, isClick: false })
   const [employeeData, setEmployeeData] = useState([])
@@ -173,6 +180,7 @@ function HRPage() {
 
   const newCandidateData = candidateData.map((data) => ({
     ...data,
+    name: data.firstName + " " + data.lastName,
     acceptBtn: (
       <CustomButton
         onClick={() => {
