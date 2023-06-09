@@ -1,7 +1,7 @@
 
 import { useNavigate } from "react-router-dom";
-import { useState, useRef, useEffect } from "react";
-
+import { useState, useRef, useEffect, useContext } from "react";
+import CheckBox from "../../components/CheckBox/CheckBox";
 import "./HRPage.scss"
 
 import HRSideBar from "../../components/HRSideBar/HRSideBar";
@@ -17,9 +17,10 @@ import { getAllEmployee } from "../../api/EmployeeAPI";
 import { Button } from "antd";
 import axios from "axios";
 import { CANDIDATE_API } from "../../constant/apiURL";
+import { EmployeeContext } from "../../contexts/EmployeeContext";
 
 
-const employeeData = [
+const employeeData_ = [
   { id: '#00001', birthplace: 'ketui', ethnictity: 'kinh', citizenId: 'khongnoi', name: 'Bùi Thị Hoàng Giang', gender: 'Male', birthdate: '06/05/2002', department: 'unknown', position: 'unknown' },
   { id: '#00002', birthplace: 'ketui', ethnictity: 'kinh', citizenId: 'khongnoi', name: 'Nguyễn Hoàng Hy', gender: 'Male', birthdate: '01/12/2003', department: 'unknown', position: 'unknown' },
   { id: '#00003', birthplace: 'ketui', ethnictity: 'kinh', citizenId: 'khongnoi', name: 'Ngô Quang Khải', gender: 'Male', birthdate: '27/12/2003', department: 'unknown', position: 'unknown' },
@@ -30,7 +31,7 @@ const employeeData = [
 
 ]
 
-const candidateData = [
+const candidateData_ = [
   { name: 'Example1', CV: 'Male', applyPosition: 'CFO' },
   { name: 'Example2', CV: 'Male', applyPosition: 'CFO' },
   { name: 'Example3', CV: 'Male', applyPosition: 'CFO' },
@@ -73,20 +74,21 @@ function HRPage() {
     setTab(status);
   };
 
+  const { employeeData, setEmployeeData } = useContext(EmployeeContext)
+
 
   const [candidateData, setCandidateData] = useState([])
 
   useEffect(() => {
     (async () => {
       const response = await axios.get(`${CANDIDATE_API}/all`, {
-        headers: {Authorization: `Bearer ${localStorage.getItem('accessToken')}`}
+        headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
       })
       setCandidateData(response.data)
     })()
   }, [])
 
   const [clickPosition, setClickPosition] = useState({ x: 0, y: 0, onChange: () => { }, isClick: false })
-  const [employeeData, setEmployeeData] = useState([])
   const [dayTimeKeepingData, setDayTimeKeepingData] = useState(dayTimeKeepingDataDeafault.map(d => ({
     ...d,
     position: 'Developer',
@@ -102,7 +104,7 @@ function HRPage() {
       let D = 0;
       let T = 0;
       keys.forEach(key_ => {
-        console.log({key: d[key_]})
+        console.log({ key: d[key_] })
         if (key_ != key) {
 
           if (d[key_]?.props?.children == 'P' || d[key_] == 'P') P += 1;
@@ -178,9 +180,9 @@ function HRPage() {
   };
 
 
-  const newCandidateData = candidateData.map((data) => ({
+  const newCandidateData = candidateData_.map((data) => ({
     ...data,
-    name: data.firstName + " " + data.lastName,
+    // name: data.firstName + " " + data.lastName,
     acceptBtn: (
       <CustomButton
         onClick={() => {
@@ -202,6 +204,7 @@ function HRPage() {
       </CustomButton>
     ),
   }));
+
 
   return (
     <div className="containerHRPage">
@@ -243,7 +246,7 @@ function HRPage() {
             {tabTimekeepingBtn == "month" && <MonthTimeKeeping monthTimeKeepingData={monthTimeKeepingData}></MonthTimeKeeping>}
           </div>
         }
-        {tab == "employee" && <Employee employeeData={employeeData} onClick={handleOnClickID}></Employee>}
+        {tab == "employee" && <Employee employeeData={employeeData} setEmployeeData={setEmployeeData} onClick={handleOnClickID}></Employee>}
         {tab == "candidate" && <Candidate data={data} newCandidateData={newCandidateData}  ></Candidate>}
 
         <div className="confirmBox">

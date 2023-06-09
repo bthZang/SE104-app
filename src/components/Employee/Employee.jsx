@@ -1,67 +1,114 @@
 
+import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
-import { useState } from "react";
-import CustomButton from "../CustomButton/CustomButton";
+import * as XLSX from 'xlsx';
 import TitleHome from "../titleHome/titleHome";
 
-import "./Employee.scss"
-
+import { Button } from "@mui/material";
+import CheckBox from "../CheckBox/CheckBox";
 import Profile from "../Profile/Profile";
+import "./Employee.scss";
 
-const columns = [
 
-    {
-        name: 'ID',
-        selector: 'id',
-        sortable: true,
+const Employee = ({ employeeData, setEmployeeData, onClick }) => {
+    const [isCheckAll, setIsCheckAll] = useState(false)
+    const columns = [
+        {
+            name: <CheckBox value={isCheckAll} onChange={e => setIsCheckAll(e.target.checked)} />,
+            selector: 'checkbox',
+            width: '60px',
+        },
+        {
+            name: 'ID',
+            selector: 'id',
+            sortable: true,
 
-    },
-    {
-        name: 'Name',
-        selector: 'name',
-        sortable: true,
-        width: '303px'
-    },
-    {
-        name: 'Gender',
-        selector: 'gender',
-        sortable: true,
-    },
-    {
-        name: 'Birthplace',
-        selector: 'birthplace',
-        sortable: true,
-    },
-    {
-        name: 'Ethnicity',
-        selector: 'ethnicity',
-        sortable: true,
-    },
-    {
-        name: 'Citizen Id',
-        selector: 'citizenId',
-        sortable: true,
-    },
-    {
-        name: 'Birthdate',
-        selector: 'birthdate',
-        sortable: true,
-    },
-    {
-        name: 'Department',
-        selector: 'department',
-        sortable: true,
-    },
-    {
-        name: 'Position',
-        selector: 'position',
-        sortable: true,
-    }
-]
+        },
+        {
+            name: 'Name',
+            selector: 'name',
+            sortable: true,
+            width: '303px'
+        },
+        {
+            name: 'Gender',
+            selector: 'gender',
+        },
+        {
+            name: 'Birthplace',
+            selector: 'birthplace',
+            sortable: true,
 
-const Employee = ({ employeeData, onClick }) => {
+        },
+        {
+            name: 'Ethnicity',
+            selector: 'ethnicity',
+            sortable: true,
+
+        },
+        {
+            name: 'Citizen Id',
+            selector: 'citizenId',
+        },
+        {
+            name: 'Birthdate',
+            selector: 'birthdate',
+            sortable: true,
+        },
+        {
+            name: 'Department',
+            selector: 'department',
+            sortable: true,
+        },
+        {
+            name: 'Position',
+            selector: 'position',
+            sortable: true,
+        }
+    ]
     const [selectedId, setSelectedId] = useState(null);
 
+    const [newEmployeeData, setNewEmployeeData] = useState([])
+    const [checkList, setCheckList] = useState([])
+
+    useEffect(() => {
+        setCheckList(employeeData.map(_ => false))
+    }, [JSON.stringify(employeeData)])
+
+    useEffect(() => {
+        setNewEmployeeData(employeeData.map((data, index) => ({
+            ...data,
+            checkbox: (
+                <CheckBox value={checkList[index] || false} onChange={(e) => setCheckList(prev => {
+                    const newPrev = [...prev]
+                    newPrev[index] = e.target.checked
+                    return newPrev
+                })} />
+            ),
+        })))
+        console.log({ checkList })
+    }, [JSON.stringify(employeeData), JSON.stringify(checkList)])
+
+    useEffect(() => {
+        setCheckList(employeeData.map(_ => isCheckAll))
+    }, [isCheckAll])
+
+    function handleDeleteItem() {
+        const idList = employeeData.filter((_, index) => checkList[index] == true).map(v => v.id)
+        setEmployeeData([...employeeData.filter(item => !idList.includes(item.id))])
+    }
+
+    function handleExport() {
+        const columnList = columns.map(v => v.name)
+        const columnSelector = columns.map(v => v.selector)
+        const data = [columnList];
+        employeeData.filter((_, index) => checkList[index] == true).forEach(d => data.push(columnSelector.map(v => d[v]))
+        );
+        const workbook = XLSX.utils.book_new();
+        const worksheet = XLSX.utils.aoa_to_sheet(data);
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+        XLSX.writeFile(workbook, 'Employee data.xlsx');
+    }
 
     return (
 
@@ -69,9 +116,13 @@ const Employee = ({ employeeData, onClick }) => {
             <div>
                 <TitleHome children={"Employee"} data={employeeData}></TitleHome>
                 <div className="employee">
+                    <div className="tools">
+                        <Button onClick={handleDeleteItem} variant="outlined" color="error" disabled={checkList.every(v => v == false)}>Delete</Button>
+                        <Button onClick={handleExport} variant="outlined" color="info" disabled={checkList.every(v => v == false)}>Export data</Button>
+                    </div>
                     <DataTable
                         columns={columns}
-                        data={employeeData}
+                        data={newEmployeeData}
                         pagination={true}
                         highlightOnHover={true}
                         striped={true}

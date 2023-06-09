@@ -40,5 +40,13 @@
     }
     .employee{
         margin-top:58px ;
+
+        .tools {
+            display: flex;
+            flex-direction: row;
+            justify-content: start;
+            margin-bottom: 20px;
+            gap: 20px;
+        }
     }
 }

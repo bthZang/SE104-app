@@ -6,8 +6,58 @@ import Display from "../Display/Display";
 import avatar from "../../assets/images/LogoPNG.png"
 import pen from "../../assets/edit.svg"
 import Pin from "../../assets/pin.svg"
+import DataTable from "react-data-table-component";
 
+const columns = [
 
+    {
+        name: 'ID',
+        selector: 'id',
+        sortable: true,
+
+    },
+    {
+        name: 'Name',
+        selector: 'name',
+        sortable: true,
+        width: '303px'
+    },
+    {
+        name: 'Gender',
+        selector: 'gender',
+    },
+    {
+        name: 'Birthplace',
+        selector: 'birthplace',
+        sortable: true,
+
+    },
+    {
+        name: 'Ethnicity',
+        selector: 'ethnicity',
+        sortable: true,
+
+    },
+    {
+        name: 'Citizen Id',
+        selector: 'citizenId',
+    },
+    {
+        name: 'Birthdate',
+        selector: 'birthdate',
+        sortable: true,
+    },
+    {
+        name: 'Department',
+        selector: 'department',
+        sortable: true,
+    },
+    {
+        name: 'Position',
+        selector: 'position',
+        sortable: true,
+    }
+]
 
 const Profile = ({ onClose, data, id }) => {
     
@@ -25,6 +75,14 @@ const Profile = ({ onClose, data, id }) => {
 
     return (
         <div className="containerProfile" onClick={onClose} >
+             <DataTable
+                        columns={columns}
+                        data={[]}
+                        pagination={true}
+                        highlightOnHover={true}
+                        striped={true}
+                       
+                    ></DataTable>
             <div className="boxProfile" onClick={e => e.stopPropagation()}>
                 <div className="firstColumn">
 
