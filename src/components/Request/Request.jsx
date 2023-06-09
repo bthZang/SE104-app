@@ -40,18 +40,9 @@ import "./Request.scss";
 const columns = [
 	{
 		name: "Name",
-		selector: "name",
+		selector: "bodId",
 		sortable: true,
 		width: "270px",
-		style: {
-			justifyContent: "left",
-		},
-	},
-	{
-		name: "Timestamp",
-		selector: "timestamp",
-		sortable: true,
-		width: "287px",
 		style: {
 			justifyContent: "left",
 		},
@@ -85,8 +76,7 @@ const columns = [
 	},
 ];
 
-const Request = (requestData) => {
-	
+const Request = ({ requestData, newRequestData }) => {
 
 	return (
 		<div className="containerRequest">
@@ -95,7 +85,7 @@ const Request = (requestData) => {
 				<p className="titleTable">{`You have ${requestData.length} pending request`}</p>
 				<DataTable
 					columns={columns}
-					data={requestData}
+					data={newRequestData}
 					pagination={true}
 					highlightOnHover={true}
 					striped={true}

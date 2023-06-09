@@ -58,21 +58,10 @@ const columns = [
 	},
 	{
 		name: "Over time",
-		selector: "overTime",
+		selector: "overtime",
 		sortable: true,
 		width: "270px",
 
-		style: {
-			// background: "orange",
-			justifyContent: "left",
-		},
-	},
-	{
-		name: "Salary",
-		selector: "netSalary",
-		width: "270px",
-
-		sortable: true,
 		style: {
 			// background: "orange",
 			justifyContent: "left",
