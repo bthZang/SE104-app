@@ -25,8 +25,11 @@ const ChangeConfirm = ({ onClose, onClick, options, userData, handleChange }) =>
             case "Accounting Deparment":
                 userRole = 'ACCOUNTANT'
                 break
-            case "Boar of Director":
+            case "Board of Director":
                 userRole = 'BOD'
+                break
+            case "None Access":
+                userRole = 'USER'
                 break
             default:
                 break

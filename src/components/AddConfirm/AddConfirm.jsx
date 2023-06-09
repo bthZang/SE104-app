@@ -7,6 +7,8 @@ import CustomButton from "../CustomButton/CustomButton";
 import { TextField } from "@mui/material";
 import { useRef } from "react";
 import { addUser } from "../../api/AdminAPI";
+import Swal from "sweetalert2";
+
 
 
 const AddConfirm = ({ onClose, onClick }) => {
@@ -16,8 +18,17 @@ const AddConfirm = ({ onClose, onClick }) => {
     const [name, setName] = useState('')
     const accessToken = localStorage.getItem('accessToken')
 
-    const handleAddUser = () =>{
+    const handleAddUser = async () => {
+
         addUser(accessToken, email, name)
+        Swal.fire({
+            icon: 'success',
+            text: 'Successful!',
+            showConfirmButton: false,
+            timer: 1500
+        })
+        onClose()
+        onClick()
     }
 
     return (
@@ -28,8 +39,8 @@ const AddConfirm = ({ onClose, onClick }) => {
                         Add <span style={{ color: '#1233E5' }}>new account</span>
                     </p>
                     <div className="topTable">
-                    <TextField
-                    
+                        <TextField
+
                             id="firstNameInputSignInForm"
                             variant="outlined"
                             label="Email"
@@ -39,8 +50,8 @@ const AddConfirm = ({ onClose, onClick }) => {
                                 alignSelf: 'center',
 
                             }}
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
                         <TextField
                             id="lastNameInputSignInForm"
@@ -52,14 +63,14 @@ const AddConfirm = ({ onClose, onClick }) => {
                                 alignSelf: 'center',
 
                             }}
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
                         />
 
 
                     </div>
                     <div className="confirmBtn">
-                        <CustomButton onClick={handleAddUser} style={{width: "100%" }} type="long" >Add</CustomButton>
+                        <CustomButton onClick={handleAddUser} style={{ width: "100%" }} type="long" >Add</CustomButton>
                     </div>
                 </div>
             </div>

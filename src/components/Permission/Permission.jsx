@@ -37,7 +37,7 @@ const columns = [
     }
 ]
 
-const Permission = ({ onClick, humanRescourceData, AcountingData, BoardData, newBoardData, newAcountingData, newHumanRescourceData }) => {
+const Permission = ({ onClick, humanRescourceData, AcountingData, BoardData, userData, newUserData, newBoardData, newAcountingData, newHumanRescourceData }) => {
 
 
     return (
@@ -75,6 +75,16 @@ const Permission = ({ onClick, humanRescourceData, AcountingData, BoardData, new
                         <DataTable
                             columns={columns}
                             data={newBoardData}
+                            pagination={true}
+                            highlightOnHover={true}
+                            striped={true}
+                        ></DataTable>
+                    </div>
+                    <div className="UserData">
+                        <p className="titleTable">User no role</p>
+                        <DataTable
+                            columns={columns}
+                            data={newUserData}
                             pagination={true}
                             highlightOnHover={true}
                             striped={true}

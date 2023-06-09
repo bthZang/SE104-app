@@ -109,7 +109,7 @@ const Payroll = ({ onClick, payrollData, newPayrollData }) => {
 					options={options}
 					value={selectedOption}
 					onChange={handleChange}
-					placeholder="Slect a month"
+					placeholder="Select a month"
 					className="customDropdown"
 				></Dropdown>
 				<CustomButton

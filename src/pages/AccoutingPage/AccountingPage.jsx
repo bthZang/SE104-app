@@ -9,87 +9,36 @@ import Payroll from "../../components/payroll/payroll";
 import Request from "../../components/request/request";
 import Confirm from "../../components/Confirm/Confirm";
 import CustomButton from "../../components/CustomButton/CustomButton";
+import { useEffect } from "react";
+import { getAllPayslip, getAllRequest } from "../../api/AccountantAPI";
+import { selectAccessToken } from "../../app/reducer/authReducer";
+import { useSelector } from "react-redux";
 
-const payrollData = [
-  {
-    id: "#00001",
-    name: "Example",
-    workingDays: "Accounting",
-    overTime: "Accounting",
-    netSalary: "P",
-  },
-  {
-    id: "#00002",
-    name: "Example",
-    workingDays: "Accounting",
-    overTime: "Accounting",
-    netSalary: "P",
-  },
-  {
-    id: "#00003",
-    name: "Example",
-    workingDays: "Accounting",
-    overTime: "Accounting",
-    netSalary: "P",
-  },
-  {
-    id: "#00004",
-    name: "Example",
-    workingDays: "Accounting",
-    overTime: "Accounting",
-    netSalary: "P",
-  },
-  {
-    id: "#00005",
-    name: "Example",
-    workingDays: "Accounting",
-    overTime: "Accounting",
-    netSalary: "P",
-  },
-  {
-    id: "#00006",
-    name: "Example",
-    workingDays: "Accounting",
-    overTime: "Accounting",
-    netSalary: "P",
-  },
-  {
-    id: "#00007",
-    name: "Example",
-    workingDays: "Accounting",
-    overTime: "Accounting",
-    netSalary: "P",
-  },
-  {
-    id: "#00008",
-    name: "Example",
-    workingDays: "Accounting",
-    overTime: "Accounting",
-    netSalary: "P",
-  },
-  {
-    id: "#00009",
-    name: "Example",
-    workingDays: "Accounting",
-    overTime: "Accounting",
-    netSalary: "P",
-  },
-  {
-    id: "#00010",
-    name: "Example",
-    workingDays: "Accounting",
-    overTime: "Accounting",
-    netSalary: "P",
-  },
-];
+
 
 function AccountingPage() {
   const [tab, setTab] = useState('payroll');
+  const [payrollData, setPayrollData] = useState([])
+  const [requestData, setRequestData] = useState([])
+
   const handleChange = (status) => {
     setTab(status);
   };
 
-  const newPayrollData = payrollData.map((data) => ({
+  const accessToken = useSelector(selectAccessToken)
+
+  useEffect(() => {
+    getAllPayslip(accessToken)
+      .then(response => {
+        setPayrollData(response);
+      })
+    getAllRequest(accessToken)
+      .then(response => {
+        setRequestData(response);
+      })
+  }, [])
+
+  const newPayrollData = payrollData?.map((data) => ({
     ...data,
     payslip: (
       <CustomButton
@@ -102,6 +51,22 @@ function AccountingPage() {
       </CustomButton>
     ),
   }));
+
+  const [identifyRequest, setIdentifyRequest] = useState("");
+
+	const newRequestData = requestData?.map((data) => ({
+		...data,
+		payslip: (
+			<CustomButton
+				onClick={() => {
+					setIdentifyRequest(data.name);
+				}}
+				type={"short"}
+			>
+				Send
+			</CustomButton>
+		),
+	}));
 
   const [dialogType, setDialogType] = useState('');
   const [id, setId] = useState('');
@@ -146,7 +111,7 @@ function AccountingPage() {
       </div>
       <div className="content" >
         {tab == "payroll" && <Payroll payrollData={payrollData} newPayrollData={newPayrollData} onClick={handleOnClick} />}
-        {tab == "request" && <Request></Request>}
+        {tab == "request" && <Request requestData={requestData}></Request>}
 
         <div className="confirmBox">
           {dialogType == "export" && <Confirm text={"payroll?"} onClose={() => setDialogType('')}

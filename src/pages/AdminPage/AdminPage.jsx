@@ -17,8 +17,11 @@ import Confirm from "../../components/Confirm/Confirm";
 import topAdminPage from "../../assets/images/topAdminPage.png"
 
 import { useEffect } from "react";
-import { getAllUser, updateUserRole } from "../../api/AdminAPI";
+import { deleteUser, getAllUser, updateUserRole } from "../../api/AdminAPI";
 import { selectAccessToken, selectAuthData, selectUserRole } from "../../app/reducer/authReducer";
+import Swal from "sweetalert2";
+
+
 
 
 
@@ -37,6 +40,8 @@ function AdminPage() {
 
   const [humanRescourceData, sethumanRescourceData] = useState([])
 
+  const [userData, setUserData] = useState([])
+
   const [accountData, setAccountData] = useState([])
 
 
@@ -52,6 +57,11 @@ function AdminPage() {
     getAllUser(accessToken, 'BOD')
       .then(response => {
         setBoardData(response);
+
+      })
+    getAllUser(accessToken, 'USER')
+      .then(response => {
+        setUserData(response);
 
       })
     getAllUser(accessToken)
@@ -75,6 +85,11 @@ function AdminPage() {
         setBoardData(response);
 
       })
+    getAllUser(accessToken, 'USER')
+      .then(response => {
+        setUserData(response);
+        console.log("user:", response)
+      })
     getAllUser(accessToken)
       .then(response => {
         setAccountData(response)
@@ -95,6 +110,19 @@ function AdminPage() {
     setDialogType(type)
   };
 
+  const newUserData = userData?.map((data) => ({
+    ...data,
+    button: (
+      <CustomButton
+        onClick={() => {
+          handleOnClick('change', data.id);
+        }}
+        type={"short"}
+      >
+        Change
+      </CustomButton>
+    ),
+  }));
   const newHumanRescourceData = humanRescourceData?.map((data) => ({
     ...data,
     button: (
@@ -155,12 +183,19 @@ function AdminPage() {
   const options = [
     "HR Deparment",
     "Accounting Deparment",
-    "Boar of Director",
+    "Board of Director",
     "None Access",
   ];
 
-  const handleDeleteUser = () =>{
-    
+  const handleDeleteUser = async () => {
+    await deleteUser(accessToken, id)
+    Swal.fire({
+      icon: 'success',
+      text: 'Successful!',
+      showConfirmButton: false,
+      timer: 1500
+    })
+    callAPI()
   }
 
 
@@ -172,8 +207,9 @@ function AdminPage() {
           <AdminSideBar handleChange={handleChange}></AdminSideBar>
         </div>
         <div className="content" >
-          {tab == "permission" && <Permission newAcountingData={newAcountingData} newBoardData={newBoardData} newHumanRescourceData={newHumanRescourceData} humanRescourceData={humanRescourceData} BoardData={BoardData} AcountingData={AcountingData}></Permission>}
-          {tab == "account" && <Account newAccountData={newAccountData} accountData={accountData}></Account>}
+          {tab == "permission" && <Permission newAcountingData={newAcountingData} newBoardData={newBoardData} newHumanRescourceData={newHumanRescourceData} humanRescourceData={humanRescourceData} BoardData={BoardData} AcountingData={AcountingData}
+          newUserData={newUserData} userData={userData}></Permission>}
+          {tab == "account" && <Account newAccountData={newAccountData} accountData={accountData} onClick={callAPI}></Account>}
 
           <div className="confirmBox">
             {dialogType == "change" && <ChangeConfirm handleChange={callAPI} options={options} onClose={() => setDialogType('')} userData={{ id: id, accessToken: accessToken }}

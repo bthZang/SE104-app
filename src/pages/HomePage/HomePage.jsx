@@ -4,7 +4,7 @@ import logo from '../../assets/logo.svg'
 import { useState } from "react"
 import RequestPayrollPopup from '../../components/RequestPayrollPopup/RequestPayrollPopup'
 import IdentityPopUp from "../../components/IdentityPopUp/IdentityPopUp"
-import { sendVerifyCode } from "../../api/RequestAPI"
+import { sendVerifyCode, addRequest } from "../../api/RequestAPI"
 import Swal from "sweetalert2"
 
 
@@ -14,6 +14,11 @@ import Swal from "sweetalert2"
 function HomePage() {
   const [triggerRequest, setTriggerRequest] = useState(false)
   const [triggerIdentity, setTriggerIdentity] = useState(false)
+
+  const [month, setMonth] = useState(null)
+  const [bodId, setBodId] = useState(null)
+  const [message, setMessage] = useState(null)
+
   const [code, setCode] = useState(false)
   const navigate = useNavigate()
   const handleNavigateToLogin = () => {
@@ -29,8 +34,10 @@ function HomePage() {
   const handleCancel = () => {
     setTriggerRequest(false)
   }
-  const handleSend = (email, message) => {
+  const handleSend = (email, message, month) => {
     setTriggerRequest(false)
+    setMonth(month)
+    setMessage(message)
     Swal.fire({
       icon: 'info',
       text: 'Pending',
@@ -40,14 +47,15 @@ function HomePage() {
     sendVerifyCode(email)
       .then(response => {
         setTriggerIdentity(true)
-        setCode(response)
+        setCode(response.code)
+        setBodId(response.bodId)
       })
 
   }
 
   const handleVerify = (_code) => {
-    if(_code == code)
-    {
+    if (_code == code) {
+      
       Swal.fire({
         icon: 'success',
         text: 'Successful!',
@@ -55,8 +63,13 @@ function HomePage() {
         timer: 1500
       })
       setTriggerIdentity(false)
+      addRequest(bodId, message, month)
+      .then(res =>{
+        console.log(res)
+      })
+
     }
-    else{
+    else {
       Swal.fire({
         icon: 'error',
         text: 'Wrong!',
@@ -71,7 +84,7 @@ function HomePage() {
       <div className="loginToPMSBtn" onClick={handleNavigateToLogin}>Login to PM !</div>
       <div className="requestBtn" onClick={requestPayroll}>Request payroll</div>
       <RequestPayrollPopup isOpen={triggerRequest} handleCancel={handleCancel} handleSend={handleSend} />
-      <IdentityPopUp isOpen={triggerIdentity} handleCancel={() => setTriggerIdentity(false)} handleVerify={handleVerify}/>
+      <IdentityPopUp isOpen={triggerIdentity} handleCancel={() => setTriggerIdentity(false)} handleVerify={handleVerify} />
     </div>
 
   )
