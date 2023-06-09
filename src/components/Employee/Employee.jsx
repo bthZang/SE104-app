@@ -86,7 +86,6 @@ const Employee = ({ employeeData, setEmployeeData, onClick }) => {
                 })} />
             ),
         })))
-        console.log({ checkList })
     }, [JSON.stringify(employeeData), JSON.stringify(checkList)])
 
     useEffect(() => {
@@ -130,7 +129,23 @@ const Employee = ({ employeeData, setEmployeeData, onClick }) => {
                             onClick(row.id);
                         }}
                     ></DataTable>
-                    {selectedId !== null && <Profile id={selectedId} data={employeeData.find(d => d.id == selectedId)} onClose={() => setSelectedId(null)}></Profile>}
+                    {selectedId !== null && <Profile
+                        id={selectedId}
+                        data={employeeData.find(d => d.id == selectedId)}
+                        onClose={() => setSelectedId(null)}
+                        onSave={newData => {
+                            setEmployeeData(prev => {
+                                const newPrev = [...prev]
+                                const index = prev.indexOf(prev.find(d => d.id == newData.id))
+                                newPrev[index] = newData
+                                return newPrev
+                            })
+                        }}
+                        onDelete={() => {
+                            setEmployeeData(prev => [...prev.filter(d => d.id != selectedId)])
+                            setSelectedId(null)
+                        }}
+                    ></Profile>}
 
                     {/* {selectedId !== null && <YourComponent id={selectedId} />} */}
                 </div>

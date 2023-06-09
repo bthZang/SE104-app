@@ -147,13 +147,13 @@ function HRPage() {
   })
   const [monthTimeKeepingData, setMonthTimeKeepingData] = useState(newMonthTimeKeepingDataDefault)
 
-  useEffect(() => {
-    (async () => {
-      const employees = await getAllEmployee()
-      const mapEmployees = employees.map(d => ({ ...d, name: d.firstName + " " + d.lastName }))
-      setEmployeeData(mapEmployees)
-    })()
-  }, [])
+  // useEffect(() => {
+  //   (async () => {
+  //     const employees = await getAllEmployee()
+  //     const mapEmployees = employees.map(d => ({ ...d, name: d.firstName + " " + d.lastName }))
+  //     setEmployeeData(mapEmployees)
+  //   })()
+  // }, [])
 
   const [tabTimekeeping, setTabTimekepping] = useState('dayTimekeeping');
 

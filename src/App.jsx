@@ -23,8 +23,17 @@ function App() {
     <EmployeeContext.Provider value={{
       employeeData: employeeDataState,
       setEmployeeData: (newData) => {
-        setEmployeeDataState([...newData])
-        localStorage.setItem(EMPLOYEE_DATA_STORAGE_NAME, JSON.stringify(newData))
+        if (newData instanceof Array) {
+          setEmployeeDataState([...newData])
+          localStorage.setItem(EMPLOYEE_DATA_STORAGE_NAME, JSON.stringify(newData))
+        } else if (newData instanceof Function) {
+          let updatedData
+          setEmployeeDataState(prev => {
+            updatedData = newData(prev)
+            return updatedData
+          })
+          localStorage.setItem(EMPLOYEE_DATA_STORAGE_NAME, JSON.stringify(updatedData))
+        }
       }
     }}>
       <RouterProvider router={router} />

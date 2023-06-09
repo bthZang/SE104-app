@@ -1,4 +1,4 @@
-import { useState, ScrollY } from "react";
+import { useState, ScrollY, useRef } from "react";
 
 import "./Profile.scss";
 import CustomButton from "../CustomButton/CustomButton";
@@ -61,7 +61,7 @@ const columns = [
     }
 ]
 
-const Profile = ({ onClose, data, id }) => {
+const Profile = ({ onClose, data, id, onSave, onDelete }) => {
     const [isFullScreen, setIsFullScreen] = useState(false)
 
     const [color, setColor] = useState('gray')
@@ -74,6 +74,43 @@ const Profile = ({ onClose, data, id }) => {
     const [isEditable, setIsEditable] = useState(false)
     const handleOnClickPen = () => {
         setIsEditable(true)
+    }
+
+    const firstNameRef = useRef()
+    const lastNameRef = useRef()
+    const birthplaceRef = useRef()
+    const ethnicityRef = useRef()
+    const genderRef = useRef()
+    const citizenIdRef = useRef()
+    const birthDayRef = useRef()
+    const addressRef = useRef()
+    const homeTownRef = useRef()
+    const phoneNumberRef = useRef()
+    const departmentRef = useRef()
+    const positionRef = useRef()
+    const startDateRef = useRef()
+    const contractDateRef = useRef()
+
+    function handleSave() {
+        const newData = {
+            id,
+            name: lastNameRef.current.value + " " + firstNameRef.current.value,
+            birthplace: birthplaceRef.current.value,
+            ethnictity: ethnicityRef.current.value,
+            gender: genderRef.current.value,
+            citizenId: citizenIdRef.current.value,
+            birthdate: birthDayRef.current.value,
+            department: departmentRef.current.value,
+            position: positionRef.current.value, 
+            address: addressRef.current.value,
+            hometown: homeTownRef.current.value,
+            phoneNumber: phoneNumberRef.current.value,
+            startDateRef: startDateRef.current.value,
+            contractDateRef: contractDateRef.current.value
+        }
+
+        onSave(newData)
+        setIsEditable(false)
     }
 
     return (
@@ -96,46 +133,43 @@ const Profile = ({ onClose, data, id }) => {
                         <p className="attribute">PROFILE</p>
                         <img className="imgPen" src={pen} onClick={handleOnClickPen}></img>
                     </div>
-                    <Display isEditable={isEditable} data={data?.name.split(' ').at(-1)}>First Name</Display>
-                    <Display isEditable={isEditable} data={data?.name.split(' ').slice(0, data?.name.split(' ').length - 1).join(' ')}>Last Name</Display>
-                    <Display isEditable={isEditable} data={data?.birthplace}>Birthplace</Display>
-                    <Display isEditable={isEditable} data={data?.ethnictity}>Ethnicity</Display>
-                    <Display isEditable={isEditable} data={data?.citizenId}>Citizen ID</Display>
-                    <Display isEditable={isEditable} data={data?.birthdate}>Birthday</Display>
-                    <Display isEditable={isEditable} data={data?.address}>Address</Display>
-                    <Display isEditable={isEditable} data={data?.hometown}>Hometown</Display>
-                    <Display isEditable={isEditable} data={data?.phoneNumber}>Phone Number</Display>
+                    <Display ref={firstNameRef} isEditable={isEditable} data={data?.name.split(' ').at(-1)}>First Name</Display>
+                    <Display ref={lastNameRef} isEditable={isEditable} data={data?.name.split(' ').slice(0, data?.name.split(' ').length - 1).join(' ')}>Last Name</Display>
+                    <Display ref={genderRef} isEditable={isEditable} data={data?.gender}>Gender</Display>
+                    <Display ref={birthplaceRef} isEditable={isEditable} data={data?.birthplace}>Birthplace</Display>
+                    <Display ref={ethnicityRef} isEditable={isEditable} data={data?.ethnictity}>Ethnicity</Display>
+                    <Display ref={citizenIdRef} isEditable={isEditable} data={data?.citizenId}>Citizen ID</Display>
+                    <Display ref={birthDayRef} isEditable={isEditable} data={data?.birthdate}>Birthday</Display>
+                    <Display ref={addressRef} isEditable={isEditable} data={data?.address}>Address</Display>
+                    <Display ref={homeTownRef} isEditable={isEditable} data={data?.hometown}>Hometown</Display>
+                    <Display ref={phoneNumberRef} isEditable={isEditable} data={data?.phoneNumber}>Phone Number</Display>
 
                 </div>
                 <div className="secondColumn">
                     <p className="attribute" >DEPARTMENT</p>
+                    <Display ref={departmentRef} isEditable={isEditable} data={data?.department}>Department</Display>
 
-                    <Display isEditable={isEditable} data={data?.department}>Department</Display>
                     <p className="attribute" style={{ marginTop: '50px' }}>POSITION</p>
+                    <Display ref={positionRef} isEditable={isEditable} data={data?.position}>Position</Display>
 
-                    <Display isEditable={isEditable} data={data?.position}>Position</Display>
                     <p className="attribute" style={{ marginTop: '50px' }}>ONBOARDING</p>
-
-                    <Display isEditable={isEditable} data={data?.startDate}>Start Date</Display>
-                    <Display isEditable={isEditable} data={data?.contractDate}>Contract Date</Display>
+                    <Display ref={startDateRef} isEditable={isEditable} data={data?.startDate}>Start Date</Display>
+                    <Display ref={contractDateRef} isEditable={isEditable} data={data?.contractDate}>Contract Date</Display>
 
                     <div >
                         <p className="textAttachment" >Resignation decision</p>
                         <label className="attachment">
 
                             <img src={Pin} className="imgPin" ></img>
-                            {/* cai box nay se bi an */}
                             <input type="file" className="inputFile" onChange={handleAttachment} ></input>
-
-                            {/* cai box nay hien thi len tren ne */}
                             <div className="inputFileBox" >{attachment?.name || 'No file attached'}</div>
                         </label>
 
                     </div>
 
                     {/* <CustomButton type='short' style={{ backgroundColor: color, borderRadius: '10px', width: '213px', fontSize: '21px', padding: '20px 0', alignSelf: 'end', marginTop: '38px', }}    >Delete</CustomButton> */}
-                    <Button onClick={() => {}} variant="contained" color="info" disabled={!isEditable}>Save</Button>
-                    <Button onClick={() => {}} variant="outlined" color="error">Delete</Button>
+                    <Button onClick={handleSave} variant="contained" color="info" disabled={!isEditable}>Save</Button>
+                    <Button onClick={onDelete} variant="outlined" color="error">Delete</Button>
 
                 </div>
             </div>

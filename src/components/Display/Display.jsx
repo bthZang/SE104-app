@@ -1,4 +1,4 @@
-import { Children } from "react";
+import { Children, forwardRef } from "react";
 
 
 import avatar from "../../assets/images/LogoPNG.png"
@@ -7,11 +7,12 @@ import "./Display.scss";
 import { color } from "@mui/system";
 //import { Button } from "@mui/material";
 
-const Display = ({ children, type, onClick, data, isEditable }) => {
+const Display = forwardRef(({ children, type, onClick, data, isEditable }, ref) => {
     return (
         <div onClick={onClick} data={data} className='textBox'>
             {children}
             <input
+                ref={ref}
                 disabled={!isEditable}
                 className='textDefautValue'
                 type="text"
@@ -22,6 +23,6 @@ const Display = ({ children, type, onClick, data, isEditable }) => {
             />
         </div>
     );
-};
+});
 
 export default Display;
