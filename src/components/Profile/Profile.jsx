@@ -105,8 +105,8 @@ const Profile = ({ onClose, data, id, onSave, onDelete }) => {
             address: addressRef.current.value,
             hometown: homeTownRef.current.value,
             phoneNumber: phoneNumberRef.current.value,
-            startDateRef: startDateRef.current.value,
-            contractDateRef: contractDateRef.current.value
+            startDate: startDateRef.current.value,
+            contractDate: contractDateRef.current.value
         }
 
         onSave(newData)

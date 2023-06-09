@@ -6,7 +6,8 @@
     flex-direction: column;
     gap: 20px;
 	min-height: 100vh;
-    margin-top: 120px;
+    margin-top: 100px;
+
     .rdt_TableHead {
         color: #3552E9;
         font-size: 20px;
@@ -29,9 +30,6 @@
         
     }
     
-
-
-    
     .titleTable{
         color: #3552E9;
         font-size: 28px;
@@ -39,7 +37,7 @@
         font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
     }
     .employee{
-        margin-top:58px ;
+        margin-top: 0px ;
 
         .tools {
             display: flex;
@@ -47,6 +45,12 @@
             justify-content: start;
             margin-bottom: 20px;
             gap: 20px;
+            position: relative;
+
+            .search {
+                margin-left: 100px;
+                margin-top: 0;
+            }
         }
     }
 }

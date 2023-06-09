@@ -26,12 +26,12 @@
         width: 850px;
         height: calc(100vh - 250px);
         border-radius: 20px;
-        // display: flex;
         padding: 50px;
         padding-right: 100px;
         overflow-x: hidden;
         overflow-y: auto;
-        gap: 73px;
+        row-gap: 30px;
+        column-gap: 60px;
         box-shadow: 0 0 20px 0px rgb(190, 190, 190);
         justify-self: end;
         display: grid;
@@ -74,7 +74,7 @@
 
                 .attribute {
                     color: black;
-                    font-size: 21px;
+                    font-size: 18px;
                     font-weight: 500;
                     padding-right: 32px;
 
@@ -215,7 +215,7 @@
 
                 .name {
                     color: black;
-                    font-size: 30px;
+                    font-size: 25px;
                     font-weight: 600;
                     width: max-content;
                     padding: 0;
@@ -225,7 +225,7 @@
 
                 .position {
                     color: #7D8FF1;
-                    font-size: 20px;
+                    font-size: 18px;
                     width: max-content;
                     padding: 0;
                     margin: 0;

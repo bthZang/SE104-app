@@ -7,6 +7,8 @@ import TitleHome from "../titleHome/titleHome";
 import { Button } from "@mui/material";
 import CheckBox from "../CheckBox/CheckBox";
 import Profile from "../Profile/Profile";
+import Search from "../search/search";
+
 import "./Employee.scss";
 
 
@@ -66,7 +68,9 @@ const Employee = ({ employeeData, setEmployeeData, onClick }) => {
             sortable: true,
         }
     ]
+
     const [selectedId, setSelectedId] = useState(null);
+    const [searchKeyword, setSearchKeyword] = useState('')
 
     const [newEmployeeData, setNewEmployeeData] = useState([])
     const [checkList, setCheckList] = useState([])
@@ -98,8 +102,6 @@ const Employee = ({ employeeData, setEmployeeData, onClick }) => {
     }
 
     function handleExport() {
-        const columnList = columns.map(v => v.name)
-        const columnSelector = columns.map(v => v.selector)
         const data = [Object.keys(employeeData[0])];
         employeeData.filter((_, index) => checkList[index] == true).forEach(d => data.push(Object.values(d)));
         const workbook = XLSX.utils.book_new();
@@ -112,15 +114,16 @@ const Employee = ({ employeeData, setEmployeeData, onClick }) => {
 
         <div className="containerEmployee">
             <div>
-                <TitleHome children={"Employee"} data={employeeData}></TitleHome>
+                <TitleHome children={"Employee"} data={employeeData} showSearch={false}></TitleHome>
                 <div className="employee">
                     <div className="tools">
                         <Button onClick={handleDeleteItem} variant="outlined" color="error" disabled={checkList.every(v => v == false)}>Delete</Button>
                         <Button onClick={handleExport} variant="outlined" color="info" disabled={checkList.every(v => v == false)}>Export data</Button>
+                        <div className="search"><Search onSearch={setSearchKeyword} /></div>
                     </div>
                     <DataTable
                         columns={columns}
-                        data={newEmployeeData}
+                        data={newEmployeeData.filter(d => d.name.toLowerCase().includes(searchKeyword))}
                         pagination={true}
                         highlightOnHover={true}
                         striped={true}
