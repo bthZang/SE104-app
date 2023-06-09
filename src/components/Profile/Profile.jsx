@@ -101,7 +101,7 @@ const Profile = ({ onClose, data, id, onSave, onDelete }) => {
             citizenId: citizenIdRef.current.value,
             birthdate: birthDayRef.current.value,
             department: departmentRef.current.value,
-            position: positionRef.current.value, 
+            position: positionRef.current.value,
             address: addressRef.current.value,
             hometown: homeTownRef.current.value,
             phoneNumber: phoneNumberRef.current.value,
@@ -116,19 +116,28 @@ const Profile = ({ onClose, data, id, onSave, onDelete }) => {
     return (
         <div className="containerProfile" onClick={onClose} >
             <div className={`boxProfile ${isFullScreen ? 'fullScreen' : ''}`} onClick={e => e.stopPropagation()}>
-                <div className="resizeIcon" onClick={() => {
-                    setIsFullScreen(prev => !prev)
-                }}><img src={isFullScreen ? CLOSE_ICON : RESIZE} /></div>
-                <div className="firstColumn">
-                    <div className="titleDisplay" >
-                        <div className="imgDisplay"><img src={avatar} style={{ width: '80px', height: '80px' }} /></div>
+                <div className="header">
+                    <div className="resizeIcon" onClick={() => {
+                        setIsFullScreen(prev => !prev)
+                    }}><img src={isFullScreen ? CLOSE_ICON : RESIZE} /></div>
+                    <div className="headerContent">
+                        <div className="titleDisplay" >
+                            <div className="imgDisplay"><img src={avatar} style={{ width: '80px', height: '80px' }} /></div>
 
-                        <div className="textDisplay">
-                            <p className="name"  >{data?.name}</p>
-                            <p className="position">{data?.position}</p>
+                            <div className="textDisplay">
+                                <p className="name"  >{data?.name}</p>
+                                <p className="position">{data?.position}</p>
+                            </div>
+
                         </div>
-
+                        <div className="toolBox">
+                            <Button onClick={handleSave} variant="contained" color="info" disabled={!isEditable}>Save</Button>
+                            <Button onClick={() => setIsEditable(true)} variant="contained" color="info" disabled={isEditable}>Change</Button>
+                            <Button onClick={onDelete} variant="outlined" color="error">Delete</Button>
+                        </div>
                     </div>
+                </div>
+                <div className="firstColumn">
                     <div className="fisrtAttribute">
                         <p className="attribute">PROFILE</p>
                         <img className="imgPen" src={pen} onClick={handleOnClickPen}></img>
@@ -146,7 +155,7 @@ const Profile = ({ onClose, data, id, onSave, onDelete }) => {
 
                 </div>
                 <div className="secondColumn">
-                    <p className="attribute" >DEPARTMENT</p>
+                    <p className="attribute department" >DEPARTMENT</p>
                     <Display ref={departmentRef} isEditable={isEditable} data={data?.department}>Department</Display>
 
                     <p className="attribute" style={{ marginTop: '50px' }}>POSITION</p>
@@ -168,8 +177,6 @@ const Profile = ({ onClose, data, id, onSave, onDelete }) => {
                     </div>
 
                     {/* <CustomButton type='short' style={{ backgroundColor: color, borderRadius: '10px', width: '213px', fontSize: '21px', padding: '20px 0', alignSelf: 'end', marginTop: '38px', }}    >Delete</CustomButton> */}
-                    <Button onClick={handleSave} variant="contained" color="info" disabled={!isEditable}>Save</Button>
-                    <Button onClick={onDelete} variant="outlined" color="error">Delete</Button>
 
                 </div>
             </div>
