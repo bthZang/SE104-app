@@ -11,7 +11,15 @@ const Display = ({ children, type, onClick, data, isEditable }) => {
     return (
         <div onClick={onClick} data={data} className='textBox'>
             {children}
-            <input disabled={!isEditable} className='textDefautValue' type="text" defaultValue={data}></input>
+            <input
+                disabled={!isEditable}
+                className='textDefautValue'
+                type="text"
+                defaultValue={data} 
+                style={isEditable ? {
+                    borderBottom: '3px solid #A0AEF5'
+                } : {}}
+            />
         </div>
     );
 };

@@ -6,7 +6,9 @@ import Display from "../Display/Display";
 import avatar from "../../assets/images/LogoPNG.png"
 import pen from "../../assets/edit.svg"
 import Pin from "../../assets/pin.svg"
-import DataTable from "react-data-table-component";
+import CLOSE_ICON from "../../assets/close.svg"
+import RESIZE from "../../assets/resize.svg"
+import { Button } from "@mui/material";
 
 const columns = [
 
@@ -60,7 +62,8 @@ const columns = [
 ]
 
 const Profile = ({ onClose, data, id }) => {
-    
+    const [isFullScreen, setIsFullScreen] = useState(false)
+
     const [color, setColor] = useState('gray')
     const [attachment, setAttachment] = useState(null)
     const handleAttachment = (e) => {
@@ -69,23 +72,17 @@ const Profile = ({ onClose, data, id }) => {
     }
 
     const [isEditable, setIsEditable] = useState(false)
-    const handleOnClickPen=()=>{
+    const handleOnClickPen = () => {
         setIsEditable(true)
     }
 
     return (
         <div className="containerProfile" onClick={onClose} >
-             <DataTable
-                        columns={columns}
-                        data={[]}
-                        pagination={true}
-                        highlightOnHover={true}
-                        striped={true}
-                       
-                    ></DataTable>
-            <div className="boxProfile" onClick={e => e.stopPropagation()}>
+            <div className={`boxProfile ${isFullScreen ? 'fullScreen' : ''}`} onClick={e => e.stopPropagation()}>
+                <div className="resizeIcon" onClick={() => {
+                    setIsFullScreen(prev => !prev)
+                }}><img src={isFullScreen ? CLOSE_ICON : RESIZE} /></div>
                 <div className="firstColumn">
-
                     <div className="titleDisplay" >
                         <div className="imgDisplay"><img src={avatar} style={{ width: '80px', height: '80px' }} /></div>
 
@@ -136,7 +133,9 @@ const Profile = ({ onClose, data, id }) => {
 
                     </div>
 
-                    <CustomButton type='short' style={{backgroundColor :color, borderRadius: '10px', width: '213px', fontSize: '21px', padding: '20px 0', alignSelf: 'end', marginTop: '38px',  }}    >Delete</CustomButton>
+                    {/* <CustomButton type='short' style={{ backgroundColor: color, borderRadius: '10px', width: '213px', fontSize: '21px', padding: '20px 0', alignSelf: 'end', marginTop: '38px', }}    >Delete</CustomButton> */}
+                    <Button onClick={() => {}} variant="contained" color="info" disabled={!isEditable}>Save</Button>
+                    <Button onClick={() => {}} variant="outlined" color="error">Delete</Button>
 
                 </div>
             </div>

@@ -101,9 +101,8 @@ const Employee = ({ employeeData, setEmployeeData, onClick }) => {
     function handleExport() {
         const columnList = columns.map(v => v.name)
         const columnSelector = columns.map(v => v.selector)
-        const data = [columnList];
-        employeeData.filter((_, index) => checkList[index] == true).forEach(d => data.push(columnSelector.map(v => d[v]))
-        );
+        const data = [Object.keys(employeeData[0])];
+        employeeData.filter((_, index) => checkList[index] == true).forEach(d => data.push(Object.values(d)));
         const workbook = XLSX.utils.book_new();
         const worksheet = XLSX.utils.aoa_to_sheet(data);
         XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');

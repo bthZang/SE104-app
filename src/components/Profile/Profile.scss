@@ -11,7 +11,6 @@
     @keyframes slide {
         from {
             right: -1000px;
-
         }
 
         to {
@@ -21,20 +20,24 @@
 
     .boxProfile {
         position: relative;
+        transition: 0.3s;
         animation: slide 0.3s cubic-bezier(.03, .43, .61, 1.26) 0s 1 forwards;
-        border: 1px solid #F4F4F4 !important;
         background-color: white;
-        min-width: 500px;
-        max-height: 500px;
+        width: 850px;
+        height: calc(100vh - 250px);
         display: flex;
         border-radius: 20px;
         display: flex;
-        padding: 50px ;
-        overflow: auto;
+        padding: 50px;
+        padding-right: 100px;
+        padding-left: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
         flex-direction: row;
         gap: 73px;
         box-shadow: 0 0 20px 0px rgb(190, 190, 190);
         justify-self: end;
+
         &>div {
             width: 100%;
         }
@@ -43,6 +46,8 @@
             display: flex;
             flex-direction: column;
             gap: 16px;
+            flex: 1;
+            height: max-content;
 
             .titleDisplay {
                 display: flex;
@@ -122,7 +127,7 @@
         .secondColumn {
             display: flex;
             flex-direction: column;
-            width: max-content;
+            flex: 1;
             gap: 16px;
 
             .attribute {
@@ -144,6 +149,7 @@
             .attachment {
                 display: flex;
                 flex-direction: row;
+                margin-bottom: 20px;
 
                 .imgPin {
                     width: 50px;
@@ -181,7 +187,7 @@
                     vertical-align: middle;
                     align-content: center;
                     padding-left: 16px;
-                    overflow:auto;
+                    overflow: auto;
                 }
             }
 
@@ -208,5 +214,30 @@
             font-weight: 400;
 
         }
+
+        .resizeIcon {
+            position: sticky;
+            width: 24px;
+            height: 24px;
+            padding: 8px;
+            border-radius: 4px;
+            top: 0;
+            left: 0;
+            margin-right: -30px;
+            transform: translate(15px, -30px);
+            transition: 0.3s;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #dcdcdc;
+            }
+        }
+    }
+
+    .fullScreen {
+        width: 90vw;
+        height: 100vh;
+        margin: 0;
+        padding-right: 150px;
     }
 }
