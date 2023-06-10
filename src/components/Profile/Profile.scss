@@ -1,265 +1,294 @@
 .containerProfile {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 10000;
-    width: 100vw;
-    height: 100vh;
-    display: grid;
-    place-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+  display: grid;
+  place-items: center;
 
-    @keyframes slide {
-        from {
-            right: -1000px;
-        }
-
-        to {
-            right: -30px;
-        }
+  @keyframes slide {
+    from {
+      right: -1000px;
     }
 
-    .boxProfile {
-        position: relative;
-        transition: 0.3s;
-        animation: slide 0.3s cubic-bezier(.03, .43, .61, 1.26) 0s 1 forwards;
-        background-color: white;
-        width: 850px;
-        height: calc(100vh - 250px);
-        border-radius: 20px;
-        padding: 50px;
-        padding-right: 100px;
-        overflow-x: hidden;
-        overflow-y: auto;
-        row-gap: 30px;
-        column-gap: 60px;
-        box-shadow: 0 0 20px 0px rgb(190, 190, 190);
-        justify-self: end;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto 1fr;
+    to {
+      right: 0px;
+    }
+  }
 
-        &>div {
-            width: 100%;
-        }
+  .boxProfile {
+    position: relative;
+    transition: 0.3s;
+    animation: slide 0.3s cubic-bezier(0.03, 0.43, 0.61, 1.26) 0s 1 forwards;
+    background-color: white;
+    width: 450px;
+    height: calc(100vh - 200px);
+    border-radius: 20px;
+    padding: 50px;
+    padding-right: 100px;
+    padding-bottom: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    row-gap: 30px;
+    column-gap: 60px;
+    box-shadow: 0 0 20px 0px rgb(190, 190, 190);
+    justify-self: end;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
-        .firstColumn {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            flex: 1;
-            height: max-content;
-
-
-            .fisrtAttribute {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-
-                .imgPen {
-                    cursor: pointer;
-                    height: 30px;
-                    padding: 5px;
-                    transition: 0.3s;
-
-                    &:hover {
-                        background-color: #f4f4f4;
-                        border-radius: 5px;
-                    }
-
-                    &:active {
-                        background-color: #c4c4c4;
-                        border-radius: 5px;
-                    }
-                }
-
-                .attribute {
-                    color: black;
-                    font-size: 18px;
-                    font-weight: 500;
-                    padding-right: 32px;
-
-                }
-            }
-
-        }
-
-        .secondColumn {
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-            gap: 16px;
-
-            .attribute {
-                color: black;
-                font-size: 16px;
-                font-weight: 500;
-                text-align: left;
-            }
-
-            .textAttachment {
-                color: #A0AEF5;
-                font-family: 'Arial', sans-serif;
-                font-size: 15px;
-                text-align: left;
-                font-weight: 500;
-                padding-left: 26px;
-            }
-
-            .attachment {
-                display: flex;
-                flex-direction: row;
-                margin-bottom: 20px;
-
-                .imgPin {
-                    width: 50px;
-                    height: 50px;
-                }
-
-                .inputFile {
-                    border: 1px solid lightGray;
-                    background-color: white;
-                    width: 100%;
-                    height: 70px;
-                    overflow: auto;
-                    border-radius: 5px;
-                    color: lightGray;
-                    display: none;
-                    align-self: center;
-                    justify-content: center;
-                    align-items: center;
-                    vertical-align: middle;
-                    align-content: center;
-                    margin: auto;
-                    padding: auto;
-                    visibility: hidden;
-                }
-
-                .inputFileBox {
-                    border: 1px solid lightGray;
-                    background-color: white;
-                    width: 100%;
-                    height: 50px;
-                    border-radius: 5px;
-                    color: darkGray;
-                    display: flex;
-                    align-items: center;
-                    vertical-align: middle;
-                    align-content: center;
-                    padding-left: 16px;
-                    overflow: auto;
-                }
-            }
-
-
-        }
-
-
-        .textBox {
-            justify-content: flex-start;
-            flex-direction: column;
-            display: flex;
-            color: #A0AEF5;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 16px;
-            font-weight: 600;
-
-        }
-
-        .textChildren {
-            color: black;
-            width: 100%;
-            margin-top: 0px;
-            font-size: 20px;
-            font-weight: 400;
-
-        }
+    & > div {
+      width: 100%;
     }
 
-    .fullScreen {
-        width: 90vw;
-        height: 100vh;
-        margin: 0;
-        padding-right: 150px;
+    .profileContainerContent {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      gap: 30px;
+      margin-top: 20px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      scrollbar-width: none;
     }
 
-    .header {
-        grid-row: 1;
-        grid-column: span 2;
+    .firstColumn {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      flex: 1;
+      height: max-content;
+
+      .fisrtAttribute {
         display: flex;
+        flex-direction: row;
+        align-items: center;
 
-        .headerContent {
-            display: flex;
-            width: 100%;
-            justify-content: space-between;
+        .imgPen {
+          cursor: pointer;
+          height: 30px;
+          padding: 5px;
+          transition: 0.3s;
+
+          &:hover {
+            background-color: #f4f4f4;
+            border-radius: 5px;
+          }
+
+          &:active {
+            background-color: #c4c4c4;
+            border-radius: 5px;
+          }
         }
 
-        .titleDisplay {
-            display: flex;
-            flex-direction: row;
-            gap: 32px;
-
-            .imgDisplay {
-                width: 80px;
-                height: 80px;
-                border: 1px solid white;
-                border-radius: 100px;
-                background-color: gray;
-                cursor: pointer;
-            }
-
-            .textDisplay {
-                display: flex;
-                justify-content: left;
-                flex-direction: column;
-                gap: 0px;
-
-                .name {
-                    color: black;
-                    font-size: 25px;
-                    font-weight: 600;
-                    width: max-content;
-                    padding: 0;
-                    margin: 0;
-
-                }
-
-                .position {
-                    color: #7D8FF1;
-                    font-size: 18px;
-                    width: max-content;
-                    padding: 0;
-                    margin: 0;
-
-                }
-            }
-
+        .attribute {
+          color: black;
+          font-size: 18px;
+          font-weight: 500;
+          padding-right: 32px;
         }
-
-        .resizeIcon {
-            position: sticky;
-            width: 24px;
-            height: 24px;
-            padding: 8px;
-            border-radius: 4px;
-            margin-right: -40px;
-            transform: translate(-50px, -50px);
-            top: 15px;
-            left: 15px;
-            transition: 0.3s;
-            cursor: pointer;
-
-            &:hover {
-                background-color: #dcdcdc;
-            }
-        }
-
-        .toolBox {
-            display: flex;
-            // position: absolute;
-            height: min-content;
-            top: 0;
-            right: 100px;
-            gap: 15px;
-        }
+      }
     }
+
+    .secondColumn {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 16px;
+
+      .attribute {
+        color: black;
+        font-size: 16px;
+        font-weight: 500;
+        text-align: left;
+      }
+
+      .textAttachment {
+        color: #a0aef5;
+        font-family: "Arial", sans-serif;
+        font-size: 15px;
+        text-align: left;
+        font-weight: 500;
+        padding-left: 26px;
+      }
+
+      .attachment {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 20px;
+
+        .imgPin {
+          width: 50px;
+          height: 50px;
+        }
+
+        .inputFile {
+          border: 1px solid lightGray;
+          background-color: white;
+          width: 100%;
+          height: 70px;
+          overflow: auto;
+          border-radius: 5px;
+          color: lightGray;
+          display: none;
+          align-self: center;
+          justify-content: center;
+          align-items: center;
+          vertical-align: middle;
+          align-content: center;
+          margin: auto;
+          padding: auto;
+          visibility: hidden;
+        }
+
+        .inputFileBox {
+          border: 1px solid lightGray;
+          background-color: white;
+          width: 100%;
+          height: 50px;
+          border-radius: 5px;
+          color: darkGray;
+          display: flex;
+          align-items: center;
+          vertical-align: middle;
+          align-content: center;
+          padding-left: 16px;
+          overflow: auto;
+        }
+      }
+    }
+
+    .textBox {
+      justify-content: flex-start;
+      flex-direction: column;
+      display: flex;
+      color: #a0aef5;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .textChildren {
+      color: black;
+      width: 100%;
+      margin-top: 0px;
+      font-size: 20px;
+      font-weight: 400;
+    }
+  }
+
+  .header {
+    display: flex;
+
+    .headerContent {
+      display: flex;
+      width: 100%;
+      padding-right: 50px;
+      flex-direction: column;
+      gap: 30px;
+      justify-content: space-between;
+    }
+
+    .titleDisplay {
+      display: flex;
+      flex-direction: row;
+      gap: 32px;
+
+      .imgDisplay {
+        width: 80px;
+        height: 80px;
+        border: 1px solid white;
+        border-radius: 100px;
+        background-color: gray;
+        cursor: pointer;
+      }
+
+      .textDisplay {
+        display: flex;
+        justify-content: left;
+        flex-direction: column;
+        gap: 0px;
+
+        .name {
+          color: black;
+          font-size: 25px;
+          font-weight: 600;
+          width: max-content;
+          padding: 0;
+          margin: 0;
+        }
+
+        .position {
+          color: #7d8ff1;
+          font-size: 18px;
+          width: max-content;
+          padding: 0;
+          margin: 0;
+        }
+      }
+    }
+
+    .resizeIcon {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      padding: 8px;
+      border-radius: 4px;
+      top: 15px;
+      right: 110px;
+      transition: 0.3s;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #dcdcdc;
+      }
+    }
+
+    .closeIcon {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      padding: 8px;
+      border-radius: 4px;
+      top: 15px;
+      right: 60px;
+      transition: 0.3s;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #dcdcdc;
+      }
+    }
+
+    .toolBox {
+      display: flex;
+      // position: absolute;
+      height: min-content;
+      top: 0;
+      right: 100px;
+      gap: 15px;
+    }
+  }
+
+  .fullScreen {
+    left: 0;
+    border-radius: 0;
+    width: 90vw;
+    height: calc(100vh - 50px);
+    margin: 0;
+    padding-right: 150px;
+
+    .headerContent {
+      flex-direction: row;
+      gap: 0px;
+    }
+
+    .profileContainerContent {
+      flex-direction: row;
+      gap: 60px;
+    }
+  }
 }

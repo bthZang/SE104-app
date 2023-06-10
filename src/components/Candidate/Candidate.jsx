@@ -70,9 +70,10 @@ const Candidate = ({ onClick, onClose, data }) => {
                 gender: candidate.gender,
             }])
             setCandidateData(prev => [...prev.filter(d => d.name != name)])
-        }
-        else if (type == 'reject') {
+        } else if (type == 'reject') {
             setCandidateData(prev => [...prev.filter(d => d.name != name)])
+        } else if (type == 'btnCandidateAdd') {
+            setClick('btnCandidateAdd')
         }
     };
 
@@ -117,7 +118,7 @@ const Candidate = ({ onClick, onClose, data }) => {
                         striped={true}
                     ></DataTable>
                 </div>
-                <button id="btnCandidateAdd" ref={btnCandidateAddRef} className="btnCandidate" onClick={() => { handleOnClick() }}>Add new <span style={{ color: "#1233E5" }} >candidate</span></button>
+                <button id="btnCandidateAdd" ref={btnCandidateAddRef} className="btnCandidate" onClick={() => { handleOnClick("btnCandidateAdd") }}>Add new <span style={{ color: "#1233E5" }} >candidate</span></button>
                 <div>
                     {click == "btnCandidateAdd" && <AddAttachmentConfirm text={"Candidate"}
                         onClick={onclick}
