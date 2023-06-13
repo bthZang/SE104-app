@@ -18,6 +18,7 @@ import { Button } from "antd";
 import axios from "axios";
 import { CANDIDATE_API } from "../../constant/apiURL";
 import { EmployeeContext } from "../../contexts/EmployeeContext";
+import ChartTimekeeping from "../../components/ChartTimekeeping/ChartTimekeeping";
 
 const candidateData_ = [
   { name: 'Example1', CV: 'Male', applyPosition: 'CFO' },
@@ -152,6 +153,7 @@ function HRPage() {
 
   const dayRef = useRef(null)
   const monthRef = useRef(null)
+  const chartRef = useRef(null);
 
   const [id, setId] = useState(null)
   const handleOnClickID = (_id) => {
@@ -204,9 +206,14 @@ function HRPage() {
               <div id="month" ref={monthRef} className={tabTimekeepingBtn === 'month' ? 'blur' : 'nonBlur'} onClick={() => { handleChangeTabTimekeeping(monthRef) }}>
                 <p >Month</p>
               </div>
+              <div id="chart" ref={chartRef} className={tabTimekeepingBtn === 'chart' ? 'blur' : 'nonBlur'} onClick={() => { handleChangeTabTimekeeping(chartRef) }}>
+                <p >Chart</p>
+              </div>
 
             </div>{tabTimekeepingBtn == "day" && <DayTimeKeeping dayTimeKeepingData={dayTimeKeepingData} ></DayTimeKeeping>}
             {tabTimekeepingBtn == "month" && <MonthTimeKeeping monthTimeKeepingData={monthTimeKeepingData}></MonthTimeKeeping>}
+            {tabTimekeepingBtn == "chart" && <ChartTimekeeping chartTimeKeepingData={monthTimeKeepingData}></ChartTimekeeping>}
+
           </div>
         }
         {tab == "employee" && <Employee onClick={handleOnClickID}></Employee>}

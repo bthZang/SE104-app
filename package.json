@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
@@ -28,6 +28,7 @@
     "react-router-dom": "^6.11.2",
     "react-select": "^5.7.3",
     "react-text-field": "^0.4.0",
+    "recharts": "^2.6.2",
     "redux": "^4.2.1",
     "sass": "^1.62.1",
     "sweetalert2": "^11.7.11",
