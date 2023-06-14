@@ -1,35 +1,53 @@
-.border{
-    width: 472px;
+.border {
+    width: max-content;
     height: 40px;
     border-radius: 30px;
-    background-color: #E0E5FB;
+    background-color: #f0f3fb;
+    border: 1px solid #5971EE;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    .searchBtn{
-        width: 30px;
-        height: 35px;
-        justify-content: center;
+    padding-right: 10px;
+
+    .searchBtn {
+        display: grid;
+        place-items: center;
         border-width: 0px;
+        padding: 0;
         background-color: transparent;
         outline: transparent;
-        .searchImg{
+        padding-left: 10px;
+
+        .searchImg {
             width: 20px;
             align-self: center;
             height: 20px;
             color: #5971EE;
+            padding: 5px;
+            border-radius: 999px;
+            border-width: 0;
+            transition: 0.3s;
+
+            &:hover {
+                background-color: #9fa8d3;
+            }
         }
     }
 
-    .textInput{
-        width: 100%;
+    .textInput {
+        width: 110px;
         background-color: transparent;
         border-width: 0px;
-        font-size: 20px;
+        font-size: 18px;
         height: 25px;
-        margin-left: 24px;
+        margin-left: 10px;
         outline: transparent;
         color: black;
+        transition: 0.3s;
+
+        &:focus {
+            width: 220px;
+        }
     }
 }

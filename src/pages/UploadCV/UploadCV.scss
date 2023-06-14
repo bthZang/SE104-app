@@ -1,0 +1,20 @@
+.uploadCV__container {
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+        font-size: 25px;
+        color: black;
+    }
+
+    form {
+        margin-top: 80px;
+        width: 400px;
+    }
+}
