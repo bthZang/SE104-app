@@ -173,64 +173,125 @@ function HRPage() {
 
   return (
     <div className="containerHRPage">
-      {
-        clickPosition.isClick && <div style={{
-          top: clickPosition.y,
-          left: clickPosition.x
-        }} className="popup">
-          <button onClick={() => {
-            setClickPosition(prev => ({ ...prev, isClick: false }))
-            clickPosition.onChange('D')
-          }}>Work</button>
-          <button onClick={() => {
-            setClickPosition(prev => ({ ...prev, isClick: false }))
-            clickPosition.onChange('P')
-          }}>Not work</button>
-          <button onClick={() => {
-            setClickPosition(prev => ({ ...prev, isClick: false }))
-            clickPosition.onChange('T')
-          }}>Overtime</button>
+      {clickPosition.isClick && (
+        <div
+          style={{
+            top: clickPosition.y,
+            left: clickPosition.x,
+          }}
+          className="popup"
+        >
+          <button
+            onClick={() => {
+              setClickPosition((prev) => ({ ...prev, isClick: false }));
+              clickPosition.onChange("D");
+            }}
+          >
+            Work
+          </button>
+          <button
+            onClick={() => {
+              setClickPosition((prev) => ({ ...prev, isClick: false }));
+              clickPosition.onChange("P");
+            }}
+          >
+            Not work
+          </button>
+          <button
+            onClick={() => {
+              setClickPosition((prev) => ({ ...prev, isClick: false }));
+              clickPosition.onChange("T");
+            }}
+          >
+            Overtime
+          </button>
         </div>
-      }
+      )}
       <div className="HRSideBar">
         <HRSideBar handleChange={handleChange}></HRSideBar>
       </div>
-      <div className="content" >
+      <div className="content">
         {tab == "dashboard" && <Dashboard data={data}></Dashboard>}
-        {tab == "timekeeping" &&
-          <div><TitleHome data={data}>Timekeeping</TitleHome>
+        {tab == "timekeeping" && (
+          <div>
+            <TitleHome data={data} showSearch={tabTimekeepingBtn !== "chart"}>
+              Timekeeping
+            </TitleHome>
             <div className="timekeepingStyle">
-              <div id="day" ref={dayRef} className={tabTimekeepingBtn === 'day' ? 'blur' : 'nonBlur'} onClick={() => { handleChangeTabTimekeeping(dayRef) }}>
-                <p >Today</p>
+              <div
+                id="day"
+                ref={dayRef}
+                className={tabTimekeepingBtn === "day" ? "blur" : "nonBlur"}
+                onClick={() => {
+                  handleChangeTabTimekeeping(dayRef);
+                }}
+              >
+                <p>Today</p>
               </div>
-              <div id="month" ref={monthRef} className={tabTimekeepingBtn === 'month' ? 'blur' : 'nonBlur'} onClick={() => { handleChangeTabTimekeeping(monthRef) }}>
-                <p >Month</p>
+              <div
+                id="month"
+                ref={monthRef}
+                className={tabTimekeepingBtn === "month" ? "blur" : "nonBlur"}
+                onClick={() => {
+                  handleChangeTabTimekeeping(monthRef);
+                }}
+              >
+                <p>Month</p>
               </div>
-              <div id="chart" ref={chartRef} className={tabTimekeepingBtn === 'chart' ? 'blur' : 'nonBlur'} onClick={() => { handleChangeTabTimekeeping(chartRef) }}>
-                <p >Chart</p>
+              <div
+                id="chart"
+                ref={chartRef}
+                className={tabTimekeepingBtn === "chart" ? "blur" : "nonBlur"}
+                onClick={() => {
+                  handleChangeTabTimekeeping(chartRef);
+                }}
+              >
+                <p>Chart</p>
               </div>
-
-            </div>{tabTimekeepingBtn == "day" && <DayTimeKeeping dayTimeKeepingData={dayTimeKeepingData} ></DayTimeKeeping>}
-            {tabTimekeepingBtn == "month" && <MonthTimeKeeping monthTimeKeepingData={monthTimeKeepingData}></MonthTimeKeeping>}
-            {tabTimekeepingBtn == "chart" && <ChartTimekeeping chartTimeKeepingData={monthTimeKeepingData}></ChartTimekeeping>}
-
+            </div>
+            {tabTimekeepingBtn == "day" && (
+              <DayTimeKeeping
+                dayTimeKeepingData={dayTimeKeepingData}
+              ></DayTimeKeeping>
+            )}
+            {tabTimekeepingBtn == "month" && (
+              <MonthTimeKeeping
+                monthTimeKeepingData={monthTimeKeepingData}
+              ></MonthTimeKeeping>
+            )}
+            {tabTimekeepingBtn == "chart" && (
+              <ChartTimekeeping
+                chartTimeKeepingData={monthTimeKeepingData}
+              ></ChartTimekeeping>
+            )}
           </div>
-        }
+        )}
         {tab == "employee" && <Employee onClick={handleOnClickID}></Employee>}
         {tab == "candidate" && <Candidate />}
 
         <div className="confirmBox">
-          {dialogType == "accept" && <Confirm text={"candidate?"} onClose={() => setDialogType('')}
-            onClick={onclick}
-          >{"Accept"}</Confirm>}
-          {dialogType == "reject" && <Confirm text={"candidate?"} onClose={() => setDialogType('')}
-            onClick={onclick}
-          >{"Reject"}</Confirm>}
+          {dialogType == "accept" && (
+            <Confirm
+              text={"candidate?"}
+              onClose={() => setDialogType("")}
+              onClick={onclick}
+            >
+              {"Accept"}
+            </Confirm>
+          )}
+          {dialogType == "reject" && (
+            <Confirm
+              text={"candidate?"}
+              onClose={() => setDialogType("")}
+              onClick={onclick}
+            >
+              {"Reject"}
+            </Confirm>
+          )}
         </div>
       </div>
     </div>
-
-  )
+  );
 }
 
 export default HRPage;
