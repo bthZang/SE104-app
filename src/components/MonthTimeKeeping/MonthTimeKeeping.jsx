@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import CustomButton from "../CustomButton/CustomButton";
 import TitleHome from "../titleHome/titleHome";
+import Profile from "../Profile/Profile";
 
 import "./MonthTimeKeeping.scss";
 import {
@@ -14,6 +15,7 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
+import EmployeeChart from "../EmployeeChart/EmployeeChart";
 
 const columns = [
   {
@@ -323,9 +325,9 @@ const columns = [
   },
 ];
 
-
-
 const MonthTimeKeeping = ({ onClick, handleChange, monthTimeKeepingData }) => {
+  const [selectedId, setSelectedId] = useState(null);
+
   return (
     <div className="containerMonthTimeKeeping">
       <div>
@@ -337,11 +339,36 @@ const MonthTimeKeeping = ({ onClick, handleChange, monthTimeKeepingData }) => {
             highlightOnHover={true}
             striped={true}
             expandableRows={true}
+            onRowClicked={(row) => {
+              setSelectedId(row.id);
+              onClick(row.id);
+            }}
           ></DataTable>
+          {selectedId !== null && (
+            <EmployeeChart
+              id={selectedId}
+              data={monthTimeKeepingData.find((d) => d.id == selectedId)}
+              onClose={() => setSelectedId(null)}
+              onSave={(newData) => {
+                setEmployeeData((prev) => {
+                  const newPrev = [...prev];
+                  const index = prev.indexOf(
+                    prev.find((d) => d.id == newData.id)
+                  );
+                  newPrev[index] = newData;
+                  return newPrev;
+                });
+              }}
+              onDelete={() => {
+                setEmployeeData((prev) => [
+                  ...prev.filter((d) => d.id != selectedId),
+                ]);
+                setSelectedId(null);
+              }}
+            ></EmployeeChart>
+          )}
         </div>
       </div>
-
-     
     </div>
   );
 };
