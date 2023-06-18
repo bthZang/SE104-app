@@ -23,12 +23,11 @@
 		border: 1px solid #161248;
 		background-color: #161248;
 		border-radius: 70px;
-
 		.title {
 			float: right;
 			display: flex;
 			margin-top: 50px;
-
+margin-bottom: -100px;
 			.logo {
 				width: 148px;
 				height: 148px;
@@ -39,6 +38,7 @@
 			.topSideBar {
 				width: 81px;
 				height: 107px;
+				z-index: 99999999;
 			}
 		}
 
@@ -113,7 +113,7 @@ padding: 8px;
 			justify-content: center;
 			align-items: center;
 			margin-top: -36px;
-			z-index: 1000;
+			z-index: 10;
 			border: 0px solid #161248;
 			background-color: #161248;
 			border-radius: 40px;

@@ -12,7 +12,7 @@ const Search = ({ onSearch }) => {
     const inputRef = useRef()
 
     const handleSearch = (searchTerm) => {
-        onSearch(searchTerm.toLowerCase())
+        onSearch?.(searchTerm.toLowerCase())
     };
 
     const handleKeyPress = (event) => {

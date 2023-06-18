@@ -325,7 +325,12 @@ const columns = [
   },
 ];
 
-const MonthTimeKeeping = ({ onClick, handleChange, monthTimeKeepingData }) => {
+const MonthTimeKeeping = ({
+  onClick,
+  handleChange,
+  monthTimeKeepingData,
+  searchValue,
+}) => {
   const [selectedId, setSelectedId] = useState(null);
 
   return (
@@ -334,7 +339,9 @@ const MonthTimeKeeping = ({ onClick, handleChange, monthTimeKeepingData }) => {
         <div className="account">
           <DataTable
             columns={columns}
-            data={monthTimeKeepingData}
+            data={monthTimeKeepingData.filter((d) =>
+              d.name.toLowerCase().includes(searchValue)
+            )}
             pagination={true}
             highlightOnHover={true}
             striped={true}
