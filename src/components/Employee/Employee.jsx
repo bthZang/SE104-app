@@ -10,6 +10,10 @@ import Search from "../search/search";
 
 import "./Employee.scss";
 import { EmployeeContext } from "../../contexts/EmployeeContext";
+import { deleteEmployeeById, getAllEmployee } from "../../api/EmployeeAPI";
+import Swal from "sweetalert2";
+
+
 
 const Employee = ({ onClick }) => {
 	const { employeeData, setEmployeeData } = useContext(EmployeeContext);
@@ -62,7 +66,7 @@ const Employee = ({ onClick }) => {
 		},
 		{
 			name: "Department",
-			selector: "department",
+			selector: "dept.name",
 			sortable: true,
 		},
 		{
@@ -79,10 +83,13 @@ const Employee = ({ onClick }) => {
 	const [checkList, setCheckList] = useState([]);
 
 	useEffect(() => {
+		getAllEmployee().then(response => { setEmployeeData(response) })
+		// console.log(employeeData)
 		setCheckList(employeeData.map(() => false));
 	}, [JSON.stringify(employeeData)]);
 
-	useEffect(() => {
+	const handleDataChange = () => {
+		// console.log("data change", employeeData)
 		setNewEmployeeData(
 			employeeData.map((data, index) => ({
 				...data,
@@ -100,19 +107,38 @@ const Employee = ({ onClick }) => {
 				),
 			}))
 		);
+	}
+
+	useEffect(() => {
+		handleDataChange()
 	}, [JSON.stringify(employeeData), JSON.stringify(checkList)]);
 
 	useEffect(() => {
 		setCheckList(employeeData.map(() => isCheckAll));
 	}, [isCheckAll]);
 
-	function handleDeleteItem() {
+	const callAPI = () => {
+		getAllEmployee().then((response) => { setEmployeeData(response) })
+	}
+
+	async function handleDeleteItem() {
 		const idList = employeeData
 			.filter((_, index) => checkList[index] == true)
 			.map((v) => v.id);
-		setEmployeeData([
-			...employeeData.filter((item) => !idList.includes(item.id)),
-		]);
+		await idList.forEach((item) => {
+			deleteEmployeeById(item)
+		});
+
+		Swal.fire({
+			icon: 'success',
+			text: 'Successful!',
+			showConfirmButton: false,
+			timer: 1500
+		})
+		callAPI()
+
+		// handleDataChange()
+
 	}
 
 	function handleExport() {

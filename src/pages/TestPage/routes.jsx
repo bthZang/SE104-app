@@ -10,6 +10,9 @@ import ForgotPasswordOutlet from "../LoginPage/ForgotPasswordOutlet/ForgotPasswo
 import AccessDenyPage from "../AccessDenyPage";
 import UploadCV from "../UploadCV/UploadCV";
 import ThanksForUploadCV from "../ThanksForUploadCV/ThanksForUploadCV";
+import TestPage from "./TestPage";
+
+
 
 const router = createBrowserRouter([
 	{
@@ -53,6 +56,10 @@ const router = createBrowserRouter([
 	{
 		path: "/thanks-for-upload-cv",
 		element: <ThanksForUploadCV />,
+	},
+	{
+		path: "/test",
+		element: <TestPage />,
 	},
 ]);
 

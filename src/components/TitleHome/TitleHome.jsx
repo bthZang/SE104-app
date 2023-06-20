@@ -33,7 +33,7 @@ const TitleHome = ({children, showSearch = true, data, onChangeSearch, style} ) 
                 <p >{now}</p>
             
             </div>
-          {showSearch &&  <div className="search"><Search onChange={onChangeSearch}></Search></div>}
+          {showSearch &&  <div className="search"><Search onSearch={onChangeSearch}></Search></div>}
             
         </div>
     );

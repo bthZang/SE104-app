@@ -1,5 +1,5 @@
 import { createContext } from "react";
-
+import { getAllEmployee } from "../api/EmployeeAPI";
 
 export const employeeDataDefault = [
     { id: '#00001', birthplace: 'ketui', ethnictity: 'kinh', citizenId: 'khongnoi', name: 'Bùi Thị Hoàng Giang', gender: 'Male', birthdate: '06/05/2002', department: 'HR', position: 'Director' },
@@ -9,6 +9,8 @@ export const employeeDataDefault = [
     { id: '#00005', birthplace: 'ketui', ethnictity: 'kinh', citizenId: 'khongnoi', name: 'Nguyễn Tuấn Khang', gender: 'Male', birthdate: '10/10/2003', department: 'IT', position: 'Developer' },
     { id: '#00006', birthplace: 'ketui', ethnictity: 'kinh', citizenId: 'khongnoi', name: 'Nguyễn Đức Thành Duy', gender: 'Male', birthdate: '24/03/2003', department: 'IT', position: 'Project owner' },
 ]
+
+
 
 export const EMPLOYEE_DATA_STORAGE_NAME = 'employeeData'
 

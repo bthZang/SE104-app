@@ -123,27 +123,7 @@ const Candidate = ({ onClick, onClose, data }) => {
 						striped={true}
 					></DataTable>
 				</div>
-				<button
-					id="btnCandidateAdd"
-					ref={btnCandidateAddRef}
-					className="btnCandidate"
-					onClick={() => {
-						handleOnClick("btnCandidateAdd");
-					}}
-				>
-					Add new <span style={{ color: "#1233E5" }}>candidate</span>
-				</button>
-				<div>
-					{click == "btnCandidateAdd" && (
-						<AddAttachmentConfirm
-							text={"Candidate"}
-							onClick={onclick}
-							onClose={() => setClick("")}
-						>
-							Add
-						</AddAttachmentConfirm>
-					)}
-				</div>
+
 			</div>
 		</div>
 	);

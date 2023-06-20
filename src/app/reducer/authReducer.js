@@ -7,7 +7,6 @@ import Swal from "sweetalert2";
 
 export const loginPost = createAsyncThunk('authManagement/loginPost', async ({ email, password }) => {
     try {
-
         const res = await axios.post(`${AUTH_API}/login`, { email, password })
         localStorage.setItem('accessToken', res.data.access_token)
         localStorage.setItem('id', res.data.id)
@@ -19,6 +18,9 @@ export const loginPost = createAsyncThunk('authManagement/loginPost', async ({ e
             showConfirmButton: false,
             timer: 1500
         })
+        throw error
+        console.log(error)
+        
     }
 })
 
@@ -43,7 +45,6 @@ export const authManagementSlice = createSlice({
             .addCase(loginPost.fulfilled, (state, action) => {
                 state.status = 'succeeded'
                 state.data = action.payload
-                console.log(state.data)
             })
             .addCase(loginPost.rejected, (state, action) => {
                 state.status = 'failed'

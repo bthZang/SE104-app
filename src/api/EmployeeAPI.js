@@ -3,17 +3,13 @@ import { EMPLOYEE_API } from "../constant/apiURL"
 import axios from "axios"
 
 export async function getAllEmployee() {
-    const accessToken = localStorage.getItem('accessToken')
+    // const accessToken = localStorage.getItem('accessToken')
     try {
-        const res = await axios.get(`${EMPLOYEE_API}/all`, {
-            headers: {
-                Authorization: `Bearer ${accessToken}`
-            }
-        })
-        console.log({employee: res.data})
+        const res = await axios.get(`${EMPLOYEE_API}/all`)
+        // console.log({ employee: res.data })
         return res.data
     } catch (error) {
-        console.log({error})
+        console.log({ error })
         Swal.fire({
             icon: 'error',
             text: 'Something went wrong',
@@ -25,12 +21,9 @@ export async function getAllEmployee() {
 
 export const getOneEmployee = async (accessToken, id) => {
     try {
-        const res = await axios.get(`${EMPLOYEE_API}?id=${id}`, {
-            headers: {
-                Authorization: `Bearer ${accessToken}`
-            }
-        })
-    
+        const res = await axios.get(`${EMPLOYEE_API}?id=${id}`
+        )
+
         return res.data
     } catch (error) {
         Swal.fire({
@@ -42,4 +35,20 @@ export const getOneEmployee = async (accessToken, id) => {
     }
 };
 
-// export const getAllEmployeeBy
+export async function deleteEmployeeById(id) {
+    // const accessToken = localStorage.getItem('accessToken')
+    try {
+        const res = await axios.delete(`${EMPLOYEE_API}/delete?id=${id}`)
+        console.log(res.data, id)
+        return res.data
+    } catch (error) {
+        console.log({ error })
+        Swal.fire({
+            icon: 'error',
+            text: 'Something went wrong',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }
+}
+

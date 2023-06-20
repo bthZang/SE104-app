@@ -1,7 +1,7 @@
 import { RouterProvider } from "react-router-dom";
 import { createBrowserRouter } from "react-router-dom";
 
-import router from "./pages/testPage/routes";
+import router from "./pages/TestPage/routes"
 
 import "./App.css";
 import { useDispatch } from "react-redux";
@@ -17,6 +17,11 @@ import {
   CandidateContext,
   candidateData,
 } from "./contexts/CandidateContext";
+import {
+  PAYROLL_DATA_STORAGE_NAME,
+  PayrollContext,
+  payrollData,
+} from "./contexts/PayrollContext"
 
 function App() {
   const dispatch = useDispatch();
@@ -31,6 +36,7 @@ function App() {
 
   const [employeeDataState, setEmployeeDataState] = useState(employeeData);
   const [candidateDataState, setCandidateDataState] = useState(candidateData);
+  const [payrollDataState, setPayrollDataState] = useState(payrollData);
 
   const employeeProviderValue = {
     employeeData: employeeDataState,
@@ -78,10 +84,35 @@ function App() {
     },
   };
 
+  const payrollProviderValue = {
+    payrollData: payrollDataState,
+    setPayrollData: (newData) => {
+      if (newData instanceof Array) {
+        setPayrollDataState([...newData]);
+        localStorage.setItem(
+          PAYROLL_DATA_STORAGE_NAME,
+          JSON.stringify(newData)
+        );
+      } else if (newData instanceof Function) {
+        let updatedData;
+        setPayrollDataState((prev) => {
+          updatedData = newData(prev);
+          return updatedData;
+        });
+        localStorage.setItem(
+          PAYROLL_DATA_STORAGE_NAME,
+          JSON.stringify(updatedData)
+        );
+      }
+    },
+  };
+
   return (
     <EmployeeContext.Provider value={employeeProviderValue}>
       <CandidateContext.Provider value={candidateProviderValue}>
-        <RouterProvider router={router} />
+        <PayrollContext.Provider value={payrollProviderValue}>
+          <RouterProvider router={router} />
+        </PayrollContext.Provider>
       </CandidateContext.Provider>
     </EmployeeContext.Provider>
   );

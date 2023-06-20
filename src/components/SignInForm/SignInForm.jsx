@@ -41,7 +41,7 @@ export default function SignInForm() {
     }
 
     if (authStatus == 'succeeded' && isCLick) {
-        successAlert()
+         successAlert()
         switch (userRole) {
             case "ADMIN":
                 navigate('/admin')

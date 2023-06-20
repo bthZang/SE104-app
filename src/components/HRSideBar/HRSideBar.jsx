@@ -17,6 +17,7 @@ const HRSideBar = ({handleChange}) => {
     const timekeepingRef = useRef(null);
     const employeeRef = useRef(null);
     const candidateRef = useRef(null);
+    const payrollRef = useRef(null);
 
     return(
         <div className="sideBar">
@@ -25,7 +26,7 @@ const HRSideBar = ({handleChange}) => {
                     <img className="logo" src={logo} ></img>
                     <img className="topSideBar" src={topSideBar} ></img>
                 </div>
-                <div className='top'></div>
+                <div className='topHR'></div>
 
                 {/* <div id="dashboard" ref={dashboardRef} className={tabStatus === 'dashboard' ? "chosen" : "nonChosen"} onClick={() => {
                     handleTabClick(dashboardRef)
@@ -54,6 +55,13 @@ const HRSideBar = ({handleChange}) => {
                     handleChange("candidate")
                     }}>
                     <p className='text' >Candidate</p>
+                </div>
+
+                <div id="payroll" ref={payrollRef} className={tabStatus === 'payroll' ? "chosen" : "nonChosen"} onClick={() => {
+                    handleTabClick(payrollRef)
+                    handleChange("payroll")
+                    }}>
+                    <p className='text' >Payroll</p>
                 </div>
 
                 <div className='last'>

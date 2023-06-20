@@ -13,6 +13,7 @@ import DayTimeKeeping from "../../components/dayTimeKeeping/dayTimeKeeping";
 import MonthTimeKeeping from "../../components/monthTimeKeeping/monthTimeKeeping";
 import TitleHome from "../../components/titleHome/titleHome";
 import { CANDIDATE_API } from "../../constant/apiURL";
+import Payroll from "../../components/payroll/payroll";
 
 const dayTimeKeepingDataDeafault = [
 	{
@@ -306,16 +307,16 @@ function HRPage() {
 
 	const [candidateData, setCandidateData] = useState([]);
 
-	useEffect(() => {
-		(async () => {
-			const response = await axios.get(`${CANDIDATE_API}/all`, {
-				headers: {
-					Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-				},
-			});
-			setCandidateData(response.data);
-		})();
-	}, []);
+	// useEffect(() => {
+	// 	(async () => {
+	// 		const response = await axios.get(`${CANDIDATE_API}/all`, {
+	// 			headers: {
+	// 				Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+	// 			},
+	// 		});
+	// 		setCandidateData(response.data);
+	// 	})();
+	// }, []);
 
 	const [clickPosition, setClickPosition] = useState({
 		x: 0,
@@ -551,6 +552,7 @@ function HRPage() {
 					<Employee onClick={handleOnClickID}></Employee>
 				)}
 				{tab == "candidate" && <Candidate />}
+				{tab == "payroll" && <Payroll onClick={handleOnClickID}/>}
 
 				<div className="confirmBox">
 					{dialogType == "accept" && (

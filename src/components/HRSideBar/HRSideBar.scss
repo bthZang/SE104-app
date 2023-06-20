@@ -103,9 +103,9 @@ padding: 8px;
 
 		}
 
-		.top {
+		.topHR {
 			width: 250px;
-			height: 90px;
+			height:  45px;
 			position: relative;
 			z-index: 1000;
 			float: right;
@@ -116,7 +116,7 @@ padding: 8px;
 			z-index: 1000;
 			border: 0px solid #161248;
 			background-color: #161248;
-			border-radius: 40px;
+			border-bottom-right-radius: 40px;
 
 		}
 
