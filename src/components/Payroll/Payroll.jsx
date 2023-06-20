@@ -130,6 +130,12 @@ const Payroll = ({ onClick }) => {
       sortable: true,
     },
     {
+      name: "Name",
+      selector: "name",
+      sortable: true,
+      width: "400px",
+    },
+    {
       name: "Working days",
       selector: "workingDays",
       sortable: true,
@@ -206,15 +212,6 @@ const Payroll = ({ onClick }) => {
           showSearch={false}
         ></TitleHome>
         <div className="tools">
-          {/* <Dropdown
-            // width={900}
-            options={options}
-            value={selectedOption}
-            onChange={handleChange}
-            placeholder="Select a month"
-            className="customDropdown"
-          ></Dropdown> */}
-
           <DatePicker
             picker="month"
             format="YYYY-MM"

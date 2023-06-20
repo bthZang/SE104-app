@@ -26,16 +26,7 @@ import { EmployeeContext } from "../../contexts/EmployeeContext";
 import ChartTimekeeping from "../../components/ChartTimekeeping/ChartTimekeeping";
 import Payroll from "../../components/payroll/payroll";
 
-const candidateData_ = [
-  { name: "Example1", CV: "Male", applyPosition: "CFO" },
-  { name: "Example2", CV: "Male", applyPosition: "CFO" },
-  { name: "Example3", CV: "Male", applyPosition: "CFO" },
-  { name: "Example4", CV: "Male", applyPosition: "CFO" },
-  { name: "Example5", CV: "Male", applyPosition: "CFO" },
-  { name: "Example6", CV: "Male", applyPosition: "CFO" },
-  { name: "Example7", CV: "Male", applyPosition: "CFO" },
-  { name: "Example8", CV: "Male", applyPosition: "CFO" },
-];
+// 
 
 const dayTimeKeepingDataDeafault = [
   {
@@ -327,10 +318,7 @@ function HRPage() {
     setTab(status);
   };
 
-  const payrollData =[
-    { id: '1', name: 'Khai Ngo ', workingDays: '25', overtime: '1',netSalaryGrade: 3.5}
-   
-  ]
+
 
 //   const [payrollData, setPayrollData] = useState([]);
   const [requestData, setRequestData] = useState([]);
@@ -665,8 +653,9 @@ function HRPage() {
             </div>
             {tabTimekeepingBtn == "day" && (
               <DayTimeKeeping
-                searchValue={searchValue}
-                dayTimeKeepingData={dayTimeKeepingData}
+                onClick={handleOnClickID}
+                // searchValue={searchValue}
+                // dayTimeKeepingData={dayTimeKeepingData}
               ></DayTimeKeeping>
             )}
             {tabTimekeepingBtn == "month" && (
