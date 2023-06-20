@@ -1,6 +1,8 @@
 import DataTable from "react-data-table-component";
 import { useState } from "react";
 
+import {DatePicker } from "antd";
+
 import CustomButton from "../CustomButton/CustomButton";
 import TitleHome from "../titleHome/titleHome";
 import Profile from "../Profile/Profile";
@@ -335,11 +337,24 @@ const MonthTimeKeeping = ({
 }) => {
   const [selectedId, setSelectedId] = useState(null);
 
+
+  const [selectedDate, setSelectedDate] = useState(null);
+  const handleDateChange = (date, dateString) => {
+    const formattedDate = moment(dateString).format("YYYY-MM");
+    setSelectedDate(formattedDate);
+  };
+
   return (
     <div className="containerMonthTimeKeeping">
       <div>
+        <div className="containDatePicker">
+        <DatePicker
+          picker="month"
+          format="YYYY-MM"
+          onChange={handleDateChange}
+          className="custom"
+        /></div>
         <div className="account">
-          
           <DataTable
             columns={columns}
             data={monthTimeKeepingData.filter((d) =>

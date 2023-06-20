@@ -1,49 +1,66 @@
-.containerMonthTimeKeeping{
+.containerMonthTimeKeeping {
+  background-color: white;
+  border: 0px solid white;
+  width: max-content;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 20px;
+  margin-top: 210px;
+  height: max-content;
+  .containDatePicker {
+    width: 100%;
+    padding-top: 50px;
     background-color: white;
-    border: 0px solid white;
-    width: max-content;
+    border: 1px solid white;
     display: flex;
-    flex-direction: column-reverse;
-    gap: 20px;
-    margin-top: 210px;
-	height: max-content;
-    .rdt_TableHead {
-        color: #3552E9;
-        font-size: 20px;
-        border-color: #3552E9;
-        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    position: fixed;
+    z-index: 9;
+    margin-left: -79px;
+    margin-top: -120px;
+    .custom {
+      margin-left: 95px;
+      height: 45px;
+      font-size: 20px;
+      background-color: white;
     }
-    .rdt_TableRow{
-        color: black;
-        font-size: 20px;
-        height: 52px;
-        border-color: #3552E9;
-        
-        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    }
-    .rdt_TableCol{
-        height: 52px;
-        border-color: #3552E9;
-        border: 0.00001px solid #3552E9;
-        width: 160px;
-        
-    }
-    
+  }
+.account{
+    margin-top: 40px;
+}
+  .rdt_TableHead {
+    color: #3552e9;
+    font-size: 20px;
+    border-color: #3552e9;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  }
+  .rdt_TableRow {
+    color: black;
+    font-size: 20px;
+    height: 52px;
+    border-color: #3552e9;
 
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
+  }
+  .rdt_TableCol {
+    height: 52px;
+    border-color: #3552e9;
+    border: 0.00001px solid #3552e9;
+    width: 160px;
+  }
 
-    
-    .titleTable{
-        color: #3552E9;
-        font-size: 28px;
-        font-weight: 500;
-        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
-    }
-    .btn{
-        width: 140px;
-        height: 52px;
-        border-radius: 0px;
-        border: 1px solid #3552E9;
-        background-color: #A0AEF5;
-        color: #1233E5;
-    }
+  .titleTable {
+    color: #3552e9;
+    font-size: 28px;
+    font-weight: 500;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .btn {
+    width: 140px;
+    height: 52px;
+    border-radius: 0px;
+    border: 1px solid #3552e9;
+    background-color: #a0aef5;
+    color: #1233e5;
+  }
 }

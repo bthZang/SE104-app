@@ -1,6 +1,8 @@
 import "./Payroll.scss";
 import * as XLSX from "xlsx";
 
+import { DatePicker } from "antd";
+
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 import { useState, useContext, useEffect } from "react";
@@ -189,20 +191,35 @@ const Payroll = ({ onClick }) => {
     XLSX.writeFile(workbook, "Payroll data.xlsx");
   }
 
+  const [selectedDate, setSelectedDate] = useState(null);
+  const handleDateChange = (date, dateString) => {
+    const formattedDate = moment(dateString).format("YYYY-MM");
+    setSelectedDate(formattedDate);
+  };
+
   return (
     <div className="containerPayroll">
       <div class="titleTable">
-        
-        <TitleHome children={"Payroll"} data={payrollData} showSearch={false}></TitleHome>
+        <TitleHome
+          children={"Payroll"}
+          data={payrollData}
+          showSearch={false}
+        ></TitleHome>
         <div className="tools">
-          <Dropdown
+          {/* <Dropdown
             // width={900}
             options={options}
             value={selectedOption}
             onChange={handleChange}
             placeholder="Select a month"
             className="customDropdown"
-          ></Dropdown>
+          ></Dropdown> */}
+
+          <DatePicker
+            picker="month"
+            format="YYYY-MM"
+            onChange={handleDateChange}
+          />
           <Button
             onClick={handleExport}
             variant="outlined"
