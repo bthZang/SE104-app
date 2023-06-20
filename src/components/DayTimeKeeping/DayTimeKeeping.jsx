@@ -9,8 +9,7 @@ import Search from "../search/search";
 
 import "./DayTimeKeeping.scss";
 
-const DayTimeKeeping = ({ onClick }) => {
-
+const DayTimeKeeping = ({ onClick, searchValue }) => {
   const [isCheckAll, setIsCheckAll] = useState(false);
 
   const [checkList, setCheckList] = useState([]);
@@ -60,7 +59,7 @@ const DayTimeKeeping = ({ onClick }) => {
       ...dayTimekeepingData.filter((item) => !idList.includes(item.id)),
     ]);
   }
-// const columns=[]
+  // const columns=[]
 
   const columns = [
     // {
@@ -110,18 +109,14 @@ const DayTimeKeeping = ({ onClick }) => {
     },
   ];
 
-  
   return (
     <div className="containerDayTimekeeping">
       <div>
-        <div className="search">
-          <Search onSearch={setSearchKeyword} />
-        </div>
         <div className="account">
           <DataTable
             columns={columns}
             data={newDayTimekeepingData.filter((d) =>
-              d.name.toLowerCase().includes(searchKeyword)
+              d.name.toLowerCase().includes(searchValue)
             )}
             pagination={true}
             highlightOnHover={true}

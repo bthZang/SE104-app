@@ -394,25 +394,6 @@ function HRPage() {
     XLSX.writeFile(workbook, "data.xlsx");
   };
 
-//   const handleExportAllPayrollToExcel = () => {
-//     // const row = payrollData.find((data) => data.id == id);
-
-//     const data = [["ID", "Name", "Working days", "Over time", "Salary"]];
-//     for (let i = 0; i < payrollData.length; i++) {
-//       data.push([
-//         payrollData[i].id,
-//         payrollData[i].name,
-//         payrollData[i].workingDays,
-//         // payrollData[i].overTime,
-//         payrollData[i].netSalary,
-//       ]);
-//     }
-//     const workbook = XLSX.utils.book_new();
-//     const worksheet = XLSX.utils.aoa_to_sheet(data);
-//     XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-//     XLSX.writeFile(workbook, "data.xlsx");
-//   };
-
   const [candidateData, setCandidateData] = useState([]);
 
   useEffect(() => {
@@ -559,19 +540,7 @@ function HRPage() {
     setDialogType(type);
   };
 
-//   const newPayrollData = payrollData?.map((data) => ({
-//     ...data,
-//     payslip: (
-//       <CustomButton
-//         onClick={() => {
-//           handleOnClick("export", data.id);
-//         }}
-//         type={"short"}
-//       >
-//         Export
-//       </CustomButton>
-//     ),
-//   }));
+
 
   return (
     <div className="containerHRPage">
@@ -616,7 +585,10 @@ function HRPage() {
         {tab == "dashboard" && <Dashboard data={data}></Dashboard>}
         {tab == "timekeeping" && (
           <div>
-            <TitleHome setSearchValue={setSearchValue} data={data}>
+            <TitleHome
+              setSearchValue={setSearchValue}
+              data={data}
+            >
               Timekeeping
             </TitleHome>
             <div className="timekeepingStyle">
@@ -654,7 +626,7 @@ function HRPage() {
             {tabTimekeepingBtn == "day" && (
               <DayTimeKeeping
                 onClick={handleOnClickID}
-                // searchValue={searchValue}
+                searchValue={searchValue}
                 // dayTimeKeepingData={dayTimeKeepingData}
               ></DayTimeKeeping>
             )}
