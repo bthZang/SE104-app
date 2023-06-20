@@ -33,24 +33,35 @@
     .titleTable{
         color: #3552E9;
         font-size: 28px;
+        background-color: white;
+        position: fixed;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-left: -78px;
+    z-index: 999;
+    margin-top: -150px;
         font-weight: 500;
+        padding-top: 150px;
         font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
     }
     .employee{
-        margin-top: 0px ;
-
-        .tools {
+        margin-top: 100px ;
+z-index: 0;
+        
+    }
+    
+    .tools {
             display: flex;
             flex-direction: row;
             justify-content: start;
             margin-bottom: 20px;
             gap: 20px;
             position: relative;
-
-            .search {
+margin-left: 78px;
+            
+        }.search {
                 margin-left: 100px;
                 margin-top: 0;
             }
-        }
-    }
 }

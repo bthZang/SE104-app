@@ -327,7 +327,12 @@ function HRPage() {
     setTab(status);
   };
 
-  const [payrollData, setPayrollData] = useState([]);
+  const payrollData =[
+    { id: '1', name: 'Khai Ngo ', workingDays: '25', overtime: '1',netSalaryGrade: 3.5}
+   
+  ]
+
+//   const [payrollData, setPayrollData] = useState([]);
   const [requestData, setRequestData] = useState([]);
   const [timekeepingData, setTimekeepingData] = useState([]);
 
@@ -393,7 +398,7 @@ function HRPage() {
         "Allowances",
         "Total",
       ],
-      [id, row.salary, row.overtime_pay, row.overTime, row.netSalary],
+      [id, row.salary, row.netSalary],
     ];
     const workbook = XLSX.utils.book_new();
     const worksheet = XLSX.utils.aoa_to_sheet(data);
@@ -401,24 +406,24 @@ function HRPage() {
     XLSX.writeFile(workbook, "data.xlsx");
   };
 
-  const handleExportAllPayrollToExcel = () => {
-    // const row = payrollData.find((data) => data.id == id);
+//   const handleExportAllPayrollToExcel = () => {
+//     // const row = payrollData.find((data) => data.id == id);
 
-    const data = [["ID", "Name", "Working days", "Over time", "Salary"]];
-    for (let i = 0; i < payrollData.length; i++) {
-      data.push([
-        payrollData[i].id,
-        payrollData[i].name,
-        payrollData[i].workingDays,
-        payrollData[i].overTime,
-        payrollData[i].netSalary,
-      ]);
-    }
-    const workbook = XLSX.utils.book_new();
-    const worksheet = XLSX.utils.aoa_to_sheet(data);
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-    XLSX.writeFile(workbook, "data.xlsx");
-  };
+//     const data = [["ID", "Name", "Working days", "Over time", "Salary"]];
+//     for (let i = 0; i < payrollData.length; i++) {
+//       data.push([
+//         payrollData[i].id,
+//         payrollData[i].name,
+//         payrollData[i].workingDays,
+//         // payrollData[i].overTime,
+//         payrollData[i].netSalary,
+//       ]);
+//     }
+//     const workbook = XLSX.utils.book_new();
+//     const worksheet = XLSX.utils.aoa_to_sheet(data);
+//     XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+//     XLSX.writeFile(workbook, "data.xlsx");
+//   };
 
   const [candidateData, setCandidateData] = useState([]);
 
@@ -566,6 +571,20 @@ function HRPage() {
     setDialogType(type);
   };
 
+//   const newPayrollData = payrollData?.map((data) => ({
+//     ...data,
+//     payslip: (
+//       <CustomButton
+//         onClick={() => {
+//           handleOnClick("export", data.id);
+//         }}
+//         type={"short"}
+//       >
+//         Export
+//       </CustomButton>
+//     ),
+//   }));
+
   return (
     <div className="containerHRPage">
       {clickPosition.isClick && (
@@ -667,9 +686,9 @@ function HRPage() {
         {tab == "candidate" && <Candidate />}
         {tab == "payroll" && (
           <Payroll
-            payrollData={timekeepingData}
-            newPayrollData={newTimekeepingData}
-            onClick={handleOnClick}
+            // payrollData={payrollData}
+            // newPayrollData={newPayrollData}
+            onClick={handleOnClickID}
           />
         )}
 

@@ -1,74 +1,86 @@
-.containerPayroll{
-    background-color: white;
-    border: 0px solid white;
-    min-width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-	min-height: 100vh;
-    margin-top: 120px;
-    .topTable{
-      display: flex;
-      flex-direction: row;
-      margin-top: 20px;
-      margin-bottom: 20px;
-        .customDropdown{
-            border-color: #3552E9 !important ;
-            width: 161px;
-            border-radius: 50px ;
-            margin-right: 1113px;
-        .Dropdow-control{
-            border-radius: 100px ;
-            width: 161px;
-
-        }
-
-        .Dropdown-menu{
-            background-color: white ;
-            border-radius: 5px ;
-            width: 161px;
-
-        }   
-      }
-}
+.containerPayroll {
+  background-color: white;
+  border: 0px solid white;
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 100vh;
+  margin-top: 100px;
 
   .rdt_TableHead {
-      color: #3552E9;
-      font-size: 20px;
-      border-color: #3552E9;
-      font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: #3552e9;
+    font-size: 20px;
+    border-color: #3552e9;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   }
-  .rdt_TableRow{
-      color: black;
-      font-size: 20px;
-      height: 52px;
-      border-color: #3552E9;
-      
-      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  }
-  .rdt_TableCol{
-      height: 52px;
-      border-color: #3552E9;
-      border: 0.00001px solid #3552E9;
-      
-  }
-  
 
- 
-  .titleTable{
-      color: #3552E9;
-      font-size: 28px;
-      font-weight: 500;
-      font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+  .rdt_TableRow {
+    color: black;
+    font-size: 20px;
+    height: 52px;
+    border-color: #3552e9;
+
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
   }
-  .btn{
-      width: 140px;
-      height: 52px;
-      border-radius: 0px;
-      border: 1px solid #3552E9;
-      background-color: #A0AEF5;
-      color: #1233E5;
+
+  .rdt_TableCol {
+    height: 52px;
+    border-color: #3552e9;
+    border: 0.00001px solid #3552e9;
+    width: 200px;
+  }
+
+  .titleTable {
+    color: #3552e9;
+    font-size: 28px;
+    background-color: white;
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-left: -78px;
+    z-index: 999;
+    margin-top: -150px;
+    font-weight: 500;
+    padding-top: 150px;
+    // background-color: red;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    .tools {
+      display: flex;
+      flex-direction: row;
+      justify-content: start;
+      margin-bottom: 20px;
+      gap: 20px;
+      position: relative;
+      margin-left: 78px;
+      background-color: white;
+      .search {
+        margin-left: 100px;
+        margin-top: 0;
+      }
+      .customDropdown {
+        border-color: #3552e9 !important;
+        border-radius: 50px;
+font-size: 20px;
+color: #3552e9;
+        .Dropdow-control {
+          border-radius: 100px;
+          // width: 161px;
+        }
+
+        .Dropdown-menu {
+          background-color: white;
+          border-radius: 5px;
+          // width: 161px;
+        }
+      }
+    }
+  }
+
+  .payroll {
+    margin-top: 100px;
+    z-index: 0;
   }
 }
-
-

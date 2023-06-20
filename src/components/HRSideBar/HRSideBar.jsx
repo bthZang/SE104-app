@@ -69,7 +69,7 @@ const HRSideBar = ({handleChange}) => {
               handleChange("candidate");
             }}
           >
-            <p className="text">Payroll</p>
+            <p className="text">Candidate</p>
           </div>
           <div
             id="payroll"
@@ -80,7 +80,7 @@ const HRSideBar = ({handleChange}) => {
               handleChange("payroll");
             }}
           >
-            <p className="text">Candidate</p>
+            <p className="text">Payroll</p>
           </div>
 
           <div className="last"></div>
