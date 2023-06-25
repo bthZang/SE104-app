@@ -21,7 +21,6 @@ export default function RequestPayrollPopup({ isOpen, handleCancel, handleSend }
 
     const [selectedDate, setSelectedDate] = useState(null);
     const [email, setEmail] = useState(null)
-    const [message, setMessage] = useState(null)
 
     const handleDateChange = (date, dateString) => {
         const formattedDate = moment(dateString).format('YYYY-MM');
@@ -41,7 +40,7 @@ export default function RequestPayrollPopup({ isOpen, handleCancel, handleSend }
             onCancel={handleCancel}
             footer={
                 <div className="modalFooter">
-                    <FlexibleButton label="Send" onClick={() => handleSend(email, message, selectedDate)}></FlexibleButton>
+                    <FlexibleButton label="Send" onClick={() => handleSend(email,  selectedDate)}></FlexibleButton>
                 </div>
             }
         >
@@ -68,13 +67,6 @@ export default function RequestPayrollPopup({ isOpen, handleCancel, handleSend }
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Please enter your email!"
                      />
-                <TextField id="messageInputRequestPayrollPopup" sx={{ width: '100%' }}
-                    label="Message"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    placeholder="Write something..."
-                    multiline />
-
             </div>
         </Modal>
 

@@ -1,11 +1,16 @@
 import "./HomePage.scss"
 import { useNavigate } from "react-router-dom"
 import logo from '../../assets/logo.svg'
-import { useState } from "react"
 import RequestPayrollPopup from '../../components/RequestPayrollPopup/RequestPayrollPopup'
-import IdentityPopUp from "../../components/IdentityPopUp/IdentityPopUp"
-import { addRequest, verifyEmail } from "../../api/RequestAPI"
+import { sendRequest, verifyEmail } from "../../api/RequestAPI"
 import Swal from "sweetalert2"
+import moment from "moment"
+import * as XLSX from 'xlsx'
+import { useState, useContext, useEffect } from "react";
+import { PayrollContext } from "../../contexts/PayrollContext";
+import { getAllPayslip } from "../../api/PayrollAPI";
+import { getAllTimekeeping } from "../../api/TimekeepingAPI";
+
 
 
 
@@ -13,11 +18,13 @@ import Swal from "sweetalert2"
 
 function HomePage() {
   const [triggerRequest, setTriggerRequest] = useState(false)
-  const [triggerIdentity, setTriggerIdentity] = useState(false)
+  const { payrollData, setPayrollData } = useContext(PayrollContext)
+  const [newPayrollData, setNewPayrollData] = useState([])
+  const [timekeepingData, setTimekeepingData] = useState([])
 
-  // const [month, setMonth] = useState(null)
-  // const [bodId, setBodId] = useState(null)
-  // const [message, setMessage] = useState(null)
+  useEffect(() => {
+		handleDataChange()
+	}, [JSON.stringify(payrollData), JSON.stringify(timekeepingData)])
 
 
   const navigate = useNavigate()
@@ -34,41 +41,108 @@ function HomePage() {
   const handleCancel = () => {
     setTriggerRequest(false)
   }
-  const handleSend = async (email, message, month) => {
 
-    if (await handleVerify(email) == false) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Email not exist!',
-      })
-      return
-    }
+  const getPayrollData = (month) => {
+    getAllTimekeeping(month).then(response => { setTimekeepingData(response) })
+    getAllPayslip(month).then(response => { setPayrollData(response) })
+    
+  }
 
-    setTriggerRequest(false)
-    // setMonth(month)
-    // setMessage(message)
-    await addRequest(email, message, month)
+  const handleDataChange = () => {
+    var data = payrollData.map((item) => ({
+      ...item,
+      formattedSalary: new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+      }).format(item.totalSalary),
+    }))
 
-    Swal.fire({
-      icon: 'success',
-      title: 'Successful!',
-      text: 'Please wait response from your Accountant!',
-      showConfirmButton: false,
-      timer: 3000
+
+    var res = data.map((itemA) => {
+      const matchingItem = timekeepingData.find((itemB) => itemB.employee.id == itemA.employee.id)
+      if (matchingItem) {
+        // console.log("dô")
+        return {
+          ...itemA,
+          workingDays: matchingItem.working_days,
+          overtime: matchingItem.overtime,
+          daysOff: matchingItem.days_off,
+        };
+      }
+      return itemA;
     })
 
-
+    setNewPayrollData(res)
   }
 
+  function handleExport() {
+    console.log(newPayrollData)
+    const month = newPayrollData[1].month
+    const data = [Object.keys(newPayrollData[0])];
 
-  const handleVerify = async (email) => {
-    var res
-    await verifyEmail(email)
-      .then(response => {
-        res = response
+    newPayrollData
+      .forEach((d) => data.push(Object.values(d)));
+    const workbook = XLSX.utils.book_new();
+    const worksheet = XLSX.utils.aoa_to_sheet(data);
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+    const fileData = XLSX.write(workbook, { type: 'array', bookType: 'xlsx' });
+    const file = new File([fileData], `Payroll of ${month} .xlsx`, { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    return file
+  }
+
+  const handleSend = (email, month) => {
+
+    // console.log(email, month)
+
+    if (email == null || month == null || month == 'Invalid date') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Please fill out the form!',
       })
-    return res
+    }
+    else if (!moment(month, 'YYYY-MM').isBefore(moment().format('YYYY-MM'))) {
+      if (moment(month, 'YYYY-MM').isSame(moment().format('YYYY-MM'))) {
+        Swal.fire({
+          icon: 'error',
+          title: `This month is not over yet!`,
+        })
+      }
+      else {
+        Swal.fire({
+          icon: 'error',
+          title: `This month hasn't come yet!`,
+        })
+      }
+    }
+    else {
+      verifyEmail(email)
+        .then(response => {
+          if (response == false) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Email not exist!',
+            })
+          }
+          else {
+            Swal.fire({
+              icon: 'success',
+              title: 'Successful!',
+              text: 'Please wait response from your Accountant!',
+              showConfirmButton: false,
+              timer: 3000
+            })
+
+            getPayrollData(month)
+            if (newPayrollData != [])
+              sendRequest(email, handleExport())
+          }
+          setTriggerRequest(false)
+        })
+    }
   }
+
+
+
 
   return (
     <div className="containerHomePage">

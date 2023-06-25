@@ -15,13 +15,12 @@ import { PayrollContext } from "../../contexts/PayrollContext";
 import { getAllPayslip } from "../../api/PayrollAPI";
 import { getAllTimekeeping } from "../../api/TimekeepingAPI";
 import moment from "moment/moment";
-import { DatePicker } from "antd";
+import { DatePicker, Spin } from "antd";
 import IndividualTableContent from "../IndividualTableContent/IndividualTableContent";
 import Profile from "../Profile/Profile";
 
 
-
-
+// const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />
 
 
 const Payroll = ({ onClick }) => {
@@ -79,6 +78,7 @@ const Payroll = ({ onClick }) => {
 	const [newPayrollData, setNewPayrollData] = useState([])
 	const [timekeepingData, setTimekeepingData] = useState([])
 	const [selectedDate, setSelectedDate] = useState('2023-04')
+	const [isLoading, setIsLoading] = useState(null)
 
 	useEffect(() => {
 		handleDataChange()
@@ -86,7 +86,9 @@ const Payroll = ({ onClick }) => {
 
 	useEffect(() => {
 		if (selectedDate != 'Invalid date') {
-			// console.log("dô, month=", selectedDate)
+
+			setIsLoading(true)
+			console.log("dô, ", isLoading)
 			getAllTimekeeping(selectedDate).then(response => { setTimekeepingData(response) })
 			getAllPayslip(selectedDate).then(response => { setPayrollData(response) })
 
@@ -109,7 +111,7 @@ const Payroll = ({ onClick }) => {
 		var res = data.map((itemA) => {
 			const matchingItem = timekeepingData.find((itemB) => itemB.employee.id == itemA.employee.id)
 			if (matchingItem) {
-				console.log("dô")
+				// console.log("dô")
 				return {
 					...itemA,
 					workingDays: matchingItem.working_days,
@@ -121,8 +123,9 @@ const Payroll = ({ onClick }) => {
 		})
 
 		setNewPayrollData(res)
+		setIsLoading(false)
 
-		console.log(res)
+		// console.log(res)
 	}
 
 	// const setSearchKeyword = () =>{}
@@ -135,7 +138,7 @@ const Payroll = ({ onClick }) => {
 	function handleExport() {
 		const month = newPayrollData[1].month
 		const data = [Object.keys(newPayrollData[0])];
-		
+
 		newPayrollData
 			.forEach((d) => data.push(Object.values(d)));
 		const workbook = XLSX.utils.book_new();
@@ -159,27 +162,29 @@ const Payroll = ({ onClick }) => {
 					</Button>
 					<DatePicker defaultValue={moment(selectedDate, 'YYYY-MM')} picker="month" format="YYYY-MM" onChange={handleDateChange} />
 				</div>
-				<DataTable
-					columns={columns}
-					data={newPayrollData.filter((d) =>
-						d.employee.name.toLowerCase().includes(searchKeyword)
-					)}
-					pagination={true}
-					highlightOnHover={true}
-					striped={true}
-					onRowClicked={(row) => {
-						setSelectedId(row.id);
-						onClick(row.id);
-					}}
-				></DataTable>
+				{isLoading == false &&
+					<DataTable
+						columns={columns}
+						data={newPayrollData.filter((d) =>
+							d.employee.name.toLowerCase().includes(searchKeyword)
+						)}
+						pagination={true}
+						highlightOnHover={true}
+						striped={true}
+						onRowClicked={(row) => {
+							setSelectedId(row.id);
+							onClick(row.id);
+						}}
+					></DataTable>}
+				{isLoading == true && <Spin />}
 				{selectedId !== null && (
 					<IndividualTableContent
 						id={selectedId}
 						data={newPayrollData.find((d) => d.id == selectedId)}
-						name = {newPayrollData.find((d) => d.id == selectedId).employee.name}
+						name={newPayrollData.find((d) => d.id == selectedId).employee.name}
 						onClose={() => setSelectedId(null)}
 					></IndividualTableContent>
-					
+
 				)}
 
 			</div>
