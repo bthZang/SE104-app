@@ -12,7 +12,9 @@ export const employeeDataDefault = [
 
 export const EMPLOYEE_DATA_STORAGE_NAME = 'employeeData'
 
-export const persistentEmployeeData = JSON.parse(localStorage.getItem(EMPLOYEE_DATA_STORAGE_NAME))
+export const persistentEmployeeData = JSON.parse(
+  localStorage.getItem( JSON.stringify(EMPLOYEE_DATA_STORAGE_NAME))
+);
 
 export const employeeData = persistentEmployeeData || employeeDataDefault
 
@@ -20,6 +22,9 @@ export const EmployeeContext = createContext({
     employeeData,
     setEmployeeData: (index, newData) => {
         employeeData[index] = newData
-        localStorage.setItem(EMPLOYEE_DATA_STORAGE_NAME, employeeData)
+        localStorage.setItem(
+          EMPLOYEE_DATA_STORAGE_NAME,
+          JSON.stringify(employeeData)
+        );
     }
 })

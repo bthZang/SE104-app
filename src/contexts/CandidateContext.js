@@ -3,9 +3,21 @@ import CV from '../assets/cv/Nguyen_Hoang_Hy_CV.pdf'
 
 
 export const candidateDataDefault = [
-    { name: 'Nguyễn Hoàng Hiến', gender: 'Male', CV: CV, applyPosition: 'CEO' },
-    { name: 'Trần Thị Tuyết Mai', gender: 'Female', CV: '', applyPosition: 'CTO' },
-]
+  {
+    id: "1",
+    name: "Nguyễn Hoàng Hiến",
+    gender: "Male",
+    CV: CV,
+    applyPosition: "CEO",
+  },
+  {
+    id: "2",
+    name: "Trần Thị Tuyết Mai",
+    gender: "Female",
+    CV: "",
+    applyPosition: "CTO",
+  },
+];
 
 export const CANDIDATE_DATA_STORAGE_NAME = 'candidateData'
 

@@ -42,8 +42,6 @@ function handleExport() {
   XLSX.writeFile(workbook, "Payroll data.xlsx");
 }
 
-// const columns = [
-//   {
 //     name: "ID",
 //     selector: "id",
 //     sortable: true,

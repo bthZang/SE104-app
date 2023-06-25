@@ -1,67 +1,70 @@
-.containerEmployee{
-    background-color: white;
-    border: 0px solid white;
-    min-width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-	min-height: 100vh;
-    margin-top: 100px;
+.containerEmployee {
+  background-color: white;
+  border: 0px solid white;
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 100vh;
+  margin-top: 100px;
 
-    .rdt_TableHead {
-        color: #3552E9;
-        font-size: 20px;
-        border-color: #3552E9;
-        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    }
-    .rdt_TableRow{
-        color: black;
-        font-size: 20px;
-        height: 52px;
-        border-color: #3552E9;
-        
-        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    }
-    .rdt_TableCol{
-        height: 52px;
-        border-color: #3552E9;
-        border: 0.00001px solid #3552E9;
-        width: 200px;
-        
-    }
-    
-    .titleTable{
-        color: #3552E9;
-        font-size: 28px;
-        background-color: white;
-        position: fixed;
+  .rdt_TableHead {
+    color: #3552e9;
+    font-size: 20px;
+    border-color: #3552e9;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    // position: fixed;
+    background-color: #ffffff !important;
+  }
+  .rdt_TableBody {
+    // margin-top: 52px;
+  }
+  .rdt_TableRow {
+    color: black;
+    font-size: 20px;
+    height: 52px;
+    border-color: #3552e9;
+
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
+  }
+  .rdt_TableCol {
+    height: 52px;
+    border-color: #3552e9;
+    border: 0.00001px solid #3552e9;
+    width: 200px;
+  }
+  .titleTable {
+    color: #3552e9;
+    font-size: 28px;
+    background-color: white;
+    position: fixed;
     display: flex;
     flex-direction: row;
     width: 100%;
     margin-left: -78px;
     z-index: 999;
     margin-top: -150px;
-        font-weight: 500;
-        padding-top: 150px;
-        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
-    }
-    .employee{
-        margin-top: 100px ;
-z-index: 0;
-        
-    }
-    
-    .tools {
-            display: flex;
-            flex-direction: row;
-            justify-content: start;
-            margin-bottom: 20px;
-            gap: 20px;
-            position: relative;
-margin-left: 78px;
-            
-        }.search {
-                margin-left: 100px;
-                margin-top: 0;
-            }
+    font-weight: 500;
+    padding-top: 150px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .employee {
+    margin-top: 100px;
+    z-index: 0;
+  }
+
+  .tools {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    margin-bottom: 20px;
+    gap: 20px;
+    position: relative;
+    margin-left: 78px;
+  }
+  .search {
+    margin-left: 100px;
+    margin-top: 0;
+  }
 }

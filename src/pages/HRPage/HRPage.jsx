@@ -12,7 +12,7 @@ import { selectAccessToken } from "../../app/reducer/authReducer";
 import HRSideBar from "../../components/HRSideBar/HRSideBar";
 import Employee from "../../components/Employee/Employee";
 import DayTimeKeeping from "../../components/dayTimeKeeping/dayTimeKeeping";
-import Candidate from "../../components/candidate/candidate";
+// import Candidate from "../../components/candidate/candidate";
 import Dashboard from "../../components/dashboard/dashboard";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import Confirm from "../../components/Confirm/Confirm";
@@ -25,7 +25,7 @@ import { CANDIDATE_API } from "../../constant/apiURL";
 import { EmployeeContext } from "../../contexts/EmployeeContext";
 import ChartTimekeeping from "../../components/ChartTimekeeping/ChartTimekeeping";
 import Payroll from "../../components/payroll/payroll";
-
+import Candidate from "../../components/candidate/candidate"
 // 
 
 const dayTimeKeepingDataDeafault = [
