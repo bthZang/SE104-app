@@ -6,6 +6,8 @@ export const candidateDataDefault = [
   {
     id: "1",
     name: "Nguyễn Hoàng Hiến",
+    interviewStatus: "pass",
+
     gender: "Male",
     CV: CV,
     applyPosition: "CEO",
@@ -13,6 +15,17 @@ export const candidateDataDefault = [
   {
     id: "2",
     name: "Trần Thị Tuyết Mai",
+    interviewStatus: "fail",
+
+    gender: "Female",
+    CV: "",
+    applyPosition: "CTO",
+  },
+  {
+    id: "3",
+    name: "HYH",
+    interviewStatus: "pending",
+
     gender: "Female",
     CV: "",
     applyPosition: "CTO",

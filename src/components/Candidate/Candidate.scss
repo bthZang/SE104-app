@@ -51,6 +51,48 @@
     font-weight: bold;
     margin-bottom: 100px;
   }
+.attachment {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+
+    
+
+    .inputFile {
+        border: 1px solid lightGray;
+        background-color: white;
+        width: 100%;
+        height: 70px;
+        overflow: auto;
+        border-radius: 5px;
+        color: lightGray;
+        display: none;
+        align-self: center;
+        justify-content: center;
+        align-items: center;
+        vertical-align: middle;
+        align-content: center;
+        padding: auto;
+        visibility: hidden;
+    }
+
+    .inputFileBox {
+        border: 1px solid transparent;
+        background-color: transparent;
+        width: 100%;
+        height: 70px;
+        // border-radius: 5px;
+        color: rgb(14, 11, 198);
+        display: flex;
+        align-items:end;
+        // vertical-align: middle;
+        justify-content: flex-start;
+        padding-left: 16px;
+        padding-right: 16px;
+        overflow: auto;
+    }
+}
+
   .titleTable {
       color: #3552e9;
       font-size: 28px;

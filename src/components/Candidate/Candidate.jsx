@@ -16,7 +16,7 @@ import { EmployeeContext, employeeData } from "../../contexts/EmployeeContext";
 
 const Candidate = ({ onClick, onClose, data }) => {
   const { candidateData, setCandidateData } = useContext(CandidateContext);
-  const {employeeData, setEmployeeData } = useContext(EmployeeContext);
+  const { employeeData, setEmployeeData } = useContext(EmployeeContext);
 
   const [click, setClick] = useState(null);
 
@@ -36,44 +36,24 @@ const Candidate = ({ onClick, onClose, data }) => {
     setCandidateData((prev) => [...prev.filter((d) => d.id != id)]);
   };
 
-  // const newCandidateData = candidateData.map((data) => ({
-  // 	...data,
-  // 	// name: data.firstName + " " + data.lastName,
-  // 	CV: data.CV?.split ? (
-  // 		<a href={data.CV} download={true}>
-  // 			{data.CV?.split?.("/").at(-1)}
-  // 		</a>
-  // 	) : (
-  // 		<p>No CV</p>
-  // 	),
-  // 	acceptBtn: (
-  // 		<CustomButton
-  // 			onClick={() => {
-  // 				handleOnClick("accept", data.name);
-  // 			}}
-  // 			type={"short"}
-  // 		>
-  // 			Accept
-  // 		</CustomButton>
-  // 	),
-  // 	rejectBtn: (
-  // 		<CustomButton
-  // 			onClick={() => {
-  // 				handleOnClick("reject", data.name);
-  // 			}}
-  // 			type={"short"}
-  // 		>
-  // 			Reject
-  // 		</CustomButton>
-  // 	),
-  // }));
-
   const [newCandidateData, setNewCandidateData] = useState([]);
 
   const [selectedId, setSelectedId] = useState(null);
   const [searchKeyword, setSearchKeyword] = useState("");
   const [checkList, setCheckList] = useState([]);
   const [isCheckAll, setIsCheckAll] = useState(false);
+
+  const [attachment, setAttachment] = useState([]);
+
+  const handleAttachment = (e, index) => {
+    const file = e.target.files[0];
+
+    const list = [...attachment];
+	list[index] = file;
+    setAttachment(list);
+    setColor("red");
+   
+  };
 
   useEffect(() => {
     setNewCandidateData(
@@ -98,9 +78,25 @@ const Candidate = ({ onClick, onClose, data }) => {
             }
           />
         ),
+        interviewResult: (
+          <label className="attachment">
+            <input
+              type="file"
+              className="inputFile"
+              onChange={(e) => handleAttachment(e, index)}
+            ></input>
+            <div className="inputFileBox">
+              {attachment[index]?.name || "No file attached"}
+            </div>
+          </label>
+        ),
       }))
     );
-  }, [JSON.stringify(candidateData), JSON.stringify(checkList)]);
+  }, [
+    JSON.stringify(candidateData),
+    JSON.stringify(checkList),
+    JSON.stringify(attachment),
+  ]);
 
   useEffect(() => {
     setCheckList(candidateData.map(() => isCheckAll));
@@ -126,7 +122,7 @@ const Candidate = ({ onClick, onClose, data }) => {
       .map((v) => v.id);
 
     const newEmployees = candidateData
-    //   .filter((item) => idList.includes(item.id))
+      //   .filter((item) => idList.includes(item.id))
       .filter((_, index) => checkList[index] == true)
 
       .map((item) => ({
@@ -143,8 +139,8 @@ const Candidate = ({ onClick, onClose, data }) => {
     setCandidateData([
       ...candidateData.filter((item) => !idList.includes(item.id)),
     ]);
-	// setEmployeeData([]);
-	console.log('it worked')
+    // setEmployeeData([]);
+    console.log("it worked");
     console.log(employeeData);
 
     setCheckList([]);
@@ -173,6 +169,19 @@ const Candidate = ({ onClick, onClose, data }) => {
       sortable: true,
     },
     {
+      name: "Interview Status",
+      selector: "interviewStatus",
+      sortable: true,
+      width: "300px",
+    },
+    {
+      name: "Interview Result",
+      selector: "interviewResult",
+      sortable: true,
+      width: "300px",
+      enctype: "multipart",
+    },
+    {
       name: "Gender",
       selector: "gender",
       sortable: true,
@@ -187,22 +196,6 @@ const Candidate = ({ onClick, onClose, data }) => {
       selector: "applyPosition",
       sortable: true,
     },
-    // {
-    // 	name: "",
-    // 	selector: "acceptBtn",
-    // 	sortable: true,
-    // 	style: {
-    // 		justifyContent: "center",
-    // 	},
-    // },
-    // {
-    // 	name: "",
-    // 	selector: "rejectBtn",
-    // 	sortable: true,
-    // 	style: {
-    // 		justifyContent: "center",
-    // 	},
-    // },
   ];
 
   return (
