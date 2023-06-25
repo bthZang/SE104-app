@@ -1,12 +1,12 @@
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { TIMEKEEPING_API } from '../constant/apiURL';
+import { DAILYTK_API } from '../constant/apiURL';
 
 
-export const getAllTimekeeping = async (month) => {
+export const getAllDailyTkByEmployeeAndMonth = async (staffId, month) => {
     try {
-        const res = await axios.get(`${TIMEKEEPING_API}/all?month=${month}`)
-        console.log("tk", res.data)
+        const res = await axios.get(`${DAILYTK_API}/all/${staffId}?month=${month}`)
+        // console.log(res.data)
         return res.data
     } catch (error) {
         Swal.fire({

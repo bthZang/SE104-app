@@ -1,10 +1,11 @@
 import DataTable from "react-data-table-component";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 
 import CustomButton from "../CustomButton/CustomButton";
 import TitleHome from "../titleHome/titleHome";
 
 import "./MonthTimeKeeping.scss";
+
 import {
   BarChart,
   Bar,
@@ -14,334 +15,45 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-
-const columns = [
-  {
-    name: "ID",
-    selector: "id",
-    sortable: true,
-  },
-  {
-    name: "Name",
-    selector: "name",
-    sortable: true,
-    width: "350px",
-  },
-
-  {
-    name: "01",
-    selector: "one",
-    sortable: true,
-    width: "50px",
-    minWidth: "50px",
-    maxWidth: "50px",
-    compact: true,
-  },
-  {
-    name: "02",
-    selector: "two",
-    sortable: true,
-    width: "50px",
-    minWidth: "50px",
-    maxWidth: "50px",
-    compact: true,
-  },
-  {
-    name: "03",
-    selector: "three",
-    sortable: true,
-    width: "50px",
-    minWidth: "50px",
-    maxWidth: "50px",
-    compact: true,
-  },
-  {
-    name: "04",
-    selector: "four",
-    sortable: true,
-    width: "50px",
-    minWidth: "50px",
-    maxWidth: "50px",
-    compact: true,
-  },
-  {
-    name: "05",
-    selector: "five",
-    sortable: true,
-    width: "50px",
-    minWidth: "50px",
-    maxWidth: "50px",
-    compact: true,
-  },
-  {
-    name: "06",
-    selector: "six",
-    sortable: true,
-    width: "50px",
-    minWidth: "50px",
-    maxWidth: "50px",
-    compact: true,
-  },
-  {
-    name: "07",
-    selector: "seven",
-    sortable: true,
-    width: "50px",
-    minWidth: "50px",
-    maxWidth: "50px",
-    compact: true,
-  },
-  {
-    name: "08",
-    selector: "eight",
-    sortable: true,
-    width: "50px",
-    minWidth: "50px",
-    maxWidth: "50px",
-    compact: true,
-  },
-  {
-    name: "09",
-    selector: "nine",
-    sortable: true,
-    width: "50px",
-    minWidth: "50px",
-    maxWidth: "50px",
-    compact: true,
-  },
-  {
-    name: "10",
-    selector: "ten",
-    sortable: true,
-    width: "50px",
-    minWidth: "50px",
-    maxWidth: "50px",
-    compact: true,
-  },
-  {
-    name: "11",
-    selector: "eleven",
-    sortable: true,
-    width: "50px",
-    minWidth: "50px",
-    maxWidth: "50px",
-    compact: true,
-  },
-  {
-    name: "12",
-    selector: "twelve",
-    sortable: true,
-    width: "50px",
-    minWidth: "50px",
-    maxWidth: "50px",
-    compact: true,
-  },
-  {
-    name: "13",
-    selector: "thirteen",
-    sortable: true,
-    width: "50px",
-    minWidth: "50px",
-    maxWidth: "50px",
-    compact: true,
-  },
-  {
-    name: "14",
-    selector: "fourteen",
-    sortable: true,
-    width: "50px",
-    minWidth: "50px",
-    maxWidth: "50px",
-    compact: true,
-  },
-  {
-    name: "15",
-    selector: "fifteen",
-    sortable: true,
-    width: "50px",
-    minWidth: "50px",
-    maxWidth: "50px",
-    compact: true,
-  },
-  {
-    name: "16",
-    selector: "sixteen",
-    sortable: true,
-    width: "50px",
-    minWidth: "50px",
-    maxWidth: "50px",
-    compact: true,
-  },
-  {
-    name: "17",
-    selector: "seventeen",
-    sortable: true,
-    width: "50px",
-    minWidth: "50px",
-    maxWidth: "50px",
-    compact: true,
-  },
-  {
-    name: "18",
-    selector: "eighteen",
-    sortable: true,
-    width: "50px",
-    minWidth: "50px",
-    maxWidth: "50px",
-    compact: true,
-  },
-  {
-    name: "19",
-    selector: "nineteen",
-    sortable: true,
-    width: "50px",
-    minWidth: "50px",
-    maxWidth: "50px",
-    compact: true,
-  },
-  {
-    name: "20",
-    selector: "twenty",
-    sortable: true,
-    width: "50px",
-    minWidth: "50px",
-    maxWidth: "50px",
-    compact: true,
-  },
-  {
-    name: "21",
-    selector: "twentyOne",
-    sortable: true,
-    width: "50px",
-    minWidth: "50px",
-    maxWidth: "50px",
-    compact: true,
-  },
-  {
-    name: "22",
-    selector: "twentyTwo",
-    sortable: true,
-    width: "50px",
-    minWidth: "50px",
-    maxWidth: "50px",
-    compact: true,
-  },
-  {
-    name: "23",
-    selector: "twentyThree",
-    sortable: true,
-    width: "50px",
-    minWidth: "50px",
-    maxWidth: "50px",
-    compact: true,
-  },
-  {
-    name: "24",
-    selector: "twentyFour",
-    sortable: true,
-    width: "50px",
-    minWidth: "50px",
-    maxWidth: "50px",
-    compact: true,
-  },
-  {
-    name: "25",
-    selector: "twentyFive",
-    sortable: true,
-    width: "50px",
-    minWidth: "50px",
-    maxWidth: "50px",
-    compact: true,
-  },
-  {
-    name: "26",
-    selector: "twentySix",
-    sortable: true,
-    width: "50px",
-    minWidth: "50px",
-    maxWidth: "50px",
-    compact: true,
-  },
-  {
-    name: "27",
-    selector: "twentySeven",
-    sortable: true,
-    width: "50px",
-    minWidth: "50px",
-    maxWidth: "50px",
-    compact: true,
-  },
-  {
-    name: "28",
-    selector: "twentyEight",
-    sortable: true,
-    width: "50px",
-    minWidth: "50px",
-    maxWidth: "50px",
-    compact: true,
-  },
-  {
-    name: "29",
-    selector: "twentyNine",
-    sortable: true,
-    width: "50px",
-    minWidth: "50px",
-    maxWidth: "50px",
-    compact: true,
-  },
-  {
-    name: "30",
-    selector: "thirty",
-    sortable: true,
-    width: "50px",
-    minWidth: "50px",
-    maxWidth: "50px",
-    compact: true,
-  },
-  {
-    name: "Working days",
-    selector: "workingDays",
-    sortable: true,
-    width: "200px",
-  },
-  {
-    name: "Days off",
-    selector: "dayOff",
-    sortable: true,
-    width: "200px",
-  },
-  {
-    name: "Overtime",
-    selector: "overtime",
-    sortable: true,
-    width: "200px",
-  },
-  {
-    name: "Total",
-    selector: "total",
-    sortable: true,
-  },
-];
+import { DatePicker, Spin } from "antd";
+import { getAllDailyTkByEmployeeAndMonth } from "../../api/DailyTkAPI";
+import { getAllTimekeeping } from "../../api/TimekeepingAPI";
+import moment from "moment";
 
 
 
-const MonthTimeKeeping = ({ onClick, handleChange, monthTimeKeepingData }) => {
+
+
+const MonthTimeKeeping = ({ onClick,  monthTimekeepingData, handleDateChange, selectedDate, isLoading, columns}) => {
+
+  
+  
   return (
     <div className="containerMonthTimeKeeping">
       <div>
-        <div className="account">
+        <div className="containDatePicker">
+          <DatePicker
+            picker="month"
+            format="YYYY-MM"
+            defaultValue={moment(selectedDate, 'YYYY-MM')}
+            onChange={handleDateChange}
+            className="custom"
+          /></div>
+        {isLoading == false &&
           <DataTable
             columns={columns}
-            data={monthTimeKeepingData}
+            data={monthTimekeepingData}
             pagination={true}
             highlightOnHover={true}
             striped={true}
-            expandableRows={true}
+          // expandableRows={true}
           ></DataTable>
-        </div>
+
+        }
+        {isLoading == true && <Spin />}
       </div>
 
-     
+
     </div>
   );
 };

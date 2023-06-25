@@ -2,7 +2,6 @@ import { createContext } from "react";
 
 
 export const payrollDataDefault = [
-    { name:"CC", workingDay: "0", overtime:"0", dayOff:"0",salary: "100" },
 ]
 
 

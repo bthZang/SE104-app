@@ -12,6 +12,7 @@ import Search from "../search/search";
 import CustomButton from "../CustomButton/CustomButton";
 
 import { PayrollContext } from "../../contexts/PayrollContext";
+import { MonthTimekeepingContext } from "../../contexts/MonthTimekeepingContext";
 import { getAllPayslip } from "../../api/PayrollAPI";
 import { getAllTimekeeping } from "../../api/TimekeepingAPI";
 import moment from "moment/moment";
@@ -72,27 +73,50 @@ const Payroll = ({ onClick }) => {
 	]
 
 	const { payrollData, setPayrollData } = useContext(PayrollContext)
+	const { monthTimekeepingData, setMonthTimekeepingData } = useContext(MonthTimekeepingContext)
 
 	const [selectedId, setSelectedId] = useState(null)
 	const [searchKeyword, setSearchKeyword] = useState("")
 	const [newPayrollData, setNewPayrollData] = useState([])
-	const [timekeepingData, setTimekeepingData] = useState([])
+
 	const [selectedDate, setSelectedDate] = useState('2023-04')
-	const [isLoading, setIsLoading] = useState(null)
+	const [isLoading, setIsLoading] = useState(true)
+	const [isChanged, setIsChanged] = useState(false)
+	// const [apiCount, setApiCount] = useState(0)
+
+
+	const callAPI = async () => {
+		console.log("call")
+		getAllTimekeeping(selectedDate).then(response => {
+			setMonthTimekeepingData(response)
+		})
+		getAllPayslip(selectedDate).then(response => {
+			setPayrollData(response)
+		})
+		// console.log("call xong")
+	}
+
 
 	useEffect(() => {
 		handleDataChange()
-	}, [JSON.stringify(payrollData), JSON.stringify(timekeepingData)])
+	}, [JSON.stringify(payrollData), JSON.stringify(monthTimekeepingData)])
 
 	useEffect(() => {
-		if (selectedDate != 'Invalid date') {
-
+		if (selectedDate != 'Invalid date' && isChanged == true) {
 			setIsLoading(true)
-			console.log("dô, ", isLoading)
-			getAllTimekeeping(selectedDate).then(response => { setTimekeepingData(response) })
-			getAllPayslip(selectedDate).then(response => { setPayrollData(response) })
+			// console.log("dô, ", isLoading)
+			callAPI()
 
 		}
+		else
+			if (selectedDate != 'Invalid date' && isChanged == false && payrollData.length && monthTimekeepingData.length) {
+				console.log(payrollData, monthTimekeepingData)
+				handleDataChange()
+			}
+			else
+				if (selectedDate != 'Invalid date' && isChanged == false) {
+					callAPI()
+				}
 	}, [selectedDate])
 
 
@@ -109,9 +133,8 @@ const Payroll = ({ onClick }) => {
 
 
 		var res = data.map((itemA) => {
-			const matchingItem = timekeepingData.find((itemB) => itemB.employee.id == itemA.employee.id)
+			const matchingItem = monthTimekeepingData.find((itemB) => itemB.employee.id == itemA.employee.id)
 			if (matchingItem) {
-				// console.log("dô")
 				return {
 					...itemA,
 					workingDays: matchingItem.working_days,
@@ -123,16 +146,18 @@ const Payroll = ({ onClick }) => {
 		})
 
 		setNewPayrollData(res)
+		setIsChanged(false)
 		setIsLoading(false)
 
-		// console.log(res)
 	}
 
 	// const setSearchKeyword = () =>{}
 
 	const handleDateChange = (date, dateString) => {
-		const formattedDate = moment(dateString).format('YYYY-MM');
-		setSelectedDate(formattedDate);
+		const formattedDate = moment(dateString).format('YYYY-MM')
+		setSelectedDate(formattedDate)
+		setIsChanged(true)
+
 	}
 
 	function handleExport() {

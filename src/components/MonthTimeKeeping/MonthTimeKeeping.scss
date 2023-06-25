@@ -7,6 +7,26 @@
     gap: 20px;
     margin-top: 210px;
 	height: max-content;
+    .containDatePicker {
+        width: 100%;
+        padding-top: 50px;
+        background-color: white;
+        border: 1px solid white;
+        display: flex;
+        position: fixed;
+        z-index: 9;
+        margin-left: -79px;
+        margin-top: -120px;
+        .custom {
+          margin-left: 95px;
+          height: 45px;
+          font-size: 20px;
+          background-color: white;
+        }
+      }
+      .account{
+        margin-top: 40px;
+    }
     .rdt_TableHead {
         color: #3552E9;
         font-size: 20px;

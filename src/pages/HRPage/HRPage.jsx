@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
 import "./HRPage.scss";
 
 import axios from "axios";
@@ -14,6 +14,12 @@ import MonthTimeKeeping from "../../components/monthTimeKeeping/monthTimeKeeping
 import TitleHome from "../../components/titleHome/titleHome";
 import { CANDIDATE_API } from "../../constant/apiURL";
 import Payroll from "../../components/payroll/payroll";
+import { MonthTimekeepingContext } from "../../contexts/MonthTimekeepingContext";
+import { getAllDailyTkByEmployeeAndMonth } from "../../api/DailyTkAPI";
+import moment from "moment";
+import { getAllTimekeeping } from "../../api/TimekeepingAPI";
+
+
 
 const dayTimeKeepingDataDeafault = [
 	{
@@ -66,236 +72,6 @@ const dayTimeKeepingDataDeafault = [
 	},
 ];
 
-const monthTimeKeepingDataDefault = [
-	{
-		id: "1",
-		name: "Khai Ngo",
-		one: "D",
-		two: "P",
-		three: "D",
-		four: "P",
-		five: "D",
-		six: "P",
-		seven: "P",
-		eight: "P",
-		nine: "P",
-		ten: "P",
-		eleven: "P",
-		twelve: "P",
-		thirteen: "P",
-		fourteen: "P",
-		fifteen: "P",
-		sixteen: "P",
-		seventeen: "P",
-		eighteen: "P",
-		nineteen: "T",
-		twenty: "P",
-		thirty: "P",
-		twentyNine: "P",
-		twentyEight: "P",
-		twentySeven: "P",
-		twentySix: "P",
-		twentyFive: "P",
-		twentyFour: "P",
-		twentyThree: "P",
-		twentyTwo: "P",
-		twentyOne: "P",
-		workingDays: "3",
-		dayOff: "25",
-		overtime: "1",
-		total: "30",
-	},
-	{
-		id: "3",
-		name: "Giang Bui",
-		one: "D",
-		two: "P",
-		three: "D",
-		four: "P",
-		five: "D",
-		six: "P",
-		seven: "P",
-		eight: "P",
-		nine: "P",
-		ten: "P",
-		eleven: "P",
-		twelve: "P",
-		thirteen: "P",
-		fourteen: "P",
-		fifteen: "P",
-		sixteen: "P",
-		seventeen: "P",
-		eighteen: "P",
-		nineteen: "T",
-		twenty: "P",
-		thirty: "P",
-		twentyNine: "P",
-		twentyEight: "P",
-		twentySeven: "P",
-		twentySix: "P",
-		twentyFive: "P",
-		twentyFour: "P",
-		twentyThree: "P",
-		twentyTwo: "P",
-		twentyOne: "P",
-		workingDays: "3",
-		dayOff: "25",
-		overtime: "1",
-		total: "30",
-	},
-	{
-		id: "4",
-		name: "Hy Nguyen",
-		one: "D",
-		two: "P",
-		three: "D",
-		four: "P",
-		five: "D",
-		six: "P",
-		seven: "P",
-		eight: "P",
-		nine: "P",
-		ten: "P",
-		eleven: "P",
-		twelve: "P",
-		thirteen: "P",
-		fourteen: "P",
-		fifteen: "P",
-		sixteen: "P",
-		seventeen: "P",
-		eighteen: "P",
-		nineteen: "T",
-		twenty: "P",
-		thirty: "P",
-		twentyNine: "P",
-		twentyEight: "P",
-		twentySeven: "P",
-		twentySix: "P",
-		twentyFive: "P",
-		twentyFour: "P",
-		twentyThree: "P",
-		twentyTwo: "P",
-		twentyOne: "P",
-		workingDays: "3",
-		dayOff: "25",
-		overtime: "1",
-		total: "30",
-	},
-	{
-		id: "5",
-		name: "Duy Nguyen",
-		one: "D",
-		two: "P",
-		three: "D",
-		four: "P",
-		five: "D",
-		six: "P",
-		seven: "P",
-		eight: "P",
-		nine: "P",
-		ten: "P",
-		eleven: "P",
-		twelve: "P",
-		thirteen: "P",
-		fourteen: "P",
-		fifteen: "P",
-		sixteen: "P",
-		seventeen: "P",
-		eighteen: "P",
-		nineteen: "T",
-		twenty: "P",
-		thirty: "P",
-		twentyNine: "P",
-		twentyEight: "P",
-		twentySeven: "P",
-		twentySix: "P",
-		twentyFive: "P",
-		twentyFour: "P",
-		twentyThree: "P",
-		twentyTwo: "P",
-		twentyOne: "P",
-		workingDays: "3",
-		dayOff: "25",
-		overtime: "1",
-		total: "30",
-	},
-	{
-		id: "6",
-		name: "Khang Nguyen",
-		one: "D",
-		two: "P",
-		three: "D",
-		four: "P",
-		five: "D",
-		six: "P",
-		seven: "P",
-		eight: "P",
-		nine: "P",
-		ten: "P",
-		eleven: "P",
-		twelve: "P",
-		thirteen: "P",
-		fourteen: "P",
-		fifteen: "P",
-		sixteen: "P",
-		seventeen: "P",
-		eighteen: "P",
-		nineteen: "T",
-		twenty: "P",
-		thirty: "P",
-		twentyNine: "P",
-		twentyEight: "P",
-		twentySeven: "P",
-		twentySix: "P",
-		twentyFive: "P",
-		twentyFour: "P",
-		twentyThree: "P",
-		twentyTwo: "P",
-		twentyOne: "P",
-		workingDays: "3",
-		dayOff: "25",
-		overtime: "1",
-		total: "30",
-	},
-	{
-		id: "7",
-		name: "Da Nguyen",
-		one: "D",
-		two: "P",
-		three: "D",
-		four: "P",
-		five: "D",
-		six: "P",
-		seven: "P",
-		eight: "P",
-		nine: "P",
-		ten: "P",
-		eleven: "P",
-		twelve: "P",
-		thirteen: "P",
-		fourteen: "P",
-		fifteen: "P",
-		sixteen: "P",
-		seventeen: "P",
-		eighteen: "P",
-		nineteen: "T",
-		twenty: "P",
-		thirty: "P",
-		twentyNine: "P",
-		twentyEight: "P",
-		twentySeven: "P",
-		twentySix: "P",
-		twentyFive: "P",
-		twentyFour: "P",
-		twentyThree: "P",
-		twentyTwo: "P",
-		twentyOne: "P",
-		workingDays: "3",
-		dayOff: "25",
-		overtime: "1",
-		total: "30",
-	},
-];
 
 let data = "Zangggg";
 
@@ -306,6 +82,8 @@ function HRPage() {
 	};
 
 	const [candidateData, setCandidateData] = useState([]);
+	const { monthTimekeepingData, setMonthTimekeepingData } = useContext(MonthTimekeepingContext)
+
 
 	// useEffect(() => {
 	// 	(async () => {
@@ -321,7 +99,7 @@ function HRPage() {
 	const [clickPosition, setClickPosition] = useState({
 		x: 0,
 		y: 0,
-		onChange: () => {},
+		onChange: () => { },
 		isClick: false,
 	});
 	const [dayTimeKeepingData, setDayTimeKeepingData] = useState(
@@ -333,7 +111,7 @@ function HRPage() {
 		}))
 	);
 	const handleChangeFunction = (d, index, key) => (state) => {
-		setMonthTimeKeepingData((prev) => {
+		setMonthTimekeepingData((prev) => {
 			d = prev[index];
 			const newData = [...prev.map((d) => ({ ...d }))];
 			const keys = Object.keys(d);
@@ -377,52 +155,7 @@ function HRPage() {
 			return newData;
 		});
 	};
-	const newMonthTimeKeepingDataDefault = monthTimeKeepingDataDefault.map(
-		(d, index) => {
-			const keys = Object.keys(d);
-			const o = { ...d };
-			const infoKey = [
-				"id",
-				"name",
-				"workingDays",
-				"dayOff",
-				"overtime",
-				"total",
-			];
-			keys.forEach((key) => {
-				if (!infoKey.includes(key)) {
-					o[key] = (
-						<CustomButton
-							style={{ margin: 3, color: "white", width: 45 }}
-							type={"short"}
-							onClick={(e) => {
-								setClickPosition({
-									x: e.clientX,
-									y: e.clientY,
-									onChange: handleChangeFunction(d, index, key),
-									isClick: true,
-								});
-							}}
-						>
-							{d[key]}
-						</CustomButton>
-					);
-				}
-			});
-			return o;
-		}
-	);
-	const [monthTimeKeepingData, setMonthTimeKeepingData] = useState(
-		newMonthTimeKeepingDataDefault
-	);
 
-	// useEffect(() => {
-	//   (async () => {
-	//     const employees = await getAllEmployee()
-	//     const mapEmployees = employees.map(d => ({ ...d, name: d.firstName + " " + d.lastName }))
-	//     setEmployeeData(mapEmployees)
-	//   })()
-	// }, [])
 
 	const [tabTimekeeping, setTabTimekepping] = useState("dayTimekeeping");
 
@@ -447,6 +180,174 @@ function HRPage() {
 	const handleOnClick = (type, email) => {
 		setEmail(email);
 		setDialogType(type);
+	};
+
+	///month
+
+	const [selectedDate, setSelectedDate] = useState('2023-04')
+	const [isLoading, setIsLoading] = useState(true)
+	const [columns, setColumns] = useState([])
+	const [isChanged, setIsChanged] = useState(false)
+	const [newTimekeepingData, setNewTimekeepingData] = useState([])
+
+	useEffect(() => {
+		if (selectedDate != 'Invalid date' && isChanged == true) {
+			setIsLoading(true)
+			// console.log("call")
+			getAllTimekeeping(selectedDate).then(response => {
+				if (response.length == 0 && monthTimekeepingData.length == 0) {
+					setIsLoading(false)
+				}
+				setMonthTimekeepingData(response)
+			})
+		}
+		else
+			if (selectedDate != 'Invalid date' && isChanged == false && monthTimekeepingData.length) {
+				// console.log("call 2")
+				handleDataChange()
+			}
+			else
+				if (selectedDate != 'Invalid date' && isChanged == false) {
+					// console.log("call 3")
+					getAllTimekeeping(selectedDate).then(response => {
+						setMonthTimekeepingData(response)
+					})
+				}
+	}, [selectedDate])
+
+
+
+	useEffect(() => {
+		if (monthTimekeepingData.length || isChanged == false) {
+			// console.log("chang 1")
+			handleDataChange()
+		}
+		else
+			if (!monthTimekeepingData.length) {
+				// console.log("hello from lenght = 0", selectedDate)
+				setNewTimekeepingData([])
+				setIsLoading(false)
+			}
+	}, [JSON.stringify(monthTimekeepingData)])
+
+
+
+
+	function getDaysInMonth(_month) {
+		// Tạo một đối tượng Date với ngày là 0 (ngày cuối của tháng trước)
+		const [year, month] = _month.split('-')
+		const date = new Date(year, month, 0);
+
+		// Trả về ngày cuối cùng của tháng
+		return date.getDate();
+	}
+
+	const handleDataChange = async () => {
+
+		const daysInMonth = getDaysInMonth(selectedDate)
+
+		var tmpCol = [
+			{
+				name: "Name",
+				selector: "employee.name",
+				sortable: true,
+				width: "303px",
+			},
+
+
+		]
+		for (let i = 1; i <= daysInMonth; i++) {
+			tmpCol.push({
+				name: i,
+				selector: `days[${i - 1}].type`,
+				sortable: true,
+				width: "60px",
+				minWidth: "50px",
+				maxWidth: "50px",
+			});
+		}
+
+		tmpCol = [...tmpCol,
+		{
+			name: "Working days",
+			selector: "working_days",
+			sortable: true,
+			width: "180px",
+			style: {
+				justifyContent: "center"
+			},
+		},
+		{
+			name: "Overtime",
+			selector: "overtime",
+			sortable: true,
+			// width: "150px",
+			style: {
+				justifyContent: "center"
+			},
+		},
+		{
+			name: "Days off",
+			selector: "days_off",
+			sortable: true,
+			style: {
+				justifyContent: "center"
+			},
+		},
+		{
+			name: "Total",
+			selector: "total",
+			sortable: true,
+			style: {
+				justifyContent: "center"
+			},
+		}
+		]
+
+		setColumns(tmpCol)
+
+		var res = await Promise.all(monthTimekeepingData.map(async (itemA) => {
+			const dailyTk = await getAllDailyTkByEmployeeAndMonth(itemA.employee.id, itemA.month)
+			const newDailyTk = []
+
+			for (let i = 1; i <= daysInMonth; i++) {
+				newDailyTk.push({
+					day: i,
+					type: 'P'
+				});
+			}
+
+			for (let i = 0; i < dailyTk.length; i++) {
+				const [year, month, day] = dailyTk[i].day.split('-')
+
+				newDailyTk[Number(day) - 1]['type'] = dailyTk[i].type;
+			}
+
+
+			// console.log("dailyTk", dailyTk)
+			// console.log("newDailyTk", newDailyTk)
+			itemA.total = itemA.working_days + itemA.overtime
+			// console.log(itemA.working_days)
+			return await {
+				...itemA,
+				days: newDailyTk
+			};
+		}))
+
+		if (res.length) {
+			// console.log("do")
+			setNewTimekeepingData(res)
+			setIsChanged(true)
+			setIsLoading(false)
+		}
+
+
+	}
+
+	const handleDateChange = (date, dateString) => {
+		console.log("date change", dateString)
+		const formattedDate = moment(dateString).format("YYYY-MM");
+		setSelectedDate(formattedDate);
 	};
 
 	return (
@@ -538,12 +439,15 @@ function HRPage() {
 						)}
 						{tabTimekeepingBtn == "month" && (
 							<MonthTimeKeeping
-								monthTimeKeepingData={monthTimeKeepingData}
+								monthTimekeepingData={newTimekeepingData}
+								handleDateChange={handleDateChange}
+								selectedDate={selectedDate}
+								isLoading={isLoading}
+								columns={columns}
 							></MonthTimeKeeping>
 						)}
 						{tabTimekeepingBtn == "chart" && (
 							<ChartTimekeeping
-								chartTimeKeepingData={monthTimeKeepingData}
 							></ChartTimekeeping>
 						)}
 					</div>
@@ -552,7 +456,7 @@ function HRPage() {
 					<Employee onClick={handleOnClickID}></Employee>
 				)}
 				{tab == "candidate" && <Candidate />}
-				{tab == "payroll" && <Payroll onClick={handleOnClickID}/>}
+				{tab == "payroll" && <Payroll onClick={handleOnClickID} />}
 
 				<div className="confirmBox">
 					{dialogType == "accept" && (
@@ -575,7 +479,7 @@ function HRPage() {
 					)}
 				</div>
 			</div>
-		</div>
+		</div >
 	);
 }
 

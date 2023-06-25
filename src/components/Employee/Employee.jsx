@@ -16,7 +16,7 @@ import Swal from "sweetalert2";
 
 
 const Employee = ({ onClick }) => {
-	const { employeeData, setEmployeeData } = useContext(EmployeeContext);
+	const { employeeData, setEmployeeData } = useContext(EmployeeContext)
 
 	const [isCheckAll, setIsCheckAll] = useState(false);
 	const columns = [

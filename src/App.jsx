@@ -23,6 +23,12 @@ import {
   payrollData,
 } from "./contexts/PayrollContext"
 
+import {
+  MONTHTIMEKEEPING_DATA_STORAGE_NAME,
+  MonthTimekeepingContext,
+  monthTimekeepingData,
+} from "./contexts/MonthTimekeepingContext"
+
 function App() {
   const dispatch = useDispatch();
   if (localStorage.getItem("accessToken")) {
@@ -37,6 +43,7 @@ function App() {
   const [employeeDataState, setEmployeeDataState] = useState(employeeData);
   const [candidateDataState, setCandidateDataState] = useState(candidateData);
   const [payrollDataState, setPayrollDataState] = useState(payrollData);
+  const [monthTimekeepingDataState, setMonthTimekeepingDataState] = useState(monthTimekeepingData);
 
   const employeeProviderValue = {
     employeeData: employeeDataState,
@@ -107,11 +114,36 @@ function App() {
     },
   };
 
+  const monthTimekeepingProviderValue = {
+    monthTimekeepingData: monthTimekeepingDataState,
+    setMonthTimekeepingData: (newData) => {
+      if (newData instanceof Array) {
+        setMonthTimekeepingDataState([...newData]);
+        localStorage.setItem(
+          MONTHTIMEKEEPING_DATA_STORAGE_NAME,
+          JSON.stringify(newData)
+        );
+      } else if (newData instanceof Function) {
+        let updatedData;
+        setMonthTimekeepingDataState((prev) => {
+          updatedData = newData(prev);
+          return updatedData;
+        });
+        localStorage.setItem(
+          MONTHTIMEKEEPING_DATA_STORAGE_NAME,
+          JSON.stringify(updatedData)
+        );
+      }
+    },
+  };
+
   return (
     <EmployeeContext.Provider value={employeeProviderValue}>
       <CandidateContext.Provider value={candidateProviderValue}>
         <PayrollContext.Provider value={payrollProviderValue}>
-          <RouterProvider router={router} />
+          <MonthTimekeepingContext.Provider value={monthTimekeepingProviderValue}>
+            <RouterProvider router={router} />
+          </MonthTimekeepingContext.Provider>
         </PayrollContext.Provider>
       </CandidateContext.Provider>
     </EmployeeContext.Provider>
