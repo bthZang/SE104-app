@@ -3,6 +3,7 @@ import "./HRPage.scss";
 
 import axios from "axios";
 import ChartTimekeeping from "../../components/ChartTimekeeping/ChartTimekeeping";
+
 import Confirm from "../../components/Confirm/Confirm";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import Employee from "../../components/Employee/Employee";
@@ -168,6 +169,8 @@ function HRPage() {
 	const dayRef = useRef(null);
 	const monthRef = useRef(null);
 	const chartRef = useRef(null);
+
+	const [searchValue, setSearchValue] = useState("");
 
 	const [id, setId] = useState(null);
 	const handleOnClickID = (_id) => {
@@ -393,7 +396,9 @@ function HRPage() {
 				{tab == "dashboard" && <Dashboard data={data}></Dashboard>}
 				{tab == "timekeeping" && (
 					<div>
-						<TitleHome data={data}>Timekeeping</TitleHome>
+						<TitleHome
+							onChangeSearch={setSearchValue}
+							data={data}>Timekeeping</TitleHome>
 						<div className="timekeepingStyle">
 							<div
 								id="day"
@@ -444,10 +449,12 @@ function HRPage() {
 								selectedDate={selectedDate}
 								isLoading={isLoading}
 								columns={columns}
+								searchValue={searchValue}
 							></MonthTimeKeeping>
 						)}
 						{tabTimekeepingBtn == "chart" && (
 							<ChartTimekeeping
+								chartTimeKeepingData={newTimekeepingData}
 							></ChartTimekeeping>
 						)}
 					</div>

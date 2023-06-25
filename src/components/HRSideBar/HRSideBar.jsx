@@ -19,59 +19,75 @@ const HRSideBar = ({handleChange}) => {
     const candidateRef = useRef(null);
     const payrollRef = useRef(null);
 
-    return(
-        <div className="sideBar">
-            <div className="table">
-                <div className="title"> 
-                    <img className="logo" src={logo} ></img>
-                    <img className="topSideBar" src={topSideBar} ></img>
-                </div>
-                <div className='topHR'></div>
 
-                {/* <div id="dashboard" ref={dashboardRef} className={tabStatus === 'dashboard' ? "chosen" : "nonChosen"} onClick={() => {
+    return (
+      <div className="sideBar">
+        <div className="table">
+          <div className="title">
+            <img className="logo" src={logo}></img>
+            <img className="topSideBar" src={topSideBar}></img>
+          </div>
+          <div className="top"></div>
+
+          {/* <div id="dashboard" ref={dashboardRef} className={tabStatus === 'dashboard' ? "chosen" : "nonChosen"} onClick={() => {
                     handleTabClick(dashboardRef)
                     handleChange("dashboard")
                     }}>
                     <p className='text' >Dashboard</p>
                 </div> */}
 
-                <div id="timekeeping" ref={timekeepingRef} className={tabStatus === 'timekeeping' ? "chosen" : "nonChosen"} onClick={() => {
-                    handleTabClick(timekeepingRef)
-                    handleChange("timekeeping")
-                    }}>
-                    <p className='text' >Timekeeping</p>
-                </div>
+          <div
+            id="timekeeping"
+            ref={timekeepingRef}
+            className={tabStatus === "timekeeping" ? "chosen" : "nonChosen"}
+            onClick={() => {
+              handleTabClick(timekeepingRef);
+              handleChange("timekeeping");
+            }}
+          >
+            <p className="text">Timekeeping</p>
+          </div>
 
-                <div id="employee" ref={employeeRef} className={tabStatus === 'employee' ? "chosen" : "nonChosen"} onClick={() => {
-                    handleTabClick(employeeRef)
-                    handleChange("employee")
-                    
-                    }}>
-                    <p className='text' >Employee</p>
-                </div>
+          <div
+            id="employee"
+            ref={employeeRef}
+            className={tabStatus === "employee" ? "chosen" : "nonChosen"}
+            onClick={() => {
+              handleTabClick(employeeRef);
+              handleChange("employee");
+            }}
+          >
+            <p className="text">Employee</p>
+          </div>
 
-                <div id="candidate" ref={candidateRef} className={tabStatus === 'candidate' ? "chosen" : "nonChosen"} onClick={() => {
-                    handleTabClick(candidateRef)
-                    handleChange("candidate")
-                    }}>
-                    <p className='text' >Candidate</p>
-                </div>
+          <div
+            id="candidate"
+            ref={candidateRef}
+            className={tabStatus === "candidate" ? "chosen" : "nonChosen"}
+            onClick={() => {
+              handleTabClick(candidateRef);
+              handleChange("candidate");
+            }}
+          >
+            <p className="text">Candidate</p>
+          </div>
+          <div
+            id="payroll"
+            ref={payrollRef}
+            className={tabStatus === "payroll" ? "chosen" : "nonChosen"}
+            onClick={() => {
+              handleTabClick(payrollRef);
+              handleChange("payroll");
+            }}
+          >
+            <p className="text">Payroll</p>
+          </div>
 
-                <div id="payroll" ref={payrollRef} className={tabStatus === 'payroll' ? "chosen" : "nonChosen"} onClick={() => {
-                    handleTabClick(payrollRef)
-                    handleChange("payroll")
-                    }}>
-                    <p className='text' >Payroll</p>
-                </div>
-
-                <div className='last'>
-                                      
-                </div>
-                <img className="botLeftSideBar" src={botLeftSideBar} ></img>
-                <img className="botRightSideBar" src={botRightSideBar} ></img>
-
-            </div>
-            </div>
+          <div className="last"></div>
+          <img className="botLeftSideBar" src={botLeftSideBar}></img>
+          <img className="botRightSideBar" src={botRightSideBar}></img>
+        </div>
+      </div>
     );
 
 }

@@ -162,10 +162,30 @@ const Payroll = ({ onClick }) => {
 
 	function handleExport() {
 		const month = newPayrollData[1].month
-		const data = [Object.keys(newPayrollData[0])];
+		
 
-		newPayrollData
-			.forEach((d) => data.push(Object.values(d)));
+		const exportData = newPayrollData.map((item) => {
+			return({
+				'employee': item.employee.name,
+				'month': item.month,
+				'working days': item.workingDays,
+				'overtime': item.overtime,	
+				'days off': item.daysOff,
+				'overtime pay': item.overtimePay,
+				'social insurance': item.socialInsurance,
+				'health insurance': item.healthInsurance,
+				'income tax': item.incomeTax,
+				'allowances': item.allowances,
+				'total salary': item.totalSalary
+			})
+		})
+
+		const data = [Object.keys(exportData[0])];
+
+		exportData
+			.forEach((d) => {
+				data.push(Object.values(d))
+			});
 		const workbook = XLSX.utils.book_new();
 		const worksheet = XLSX.utils.aoa_to_sheet(data);
 		XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
@@ -204,7 +224,6 @@ const Payroll = ({ onClick }) => {
 				{isLoading == true && <Spin />}
 				{selectedId !== null && (
 					<IndividualTableContent
-						id={selectedId}
 						data={newPayrollData.find((d) => d.id == selectedId)}
 						name={newPayrollData.find((d) => d.id == selectedId).employee.name}
 						onClose={() => setSelectedId(null)}

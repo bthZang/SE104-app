@@ -10,8 +10,16 @@ import CLOSE_ICON from "../../assets/close.svg";
 import RESIZE from "../../assets/resize.svg";
 import { Button } from "@mui/material";
 
-
-const IndividualTableContent = ({ onClose, data, name, id, onSave, onDelete }) => {
+import {
+    BarChart,
+    Bar,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    Tooltip,
+    Legend,
+  } from "recharts";
+const IndividualTableContent = ({ onClose, data, name, isChart = false }) => {
     const [isFullScreen, setIsFullScreen] = useState(false)
 
     const [color, setColor] = useState("gray")
@@ -34,6 +42,22 @@ const IndividualTableContent = ({ onClose, data, name, id, onSave, onDelete }) =
             </Display>
         )
     })
+
+    const displayChart = <BarChart
+        width={isFullScreen ? 800 : 500}
+        height={isFullScreen ? 500 : 370}
+        data={[data]}
+        margin={{ top: 5, right: 190, left: 20, bottom: 5 }}
+    >
+        <XAxis dataKey="employee.name" />
+        <YAxis />
+        <CartesianGrid strokeDasharray="3 3" />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey="working_days" stackId="a" fill="#82ca9d" />
+        <Bar dataKey="days_off" stackId="a" fill="#8884d8" />
+        <Bar dataKey="overtime" stackId="a" fill="#ffc658" />
+    </BarChart>
 
 
     // console.log("dô nè má:", data[keys[1]])
@@ -64,11 +88,13 @@ const IndividualTableContent = ({ onClose, data, name, id, onSave, onDelete }) =
                         </div>
                     </div>
                 </div>
-                <div className="tableContainerContent">
-                    <div className="firstColumn">
-                        {displayList}
-                    </div>
-                </div>
+                {isChart == false &&
+                    <div className="tableContainerContent">
+                        <div className="firstColumn">
+                            {displayList}
+                        </div>
+                    </div>}
+                {isChart == true && displayChart}
             </div>
         </div>
     );
