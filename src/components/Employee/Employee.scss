@@ -1,56 +1,117 @@
-.containerEmployee{
+.containerEmployee {
     background-color: white;
     border: 0px solid white;
     min-width: 100%;
     display: flex;
     flex-direction: column;
     gap: 20px;
-	min-height: 100vh;
-    margin-top: 100px;
-
+    min-height: 100vh;
+    // margin-top: 100px;
+  
     .rdt_TableHead {
-        color: #3552E9;
-        font-size: 20px;
-        border-color: #3552E9;
-        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      color: #3552e9;
+      font-size: 20px;
+      border-color: #3552e9;
+      font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+      // position: fixed;
+      background-color: #ffffff !important;
     }
-    .rdt_TableRow{
-        color: black;
-        font-size: 20px;
-        height: 52px;
-        border-color: #3552E9;
-        
-        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    .rdt_TableBody {
+      // margin-top: 52px;
     }
-    .rdt_TableCol{
-        height: 52px;
-        border-color: #3552E9;
-        border: 0.00001px solid #3552E9;
-        width: 200px;
-        
+    .rdt_TableRow {
+      color: black;
+      font-size: 20px;
+      height: 52px;
+      border-color: #3552e9;
+  
+      font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+        "Lucida Sans", Arial, sans-serif;
     }
-    
-    .titleTable{
-        color: #3552E9;
-        font-size: 28px;
-        font-weight: 500;
-        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    .rdt_TableCol {
+      height: 52px;
+      border-color: #3552e9;
+      border: 0.00001px solid #3552e9;
+      width: 200px;
     }
-    .employee{
-        margin-top: 0px ;
+    .titleTable {
+      color: #3552e9;
+      font-size: 28px;
+      background-color: white;
+      position: fixed;
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      margin-left: -78px;
+      z-index: 999;
+      margin-top: -150px;
+      font-weight: 500;
+      padding-top: 150px;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .employee {
+      margin-top: 100px;
+      z-index: 0;
+    }
+  
+    .tools {
+      display: flex;
+      flex-direction: row;
+      justify-content: start;
+      margin-bottom: 20px;
+      gap: 20px;
+      position: relative;
+      height: 50px;
+      // margin-left: 78px;
+      .inputFile {
+        display: flex;
+        width: 135px;
+        color: transparent;
+    }
+    .inputFile::before {
+      content: 'IMPORT DATA';
+      color: #3552e9;
+      display: inline-block;
+      background: white;
+      border: 1px solid #3552e9;
+      border-radius: 3px;
+      padding: 15px 15px;
+      outline: none;
+      white-space: nowrap;
+      cursor: pointer;
+      text-shadow: 1px 1px #fff;
+      font-weight: 500;
+      font-size: 0.875rem;
+      letter-spacing: 0.02857em;
+      text-align: center;
+    }
+    .inputFile::-webkit-file-upload-button {
+      visibility: hidden;
 
-        .tools {
-            display: flex;
-            flex-direction: row;
-            justify-content: start;
-            margin-bottom: 20px;
-            gap: 20px;
-            position: relative;
-
-            .search {
-                margin-left: 100px;
-                margin-top: 0;
-            }
-        }
     }
-}
+    .inputFile:hover::before{
+      color: #667ef6;
+      border: 1px solid #002aff;
+    }
+  
+      .inputFileBox {
+          border: 1px solid transparent;
+          background-color: transparent;
+          width: 100%;
+          height: 70px;
+          // border-radius: 5px;
+          color: rgb(14, 11, 198);
+          display: flex;
+          align-items:end;
+          // vertical-align: middle;
+          justify-content: flex-start;
+          padding-left: 16px;
+          padding-right: 16px;
+          overflow: auto;
+      }
+    }
+    .search {
+      margin-left: 100px;
+      margin-top: 0;
+    }
+  }

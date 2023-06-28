@@ -9,6 +9,7 @@ import Pin from "../../assets/pin.svg";
 import CLOSE_ICON from "../../assets/close.svg";
 import RESIZE from "../../assets/resize.svg";
 import { Button } from "@mui/material";
+import Dropdown from "react-dropdown";
 
 const columns = [
   {
@@ -82,7 +83,7 @@ const Profile = ({ onClose, data, id, onSave, onDelete }) => {
   const addressRef = useRef();
   const homeTownRef = useRef();
   const phoneNumberRef = useRef();
-  const departmentRef = useRef();
+  // const departmentRef = useRef();
   const positionRef = useRef();
   const startDateRef = useRef();
   const contractDateRef = useRef();
@@ -90,13 +91,14 @@ const Profile = ({ onClose, data, id, onSave, onDelete }) => {
   function handleSave() {
     const newData = {
       id,
-      name: lastNameRef.current.value + " " + firstNameRef.current.value,
+      firstName: firstNameRef.current.value,
+      lastName: lastNameRef.current.value,
       birthplace: birthplaceRef.current.value,
-      ethnictity: ethnicityRef.current.value,
+      ethnicity: ethnicityRef.current.value,
       gender: genderRef.current.value,
       citizenId: citizenIdRef.current.value,
       birthdate: birthDayRef.current.value,
-      department: departmentRef.current.value,
+      dept: options.indexOf(selectedOptions)+1,
       position: positionRef.current.value,
       address: addressRef.current.value,
       hometown: homeTownRef.current.value,
@@ -108,6 +110,24 @@ const Profile = ({ onClose, data, id, onSave, onDelete }) => {
     onSave(newData);
     setIsEditable(false);
   }
+
+  const [selectedOptions, setSelectedOptions] = useState(null);
+
+  const options = [
+    "Director's Office",
+    "Human Resources",
+    "Accounting",
+    "Software",
+    "Quality Management",
+    "Sales",
+    "Support/Deployment"
+  ]
+
+
+  const handleOnChange = (e) => {
+    setSelectedOptions(e.value);
+    // console.log(selectedOptions);
+  };
 
   return (
     <div className="containerProfile" onClick={onClose}>
@@ -204,7 +224,7 @@ const Profile = ({ onClose, data, id, onSave, onDelete }) => {
             <Display
               ref={ethnicityRef}
               isEditable={isEditable}
-              data={data?.ethnictity}
+              data={data?.ethnicity}
             >
               Ethnicity
             </Display>
@@ -246,13 +266,16 @@ const Profile = ({ onClose, data, id, onSave, onDelete }) => {
           </div>
           <div className="secondColumn">
             <p className="attribute department">DEPARTMENT</p>
-            <Display
-              ref={departmentRef}
-              isEditable={isEditable}
-              data={data?.department}
-            >
-              Department
-            </Display>
+            <Dropdown
+              //width={200}
+              // ref={departmentRef}
+              options={options}
+              value={selectedOptions}
+              onChange={(e) => handleOnChange(e)}
+              placeholder={options[data?.dept.id - 1]}
+              className="customChangeDropdown"
+              disabled={!isEditable}
+            ></Dropdown>
 
             <p className="attribute" style={{ marginTop: "50px" }}>
               POSITION
@@ -283,20 +306,7 @@ const Profile = ({ onClose, data, id, onSave, onDelete }) => {
               Contract Date
             </Display>
 
-            <div>
-              <p className="textAttachment">Resignation decision</p>
-              <label className="attachment">
-                <img src={Pin} className="imgPin"></img>
-                <input
-                  type="file"
-                  className="inputFile"
-                  onChange={handleAttachment}
-                ></input>
-                <div className="inputFileBox">
-                  {attachment?.name || "No file attached"}
-                </div>
-              </label>
-            </div>
+
 
             {/* <CustomButton type='short' style={{ backgroundColor: color, borderRadius: '10px', width: '213px', fontSize: '21px', padding: '20px 0', alignSelf: 'end', marginTop: '38px', }}    >Delete</CustomButton> */}
           </div>

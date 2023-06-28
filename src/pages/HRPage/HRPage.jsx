@@ -8,7 +8,7 @@ import Confirm from "../../components/Confirm/Confirm";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import Employee from "../../components/Employee/Employee";
 import HRSideBar from "../../components/HRSideBar/HRSideBar";
-import Candidate from "../../components/candidate/candidate";
+import Candidate from "../../components/Candidate/Candidate";
 import Dashboard from "../../components/dashboard/dashboard";
 import DayTimeKeeping from "../../components/dayTimeKeeping/dayTimeKeeping";
 import MonthTimeKeeping from "../../components/monthTimeKeeping/monthTimeKeeping";

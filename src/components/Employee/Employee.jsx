@@ -10,8 +10,9 @@ import Search from "../search/search";
 
 import "./Employee.scss";
 import { EmployeeContext } from "../../contexts/EmployeeContext";
-import { deleteEmployeeById, getAllEmployee } from "../../api/EmployeeAPI";
+import { addMultiEmployee, deleteEmployeeById, getAllEmployee, updateEmployee } from "../../api/EmployeeAPI";
 import Swal from "sweetalert2";
+import { Spin } from "antd";
 
 
 
@@ -44,37 +45,50 @@ const Employee = ({ onClick }) => {
 		{
 			name: "Gender",
 			selector: "gender",
+			cell: (row) => row.gender || <span>Null</span>
 		},
 		{
 			name: "Birthplace",
 			selector: "birthplace",
 			sortable: true,
+			cell: (row) => row.birthplace || <span>Null</span>
 		},
 		{
 			name: "Ethnicity",
 			selector: "ethnicity",
 			sortable: true,
+			cell: (row) => row.ethnicity || <span>Null</span>
 		},
 		{
 			name: "Citizen Id",
 			selector: "citizenId",
+			cell: (row) => row.citizenId || <span>Null</span>
 		},
 		{
 			name: "Birthdate",
 			selector: "birthdate",
 			sortable: true,
+			cell: (row) => row.birthdate || <span>Null</span>
 		},
 		{
 			name: "Department",
 			selector: "dept.name",
 			sortable: true,
+			cell: (row) => renderCell(row.dept)
 		},
 		{
 			name: "Position",
 			selector: "position",
 			sortable: true,
+			cell: (row) => row.position || <span>Null</span>
 		},
 	];
+
+	const renderCell = (value) => {
+		if (value == null)
+			return <span>Null</span>
+		return value.name || <span>Null</span>;
+	};
 
 	const [selectedId, setSelectedId] = useState(null);
 	const [searchKeyword, setSearchKeyword] = useState("");
@@ -82,11 +96,15 @@ const Employee = ({ onClick }) => {
 	const [newEmployeeData, setNewEmployeeData] = useState([]);
 	const [checkList, setCheckList] = useState([]);
 
+	const [isLoading, setIsLoading] = useState(true)
+
 	useEffect(() => {
 		getAllEmployee().then(response => { setEmployeeData(response) })
 		// console.log(employeeData)
 		setCheckList(employeeData.map(() => false));
-	}, [JSON.stringify(employeeData)]);
+	}, []);
+
+
 
 	const handleDataChange = () => {
 		// console.log("data change", employeeData)
@@ -117,25 +135,46 @@ const Employee = ({ onClick }) => {
 		setCheckList(employeeData.map(() => isCheckAll));
 	}, [isCheckAll]);
 
+	useEffect(() => {
+		setIsLoading(false)
+	}, [JSON.stringify(newEmployeeData)])
+
 	const callAPI = () => {
-		getAllEmployee().then((response) => { setEmployeeData(response) })
+		getAllEmployee().then((response) => {
+			setEmployeeData(response)
+			setIsLoading(false)
+		})
+		setCheckList(employeeData.map(() => false));
 	}
 
-	async function handleDeleteItem() {
+	function handleDeleteItem() {
 		const idList = employeeData
 			.filter((_, index) => checkList[index] == true)
 			.map((v) => v.id);
-		await idList.forEach((item) => {
-			deleteEmployeeById(item)
-		});
+		setIsLoading(true)
+		const callFunc = () => {
+			idList.forEach((item, index) => {
+				deleteEmployeeById(item).then(res => {
+					if (index == idList.length - 1) {
+						Swal.fire({
+							icon: 'success',
+							text: 'Successful!',
+							showConfirmButton: false,
+							timer: 1500
+						})
+						callAPI()
+					}
+				})
+			})
+		}
 
-		Swal.fire({
-			icon: 'success',
-			text: 'Successful!',
-			showConfirmButton: false,
-			timer: 1500
+		confirmMessage("delete selected employee", callFunc, () => {
+			setIsLoading(false)
+			setCheckList(employeeData.map(() => false))
 		})
-		callAPI()
+
+
+
 
 		// handleDataChange()
 
@@ -152,6 +191,88 @@ const Employee = ({ onClick }) => {
 		XLSX.writeFile(workbook, "Employee data.xlsx");
 	}
 
+	let [importedData, setImportedData] = useState(employeeData);
+
+	const handleImport = (event) => {
+
+		let file = event.target.files[0];
+		let reader = new FileReader();
+
+		reader.onload = (e) => {
+			let data = new Uint8Array(e.target.result);
+			let workbook = XLSX.read(data, { type: "array" });
+			let worksheet = workbook.Sheets[workbook.SheetNames[0]];
+			let jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+			let headers = jsonData[0];
+			let rows = jsonData.slice(1);
+			let newData = rows.map((row) =>
+				headers.reduce(
+					(obj, header, index) => ({ ...obj, [header]: row[index] }),
+					{}
+				)
+			);
+
+			setIsLoading(true)
+
+			const callFunc = () => {
+				addMultiEmployee(newData)
+					.then(res => {
+						if (res) {
+							Swal.fire({
+								icon: 'success',
+								text: 'Successful!',
+								showConfirmButton: false,
+								timer: 1500
+							})
+							callAPI()
+						} else {
+							setIsLoading(false)
+						}
+					})
+			}
+
+			confirmMessage("import this file", callFunc, () => { setIsLoading(false) })
+
+
+		};
+
+		reader.readAsArrayBuffer(file);
+	};
+
+	const confirmMessage = (mess, callFunc, cancelFunc) => {
+		const swalWithBootstrapButtons = Swal.mixin({
+			customClass: {
+				confirmButton: 'btn btn-success',
+				cancelButton: 'btn btn-danger'
+			},
+			buttonsStyling: false
+		})
+
+		swalWithBootstrapButtons.fire({
+			title: 'Are you sure?',
+			text: `Do you really want to ${mess}?`,
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonText: 'Yes',
+			cancelButtonText: 'No, cancel!',
+			reverseButtons: true
+		}).then((result) => {
+			if (result.isConfirmed) {
+				callFunc()
+				// swalWithBootstrapButtons.fire(
+				// 	'Success',
+				// 	'',
+				// 	'success'
+				// )
+			}
+			else {
+				cancelFunc()
+			}
+		})
+
+	}
+
+
 	return (
 		<div className="containerEmployee">
 			<div>
@@ -162,6 +283,12 @@ const Employee = ({ onClick }) => {
 				></TitleHome>
 				<div className="employee">
 					<div className="tools">
+						<input
+							type="file"
+							className="inputFile"
+							onChange={handleImport}
+							onClick={(e) => e.target.value = null}
+						/>
 						<Button
 							onClick={handleDeleteItem}
 							variant="outlined"
@@ -182,39 +309,76 @@ const Employee = ({ onClick }) => {
 							<Search onSearch={setSearchKeyword} />
 						</div>
 					</div>
-					<DataTable
-						columns={columns}
-						data={newEmployeeData.filter((d) =>
-							d.name.toLowerCase().includes(searchKeyword)
-						)}
-						pagination={true}
-						highlightOnHover={true}
-						striped={true}
-						onRowClicked={(row) => {
-							setSelectedId(row.id);
-							onClick(row.id);
-						}}
-					></DataTable>
+					{isLoading == true && <Spin />}
+					{isLoading == false &&
+						<DataTable
+							columns={columns}
+							data={newEmployeeData.filter((d) =>
+								d.name.toLowerCase().includes(searchKeyword)
+							)}
+							pagination={true}
+							highlightOnHover={true}
+							striped={true}
+							onRowClicked={(row) => {
+								setSelectedId(row.id);
+								onClick(row.id);
+							}}
+						></DataTable>}
 					{selectedId !== null && (
 						<Profile
 							id={selectedId}
 							data={employeeData.find((d) => d.id == selectedId)}
 							onClose={() => setSelectedId(null)}
 							onSave={(newData) => {
-								setEmployeeData((prev) => {
-									const newPrev = [...prev];
-									const index = prev.indexOf(
-										prev.find((d) => d.id == newData.id)
-									);
-									newPrev[index] = newData;
-									return newPrev;
-								});
+								setIsLoading(true)
+
+								const callFunc = () => {
+									updateEmployee(selectedId, newData)
+										.then(res => {
+											if (res) {
+												Swal.fire({
+													icon: 'success',
+													text: 'Successful!',
+													showConfirmButton: false,
+													timer: 1500
+												})
+												callAPI()
+											} else {
+												setIsLoading(false)
+											}
+										})
+								}
+
+								confirmMessage("modify information of this employee", callFunc, () => {
+									setIsLoading(false)
+								})
+								// console.log(newData)
+
 							}}
 							onDelete={() => {
-								setEmployeeData((prev) => [
-									...prev.filter((d) => d.id != selectedId),
-								]);
-								setSelectedId(null);
+								setIsLoading(true)
+
+								const callFunc = () => {
+									deleteEmployeeById(selectedId)
+										.then(res => {
+											if (res) {
+												Swal.fire({
+													icon: 'success',
+													text: 'Successful!',
+													showConfirmButton: false,
+													timer: 1500
+												})
+												callAPI()
+											} else {
+												setIsLoading(false)
+											}
+										})
+								}
+
+								confirmMessage("delete this employee", callFunc, () => {
+									setIsLoading(false)
+								})
+
 							}}
 						></Profile>
 					)}

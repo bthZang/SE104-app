@@ -14,12 +14,15 @@ import { useContext, useRef, useState } from "react";
 import "./UploadCV.scss";
 import { CandidateContext } from "../../contexts/CandidateContext";
 import { useNavigate } from "react-router-dom";
+import { uploadFile } from "../../api/FileAPI";
+import { addCandidate } from "../../api/CandidateAPI";
 
 export default function UploadCV() {
 	const navigate = useNavigate();
-	const { setCandidateData } = useContext(CandidateContext);
+	// const { setCandidateData } = useContext(CandidateContext);
 
-	const nameRef = useRef();
+	const firstNameRef = useRef();
+	const lastNameRef = useRef();
 	const emailRef = useRef();
 	const applyPositionRef = useRef();
 	const cvFileRef = useRef();
@@ -27,15 +30,24 @@ export default function UploadCV() {
 	const [cvFile, setCvFile] = useState();
 
 	function handleSubmitCv() {
-		const name = nameRef.current.value;
+		const firstName = firstNameRef.current.value;
+		const lastName = lastNameRef.current.value;
 		const email = emailRef.current.value;
 		const applyPosition = applyPositionRef.current.value;
 
 		console.log({ gender });
-		setCandidateData((prev) => [
-			...prev,
-			{ name, email, gender, applyPosition, CV: cvFile },
-		]);
+
+		uploadFile(cvFile).then(res =>{
+			if(res){
+				addCandidate(firstName, lastName, email, gender, applyPosition, res)
+			}
+		})
+
+
+		// setCandidateData((prev) => [
+		// 	...prev,
+		// 	{ name, email, gender, applyPosition, CV: cvFile },
+		// ]);
 
 		navigate("/thanks-for-upload-cv");
 	}
@@ -46,9 +58,17 @@ export default function UploadCV() {
 			<form>
 				<FormControl fullWidth margin="normal">
 					<TextField
-						inputRef={nameRef}
+						inputRef={firstNameRef}
 						required
-						label={"Name"}
+						label={"First Name"}
+						fullWidth
+					/>
+				</FormControl>
+				<FormControl fullWidth margin="normal">
+					<TextField
+						inputRef={lastNameRef}
+						required
+						label={"Last Name"}
 						fullWidth
 					/>
 				</FormControl>

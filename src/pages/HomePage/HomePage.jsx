@@ -76,7 +76,7 @@ function HomePage() {
   }
 
   function handleExport() {
-    console.log(newPayrollData)
+    // console.log(newPayrollData)
     const month = newPayrollData[1].month
     const data = [Object.keys(newPayrollData[0])];
 
@@ -120,10 +120,11 @@ function HomePage() {
           if (response == false) {
             Swal.fire({
               icon: 'error',
-              title: 'Email not exist!',
+              title: 'Email does not exist!',
             })
           }
           else {
+            setTriggerRequest(false)
             Swal.fire({
               icon: 'success',
               title: 'Successful!',
@@ -136,7 +137,7 @@ function HomePage() {
             if (newPayrollData != [])
               sendRequest(email, handleExport())
           }
-          setTriggerRequest(false)
+          
         })
     }
   }
